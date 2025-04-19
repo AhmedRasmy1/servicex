@@ -44,10 +44,9 @@ class ServiceX extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       theme: ThemeData(fontFamily: 'Almarai'),
-      builder: (context, child) {
-        if (child == null) return const SizedBox.shrink();
-        return Directionality(textDirection: TextDirection.rtl, child: child);
-      },
+      builder:
+          (context, child) =>
+              Directionality(textDirection: TextDirection.rtl, child: child!),
       home: const OnboardingPage(),
     );
   }

@@ -19,7 +19,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       "image": AssetsManager.onBoardingImageone,
       "title": "مرحبا بك في سيرفيس اكس",
       "description":
-          "اكتشف سيرفكس اكس ، الحل الوحيد الذي يجمع بين الراحة والموثوقية لجميع احتياجاتك في خدمات الصيانة المنزلية",
+          "اكتشف سيرفس اكس ، الحل الوحيد الذي يجمع بين الراحة والموثوقية لجميع احتياجاتك في خدمات الصيانة المنزلية",
     },
     {
       "image": AssetsManager.onBoardingImagetwo,
@@ -62,7 +62,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          color: Colors.white, // تغيير لون الخلفية إلى الأبيض
+          color: Colors.white,
           child: Column(
             children: [
               Opacity(
