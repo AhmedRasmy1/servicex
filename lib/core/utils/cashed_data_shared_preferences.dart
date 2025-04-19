@@ -7,8 +7,10 @@ class CacheService {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  static Future<bool> setData(
-      {required String key, required dynamic value}) async {
+  static Future<bool> setData({
+    required String key,
+    required dynamic value,
+  }) async {
     if (value is int) {
       await sharedPreferences.setInt(key, value);
       return true;
@@ -42,9 +44,6 @@ class CacheService {
 }
 
 class CacheConstants {
-  static const String defaultLanguage = 'defaultLanguage';
   static const String userToken = "userToken";
-  static const String productId = "productId";
-  static const String billId = "billId";
   static const String role = "role";
 }

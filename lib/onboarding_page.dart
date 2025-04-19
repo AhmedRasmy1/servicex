@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:servicex/core/resources/assets_manager.dart';
+import 'package:servicex/features/auth/presentation/views/login_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   final List<Map<String, String>> onboardingData = [
     {
       "image": AssetsManager.onBoardingImageone,
-      "title": "مرحبا بك في سرفيس اكس",
+      "title": "مرحبا بك في سيرفيس اكس",
       "description":
           "اكتشف سيرفكس اكس ، الحل الوحيد الذي يجمع بين الراحة والموثوقية لجميع احتياجاتك في خدمات الصيانة المنزلية",
     },
@@ -30,7 +31,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       "image": AssetsManager.onBoardingImagethree,
       "title": "كل خدمات الصيانة في مكان واحد",
       "description":
-          "كل اللي تحتاجه من كهرباء لسباكة وصيانة أجهزة هتلاقيه هنا في سيرفس اكس",
+          "كل اللي تحتاجه من كهرباء لسباكة وصيانة أجهزة هتلاقيه هنا في سيرفيس اكس",
     },
   ];
 
@@ -61,13 +62,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0054A5), Color(0xFF87CEEB)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
+          color: Colors.white, // تغيير لون الخلفية إلى الأبيض
           child: Column(
             children: [
               Opacity(
@@ -90,7 +85,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       child: const Text(
                         "تخطي",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Color(0xFF0054A5), // لون النص الأساسي
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -123,7 +118,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             onboardingData[index]['title']!,
                             style: const TextStyle(
                               fontSize: 26,
-                              color: Colors.white,
+                              color: Color(0xFF0054A5), // لون النص الأساسي
                               fontWeight: FontWeight.bold,
                             ),
                             textAlign: TextAlign.center,
@@ -136,7 +131,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             onboardingData[index]['description']!,
                             style: const TextStyle(
                               fontSize: 18,
-                              color: Colors.white70,
+                              color: Colors.black87, // لون النصوص الثانوية
                               height: 1.5,
                             ),
                             textAlign: TextAlign.center,
@@ -165,12 +160,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           curve: Curves.easeInOut,
                         );
                       } else {
-                        // Navigator.pushReplacement(...);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: const Color(0xFF0054A5),
+                      backgroundColor: const Color(0xFF0054A5), // لون الزر
+                      foregroundColor: Colors.white, // لون النص داخل الزر
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),

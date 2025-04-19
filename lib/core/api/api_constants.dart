@@ -1,4 +1,4 @@
 class ApiConstants {
-  static const String baseUrl =
-      'https://api.example.com/'; // Replace with your actual base URL
+  static const String baseUrl = 'http://servicex.runasp.net/';
+  static const String login = 'api/auth/login';
 }
