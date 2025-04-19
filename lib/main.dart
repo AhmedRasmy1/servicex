@@ -6,6 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:servicex/core/di/di.dart';
 import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
 import 'package:servicex/core/utils/my_bloc_observer.dart';
+import 'package:servicex/onboarding_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +48,7 @@ class ServiceX extends StatelessWidget {
         if (child == null) return const SizedBox.shrink();
         return Directionality(textDirection: TextDirection.rtl, child: child);
       },
-      home: const HomePage(),
+      home: const OnboardingPage(),
     );
   }
 }
