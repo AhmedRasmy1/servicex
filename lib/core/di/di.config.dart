@@ -50,6 +50,15 @@ import '../../features/auth/presentation/viewmodels/sent_otp_viewmodel/sent_otp_
     as _i250;
 import '../../features/auth/presentation/viewmodels/verify_otp_viewmode/verify_otp_cubit.dart'
     as _i467;
+import '../../features/home/data/data_sources/services_data_sources.dart'
+    as _i459;
+import '../../features/home/data/data_sources_impl/services_data_sources_impl.dart'
+    as _i952;
+import '../../features/home/data/repo_impl/services_repo_impl.dart' as _i438;
+import '../../features/home/domain/repo/services_repo.dart' as _i118;
+import '../../features/home/domain/usecases/services_usecase.dart' as _i463;
+import '../../features/home/presentation/viewmodels/services_viewmodel/services_cubit.dart'
+    as _i239;
 import '../api/api_manager/api_manager.dart' as _i680;
 import '../api/dio_module.dart' as _i784;
 
@@ -63,6 +72,9 @@ extension GetItInjectableX on _i174.GetIt {
     final dioModule = _$DioModule();
     gh.lazySingleton<_i361.Dio>(() => dioModule.providerDio());
     gh.factory<_i680.ApiService>(() => _i680.ApiService(gh<_i361.Dio>()));
+    gh.factory<_i459.ServicesDataSources>(
+      () => _i952.ServicesDataSourcesImpl(apiService: gh<_i680.ApiService>()),
+    );
     gh.factory<_i466.LoginDataSource>(
       () => _i785.LoginDataSourceImpl(gh<_i680.ApiService>()),
     );
@@ -93,6 +105,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i503.VerifyOtpUsecase>(
       () => _i503.VerifyOtpUsecase(gh<_i1030.VerifyOtpRepo>()),
     );
+    gh.factory<_i118.ServicesRepo>(
+      () => _i438.ServicesRepoImpl(
+        servicesDataSources: gh<_i459.ServicesDataSources>(),
+      ),
+    );
     gh.factory<_i467.VerifyOtpCubit>(
       () => _i467.VerifyOtpCubit(gh<_i503.VerifyOtpUsecase>()),
     );
@@ -102,8 +119,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i188.LoginUsecase>(
       () => _i188.LoginUsecase(gh<_i543.LoginRepo>()),
     );
+    gh.factory<_i463.ServicesUsecase>(
+      () => _i463.ServicesUsecase(servicesRepo: gh<_i118.ServicesRepo>()),
+    );
     gh.factory<_i556.SentOtpUseCase>(
       () => _i556.SentOtpUseCase(gh<_i526.SentOtpRepo>()),
+    );
+    gh.factory<_i239.ServicesCubit>(
+      () => _i239.ServicesCubit(gh<_i463.ServicesUsecase>()),
     );
     gh.factory<_i716.LoginCubit>(
       () => _i716.LoginCubit(gh<_i188.LoginUsecase>()),
