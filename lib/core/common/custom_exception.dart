@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class ServerError implements Exception {
   String? serverMessage;
   int? statusCode;
-  ServerError(this.statusCode, this.serverMessage);
+  ServerError({required this.statusCode, required this.serverMessage});
 }
 
 class DioHttpException implements Exception {

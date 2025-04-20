@@ -32,7 +32,6 @@ class _CustomTextFormFielddState extends State<CustomTextFormFieldd> {
       return 'من فضلك ادخل ${widget.hintText}';
     }
 
-    // لو هو ايميل
     if (widget.hintText.contains('البريد')) {
       final emailRegex = RegExp(
         r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
@@ -42,7 +41,6 @@ class _CustomTextFormFielddState extends State<CustomTextFormFieldd> {
       }
     }
 
-    // لو هو كلمة سر
     if (widget.hintText.contains('كلمة')) {
       if (value.length < 6) {
         return 'كلمة السر يجب أن تكون 6 أحرف على الأقل';
@@ -61,22 +59,22 @@ class _CustomTextFormFielddState extends State<CustomTextFormFieldd> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF3F3F3),
-        borderRadius: BorderRadius.circular(16),
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
         controller: widget.controller,
         obscureText: _obscureText,
         textDirection: TextDirection.rtl,
         validator: _validateInput,
         decoration: InputDecoration(
+          filled: true,
+          fillColor: const Color(0xFFF3F3F3),
           hintText: widget.hintText,
           hintTextDirection: TextDirection.rtl,
-          border: InputBorder.none,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide.none,
+          ),
           prefixIcon: Icon(widget.suffixIcon, color: Colors.grey),
           suffixIcon:
               widget.obscureText
@@ -92,6 +90,8 @@ class _CustomTextFormFielddState extends State<CustomTextFormFieldd> {
                     },
                   )
                   : null,
+          isDense: true,
+          errorStyle: const TextStyle(color: Colors.red, fontSize: 12),
         ),
       ),
     );

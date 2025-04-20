@@ -17,4 +17,7 @@ abstract class ApiService {
     @Field('email') String email,
     @Field('password') String password,
   );
+
+  @POST(ApiConstants.sentOtp)
+  Future sentOtp(@Field('email') String email);
 }

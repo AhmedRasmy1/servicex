@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                     Center(
                       child: SvgPicture.asset(
                         "assets/images/loginimage.svg",
-                        height: size.height * 0.22,
+                        height: size.height * 0.17,
                       ),
                     ),
                     SizedBox(height: size.height * 0.05),
@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(
                           fontSize: size.width * 0.04,
                           fontWeight: FontWeight.w600,
-                          color: ColorManager.appColor,
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -248,7 +248,9 @@ class _LoginPageState extends State<LoginPage> {
                             const TextSpan(text: "ليس لديك حساب؟ "),
                             TextSpan(
                               text: "إنشاء حساب جديد.",
-                              style: const TextStyle(color: Colors.red),
+                              style: const TextStyle(
+                                color: ColorManager.appColor,
+                              ),
                               recognizer:
                                   TapGestureRecognizer()
                                     ..onTap = () {
