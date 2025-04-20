@@ -16,20 +16,29 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../../features/auth/data/data_sources/login_data_source.dart' as _i466;
 import '../../features/auth/data/data_sources/sent_otp_data_sources_impl.dart'
     as _i400;
+import '../../features/auth/data/data_sources/verify_otp_data_source.dart'
+    as _i398;
 import '../../features/auth/data/data_sources_impl/login_data_source_impl.dart'
     as _i785;
 import '../../features/auth/data/data_sources_impl/sent_otp_data_sources.dart'
     as _i575;
+import '../../features/auth/data/data_sources_impl/verify_otp_data_sources_impl.dart'
+    as _i1070;
 import '../../features/auth/data/repo_impl/login_repo_impl.dart' as _i204;
 import '../../features/auth/data/repo_impl/sent_otp_repo_impl.dart' as _i1020;
+import '../../features/auth/data/repo_impl/verify_otp_repo_impl.dart' as _i214;
 import '../../features/auth/domain/repo/login_repo.dart' as _i543;
 import '../../features/auth/domain/repo/sent_otp.dart' as _i526;
+import '../../features/auth/domain/repo/verify_otp_repo.dart' as _i1030;
 import '../../features/auth/domain/usecases/login_usecase.dart' as _i188;
 import '../../features/auth/domain/usecases/sent_otp_use_case.dart' as _i556;
+import '../../features/auth/domain/usecases/verify_otp_usecase.dart' as _i503;
 import '../../features/auth/presentation/viewmodels/login_viewmodel/login_cubit.dart'
     as _i716;
 import '../../features/auth/presentation/viewmodels/sent_otp_viewmodel/sent_otp_cubit.dart'
     as _i250;
+import '../../features/auth/presentation/viewmodels/verify_otp_viewmode/verify_otp_cubit.dart'
+    as _i467;
 import '../api/api_manager/api_manager.dart' as _i680;
 import '../api/dio_module.dart' as _i784;
 
@@ -46,14 +55,26 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i466.LoginDataSource>(
       () => _i785.LoginDataSourceImpl(gh<_i680.ApiService>()),
     );
+    gh.factory<_i398.VerifyOtpDataSource>(
+      () => _i1070.VerifyOtpDataSourcesImpl(gh<_i680.ApiService>()),
+    );
     gh.factory<_i575.SentOtpDataSource>(
       () => _i400.SentOtpDataSourcesImpl(gh<_i680.ApiService>()),
     );
     gh.factory<_i543.LoginRepo>(
       () => _i204.LoginRepoImpl(gh<_i466.LoginDataSource>()),
     );
+    gh.factory<_i1030.VerifyOtpRepo>(
+      () => _i214.VerifyOtpRepoImpl(gh<_i398.VerifyOtpDataSource>()),
+    );
     gh.factory<_i526.SentOtpRepo>(
       () => _i1020.SentOtpRepoImpl(gh<_i575.SentOtpDataSource>()),
+    );
+    gh.factory<_i503.VerifyOtpUsecase>(
+      () => _i503.VerifyOtpUsecase(gh<_i1030.VerifyOtpRepo>()),
+    );
+    gh.factory<_i467.VerifyOtpCubit>(
+      () => _i467.VerifyOtpCubit(gh<_i503.VerifyOtpUsecase>()),
     );
     gh.factory<_i188.LoginUsecase>(
       () => _i188.LoginUsecase(gh<_i543.LoginRepo>()),

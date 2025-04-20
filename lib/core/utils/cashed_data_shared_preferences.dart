@@ -46,4 +46,5 @@ class CacheService {
 class CacheConstants {
   static const String userToken = "userToken";
   static const String role = "role";
+  static const String userEmail = "userEmail";
 }

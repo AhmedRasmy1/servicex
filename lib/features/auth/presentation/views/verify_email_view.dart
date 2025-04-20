@@ -4,9 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:servicex/core/common/custom_exception.dart';
 import 'package:servicex/core/di/di.dart';
 import 'package:servicex/core/resources/color_manager.dart';
+import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
 import 'package:servicex/features/auth/presentation/viewmodels/sent_otp_viewmodel/sent_otp_cubit.dart';
+import 'package:servicex/features/auth/presentation/views/verify_otp.dart';
 import 'package:servicex/features/auth/presentation/widgets/custom_text_field.dart';
-import 'package:servicex/main.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({super.key});
@@ -140,7 +141,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => const HomePage(),
+                                  builder: (_) => const VerifyOtpView(),
                                 ),
                               );
                             }
@@ -203,6 +204,10 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                               if (_formKey.currentState!.validate()) {
                                 sentOtpCubit.sentOtp(
                                   email: emailController.text,
+                                );
+                                CacheService.setData(
+                                  key: CacheConstants.userEmail,
+                                  value: emailController.text,
                                 );
                               }
                             },

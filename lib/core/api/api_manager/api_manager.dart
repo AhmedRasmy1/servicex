@@ -20,4 +20,6 @@ abstract class ApiService {
 
   @POST(ApiConstants.sentOtp)
   Future sentOtp(@Field('email') String email);
+  @POST(ApiConstants.verifyOtp)
+  Future verifyOtp(@Field('otpCode') String otpCode);
 }
