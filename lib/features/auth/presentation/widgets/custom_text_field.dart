@@ -5,6 +5,8 @@ class CustomTextFormFieldd extends StatefulWidget {
   final IconData suffixIcon;
   final bool obscureText;
   final TextEditingController? controller;
+  final bool isConfirmPasswordField;
+  final TextEditingController? originalPasswordController;
 
   const CustomTextFormFieldd({
     super.key,
@@ -12,6 +14,8 @@ class CustomTextFormFieldd extends StatefulWidget {
     required this.suffixIcon,
     required this.controller,
     this.obscureText = false,
+    this.isConfirmPasswordField = false,
+    this.originalPasswordController,
   });
 
   @override
@@ -32,6 +36,12 @@ class _CustomTextFormFielddState extends State<CustomTextFormFieldd> {
       return 'من فضلك ادخل ${widget.hintText}';
     }
 
+    if (widget.isConfirmPasswordField) {
+      if (value != widget.originalPasswordController?.text) {
+        return 'كلمة المرور غير متطابقة';
+      }
+    }
+
     if (widget.hintText.contains('البريد')) {
       final emailRegex = RegExp(
         r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
@@ -41,7 +51,7 @@ class _CustomTextFormFielddState extends State<CustomTextFormFieldd> {
       }
     }
 
-    if (widget.hintText.contains('كلمة')) {
+    if (widget.hintText.contains('كلمة') && !widget.isConfirmPasswordField) {
       if (value.length < 6) {
         return 'كلمة السر يجب أن تكون 6 أحرف على الأقل';
       }

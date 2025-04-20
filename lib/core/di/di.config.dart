@@ -14,27 +14,38 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../../features/auth/data/data_sources/login_data_source.dart' as _i466;
+import '../../features/auth/data/data_sources/reset_password_data_sources.dart'
+    as _i956;
 import '../../features/auth/data/data_sources/sent_otp_data_sources_impl.dart'
     as _i400;
 import '../../features/auth/data/data_sources/verify_otp_data_source.dart'
     as _i398;
 import '../../features/auth/data/data_sources_impl/login_data_source_impl.dart'
     as _i785;
+import '../../features/auth/data/data_sources_impl/reset_password_data_sources_impl.dart'
+    as _i753;
 import '../../features/auth/data/data_sources_impl/sent_otp_data_sources.dart'
     as _i575;
 import '../../features/auth/data/data_sources_impl/verify_otp_data_sources_impl.dart'
     as _i1070;
 import '../../features/auth/data/repo_impl/login_repo_impl.dart' as _i204;
+import '../../features/auth/data/repo_impl/reset_password_repo_impl.dart'
+    as _i653;
 import '../../features/auth/data/repo_impl/sent_otp_repo_impl.dart' as _i1020;
 import '../../features/auth/data/repo_impl/verify_otp_repo_impl.dart' as _i214;
 import '../../features/auth/domain/repo/login_repo.dart' as _i543;
+import '../../features/auth/domain/repo/reset_password_repo.dart' as _i594;
 import '../../features/auth/domain/repo/sent_otp.dart' as _i526;
 import '../../features/auth/domain/repo/verify_otp_repo.dart' as _i1030;
 import '../../features/auth/domain/usecases/login_usecase.dart' as _i188;
+import '../../features/auth/domain/usecases/reset_password_usecase.dart'
+    as _i474;
 import '../../features/auth/domain/usecases/sent_otp_use_case.dart' as _i556;
 import '../../features/auth/domain/usecases/verify_otp_usecase.dart' as _i503;
 import '../../features/auth/presentation/viewmodels/login_viewmodel/login_cubit.dart'
     as _i716;
+import '../../features/auth/presentation/viewmodels/reset_password_viewmodel/reset_password_cubit.dart'
+    as _i113;
 import '../../features/auth/presentation/viewmodels/sent_otp_viewmodel/sent_otp_cubit.dart'
     as _i250;
 import '../../features/auth/presentation/viewmodels/verify_otp_viewmode/verify_otp_cubit.dart'
@@ -61,11 +72,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i575.SentOtpDataSource>(
       () => _i400.SentOtpDataSourcesImpl(gh<_i680.ApiService>()),
     );
+    gh.factory<_i956.ResetPasswordDataSource>(
+      () => _i753.ResetPasswordDataSourcesImpl(gh<_i680.ApiService>()),
+    );
     gh.factory<_i543.LoginRepo>(
       () => _i204.LoginRepoImpl(gh<_i466.LoginDataSource>()),
     );
     gh.factory<_i1030.VerifyOtpRepo>(
       () => _i214.VerifyOtpRepoImpl(gh<_i398.VerifyOtpDataSource>()),
+    );
+    gh.factory<_i594.ResetPasswordRepo>(
+      () => _i653.ResetPasswordRepoImpl(gh<_i956.ResetPasswordDataSource>()),
+    );
+    gh.factory<_i474.ResetPasswordUsecase>(
+      () => _i474.ResetPasswordUsecase(gh<_i594.ResetPasswordRepo>()),
     );
     gh.factory<_i526.SentOtpRepo>(
       () => _i1020.SentOtpRepoImpl(gh<_i575.SentOtpDataSource>()),
@@ -75,6 +95,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i467.VerifyOtpCubit>(
       () => _i467.VerifyOtpCubit(gh<_i503.VerifyOtpUsecase>()),
+    );
+    gh.factory<_i113.ResetPasswordCubit>(
+      () => _i113.ResetPasswordCubit(gh<_i474.ResetPasswordUsecase>()),
     );
     gh.factory<_i188.LoginUsecase>(
       () => _i188.LoginUsecase(gh<_i543.LoginRepo>()),

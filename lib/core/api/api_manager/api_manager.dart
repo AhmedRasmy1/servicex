@@ -22,4 +22,9 @@ abstract class ApiService {
   Future sentOtp(@Field('email') String email);
   @POST(ApiConstants.verifyOtp)
   Future verifyOtp(@Field('otpCode') String otpCode);
+  @POST(ApiConstants.resetPassword)
+  Future resetPassword(
+    @Field('email') String email,
+    @Field('newPassword') String password,
+  );
 }
