@@ -74,9 +74,11 @@ class _RegisterForCustomerViewState extends State<RegisterForCustomerView> {
                   children: [
                     Row(
                       children: [
-                        SvgPicture.asset(
-                          "assets/images/User.svg",
-                          height: size.height * 0.02,
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                          icon: const Icon(Icons.arrow_back_ios, size: 22),
+                          onPressed: () => Navigator.pop(context),
                         ),
                         SizedBox(width: size.width * 0.02),
                         Text(
@@ -108,9 +110,14 @@ class _RegisterForCustomerViewState extends State<RegisterForCustomerView> {
                             backgroundImage:
                                 _selectedImage != null
                                     ? FileImage(_selectedImage!)
-                                    : const AssetImage(
+                                    : null,
+                            child:
+                                _selectedImage == null
+                                    ? Image.asset(
                                       'assets/images/defaultimageuser.png',
-                                    ),
+                                      fit: BoxFit.cover,
+                                    )
+                                    : null,
                           ),
                           Positioned(
                             bottom: 4,
@@ -342,8 +349,44 @@ class _RegisterForCustomerViewState extends State<RegisterForCustomerView> {
                           height: size.height * 0.07,
                           child: ElevatedButton(
                             onPressed: () async {
-                              if (_formKey.currentState!.validate() &&
-                                  _selectedImage != null) {
+                              if (_formKey.currentState!.validate()) {
+                                if (_selectedImage == null) {
+                                  showDialog(
+                                    context: context,
+                                    builder:
+                                        (context) => Dialog(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              20,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(24.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: const [
+                                                Icon(
+                                                  Icons.error_outline,
+                                                  color: Colors.red,
+                                                  size: 40,
+                                                ),
+                                                SizedBox(height: 20),
+                                                Text(
+                                                  'يجب إضافة صورة شخصية للمستخدم',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                  );
+                                  return;
+                                }
                                 File file = File(_selectedImage!.path);
                                 String fileNameWithExtension = basename(
                                   file.path,

@@ -47,9 +47,34 @@ class _ChooseServiceViewState extends State<ChooseServiceView> {
         MaterialPageRoute(builder: (_) => const RegisterForTechnicianbView()),
       );
     } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('من فضلك اختر خدمة')));
+      showDialog(
+        context: context,
+        builder:
+            (context) => Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(Icons.error_outline, color: Colors.red, size: 40),
+                    SizedBox(height: 20),
+                    Text(
+                      'يرجى اختيار الخدمة',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+      );
     }
     log(CacheService.getData(key: CacheConstants.technichianService));
   }
@@ -77,7 +102,7 @@ class _ChooseServiceViewState extends State<ChooseServiceView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // العنوان وسهم الرجوع
+                  // Header with title and back button
                   Row(
                     children: [
                       IconButton(
@@ -90,17 +115,16 @@ class _ChooseServiceViewState extends State<ChooseServiceView> {
                       const Text(
                         'ما الخدمة التي ستقدمها؟',
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 30),
 
-                  // محتوى الكروت
+                  // Service cards
                   Expanded(
                     child: BlocBuilder<ServicesCubit, ServicesState>(
                       builder: (context, state) {
@@ -118,7 +142,7 @@ class _ChooseServiceViewState extends State<ChooseServiceView> {
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 16,
                                   mainAxisSpacing: 16,
-                                  childAspectRatio: 1,
+                                  childAspectRatio: 0.9,
                                 ),
                             itemBuilder: (context, index) {
                               final isSelected = selectedIndex == index;
@@ -153,17 +177,20 @@ class _ChooseServiceViewState extends State<ChooseServiceView> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SvgPicture.network(
-                                        service.imageUrl,
-                                        height: 48,
-                                        width: 48,
-                                        errorBuilder:
-                                            (context, error, stackTrace) =>
-                                                const Icon(
-                                                  Icons.broken_image,
-                                                  size: 48,
-                                                  color: Colors.grey,
-                                                ),
+                                      Hero(
+                                        tag: service.id,
+                                        child: SvgPicture.network(
+                                          service.imageUrl,
+                                          height: 60,
+                                          width: 60,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  const Icon(
+                                                    Icons.broken_image,
+                                                    size: 60,
+                                                    color: Colors.grey,
+                                                  ),
+                                        ),
                                       ),
                                       const SizedBox(height: 10),
                                       Text(
@@ -185,7 +212,16 @@ class _ChooseServiceViewState extends State<ChooseServiceView> {
                             },
                           );
                         } else if (state is ServicesFailed) {
-                          return Center(child: Text('فشل في تحميل الخدمات: '));
+                          return Center(
+                            child: Text(
+                              'فشل في تحميل الخدمات',
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
                         } else {
                           return const SizedBox.shrink();
                         }
@@ -193,6 +229,8 @@ class _ChooseServiceViewState extends State<ChooseServiceView> {
                     ),
                   ),
                   const SizedBox(height: 20),
+
+                  // Next button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -208,13 +246,12 @@ class _ChooseServiceViewState extends State<ChooseServiceView> {
                         'التالي',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 30),
                 ],
               ),
@@ -223,14 +260,5 @@ class _ChooseServiceViewState extends State<ChooseServiceView> {
         ),
       ),
     );
-  }
-}
-
-class NextPage extends StatelessWidget {
-  const NextPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text("الصفحة التالية")));
   }
 }

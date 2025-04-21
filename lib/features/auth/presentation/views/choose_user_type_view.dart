@@ -42,9 +42,34 @@ class _ChooseUserTypeViewState extends State<ChooseUserTypeView> {
         );
       }
     } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('من فضلك اختر نوع الحساب')));
+      showDialog(
+        context: context,
+        builder:
+            (context) => Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(Icons.error_outline, color: Colors.red, size: 40),
+                    SizedBox(height: 20),
+                    Text(
+                      'يرجى اختيار نوع الحساب',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+      );
     }
   }
 

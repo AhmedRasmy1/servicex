@@ -48,9 +48,11 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                   children: [
                     Row(
                       children: [
-                        SvgPicture.asset(
-                          "assets/images/User.svg",
-                          height: size.height * 0.02,
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                          icon: const Icon(Icons.arrow_back_ios, size: 22),
+                          onPressed: () => Navigator.pop(context),
                         ),
                         SizedBox(width: size.width * 0.02),
                         Text(
