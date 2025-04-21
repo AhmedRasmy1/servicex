@@ -103,12 +103,13 @@ class _RegisterForCustomerViewState extends State<RegisterForCustomerView> {
                         alignment: Alignment.bottomRight,
                         children: [
                           CircleAvatar(
-                            radius: size.width * 0.18,
+                            backgroundColor: Colors.transparent,
+                            radius: size.width * 0.16,
                             backgroundImage:
                                 _selectedImage != null
                                     ? FileImage(_selectedImage!)
                                     : const AssetImage(
-                                      'assets/images/userforregister.png',
+                                      'assets/images/defaultimageuser.png',
                                     ),
                           ),
                           Positioned(

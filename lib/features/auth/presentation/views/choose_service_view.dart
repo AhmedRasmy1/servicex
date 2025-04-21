@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:servicex/core/di/di.dart';
 import 'package:servicex/core/resources/color_manager.dart';
 import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
+import 'package:servicex/features/auth/presentation/views/register_for_technician.dart';
 import 'package:servicex/features/home/presentation/viewmodels/services_viewmodel/services_cubit.dart';
 
 class ChooseServiceView extends StatefulWidget {
@@ -43,7 +44,7 @@ class _ChooseServiceViewState extends State<ChooseServiceView> {
 
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => const NextPage()),
+        MaterialPageRoute(builder: (_) => const RegisterForTechnicianbView()),
       );
     } else {
       ScaffoldMessenger.of(
