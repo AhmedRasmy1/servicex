@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:servicex/core/resources/color_manager.dart';
 import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
 import 'package:servicex/features/auth/presentation/views/choose_service_view.dart';
+import 'package:servicex/features/auth/presentation/views/register_for_customer.dart';
 
 class ChooseUserTypeView extends StatefulWidget {
   const ChooseUserTypeView({super.key});
@@ -30,7 +31,9 @@ class _ChooseUserTypeViewState extends State<ChooseUserTypeView> {
       if (selectedUserType == 'Customer') {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const CustomerPage()),
+          MaterialPageRoute(
+            builder: (context) => const RegisterForCustomerView(),
+          ),
         );
       } else if (selectedUserType == 'Technician') {
         Navigator.push(
@@ -69,7 +72,7 @@ class _ChooseUserTypeViewState extends State<ChooseUserTypeView> {
                     ),
                     const SizedBox(width: 8),
                     const Text(
-                      'هل أنت؟',
+                      "اختر نوع الحساب",
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,

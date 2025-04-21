@@ -51,6 +51,18 @@ class _CustomTextFormFielddState extends State<CustomTextFormFieldd> {
       }
     }
 
+    if (widget.hintText.contains('رقم')) {
+      if (value.length != 11) {
+        return 'رقم الموبايل يجب أن يكون مكون من 11 رقم';
+      }
+      if (!value.startsWith('010') &&
+          !value.startsWith('011') &&
+          !value.startsWith('012') &&
+          !value.startsWith('015')) {
+        return 'رقم الموبايل يجب أن يبدأ بـ 010 أو 011 أو 012 أو 015';
+      }
+    }
+
     if (widget.hintText.contains('كلمة') && !widget.isConfirmPasswordField) {
       if (value.length < 6) {
         return 'كلمة السر يجب أن تكون 6 أحرف على الأقل';

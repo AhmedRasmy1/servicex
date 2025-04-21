@@ -31,4 +31,7 @@ abstract class ApiService {
 
   @GET(ApiConstants.getAllServices)
   Future<List<ServicesModel>> getAllServices();
+  @POST(ApiConstants.register)
+  @MultiPart()
+  Future register(@Body() FormData formData);
 }

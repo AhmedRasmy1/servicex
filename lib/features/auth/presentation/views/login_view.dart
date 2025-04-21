@@ -6,7 +6,6 @@ import 'package:servicex/core/di/di.dart';
 import 'package:servicex/core/resources/color_manager.dart';
 import 'package:servicex/features/auth/presentation/viewmodels/login_viewmodel/login_cubit.dart';
 import 'package:servicex/features/auth/presentation/views/choose_user_type_view.dart';
-import 'package:servicex/features/auth/presentation/views/register_view.dart';
 import 'package:servicex/features/auth/presentation/views/verify_email_view.dart';
 import 'package:servicex/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:servicex/main.dart';

@@ -14,6 +14,8 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../../features/auth/data/data_sources/login_data_source.dart' as _i466;
+import '../../features/auth/data/data_sources/register_data_sources.dart'
+    as _i484;
 import '../../features/auth/data/data_sources/reset_password_data_sources.dart'
     as _i956;
 import '../../features/auth/data/data_sources/sent_otp_data_sources_impl.dart'
@@ -22,6 +24,8 @@ import '../../features/auth/data/data_sources/verify_otp_data_source.dart'
     as _i398;
 import '../../features/auth/data/data_sources_impl/login_data_source_impl.dart'
     as _i785;
+import '../../features/auth/data/data_sources_impl/register_data_soruces_impl.dart'
+    as _i525;
 import '../../features/auth/data/data_sources_impl/reset_password_data_sources_impl.dart'
     as _i753;
 import '../../features/auth/data/data_sources_impl/sent_otp_data_sources.dart'
@@ -29,21 +33,26 @@ import '../../features/auth/data/data_sources_impl/sent_otp_data_sources.dart'
 import '../../features/auth/data/data_sources_impl/verify_otp_data_sources_impl.dart'
     as _i1070;
 import '../../features/auth/data/repo_impl/login_repo_impl.dart' as _i204;
+import '../../features/auth/data/repo_impl/register_repo_impl.dart' as _i1058;
 import '../../features/auth/data/repo_impl/reset_password_repo_impl.dart'
     as _i653;
 import '../../features/auth/data/repo_impl/sent_otp_repo_impl.dart' as _i1020;
 import '../../features/auth/data/repo_impl/verify_otp_repo_impl.dart' as _i214;
 import '../../features/auth/domain/repo/login_repo.dart' as _i543;
+import '../../features/auth/domain/repo/register_repo.dart' as _i937;
 import '../../features/auth/domain/repo/reset_password_repo.dart' as _i594;
 import '../../features/auth/domain/repo/sent_otp.dart' as _i526;
 import '../../features/auth/domain/repo/verify_otp_repo.dart' as _i1030;
 import '../../features/auth/domain/usecases/login_usecase.dart' as _i188;
+import '../../features/auth/domain/usecases/register_usecase.dart' as _i941;
 import '../../features/auth/domain/usecases/reset_password_usecase.dart'
     as _i474;
 import '../../features/auth/domain/usecases/sent_otp_use_case.dart' as _i556;
 import '../../features/auth/domain/usecases/verify_otp_usecase.dart' as _i503;
 import '../../features/auth/presentation/viewmodels/login_viewmodel/login_cubit.dart'
     as _i716;
+import '../../features/auth/presentation/viewmodels/register_viewmodel/register_cubit.dart'
+    as _i31;
 import '../../features/auth/presentation/viewmodels/reset_password_viewmodel/reset_password_cubit.dart'
     as _i113;
 import '../../features/auth/presentation/viewmodels/sent_otp_viewmodel/sent_otp_cubit.dart'
@@ -105,6 +114,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i503.VerifyOtpUsecase>(
       () => _i503.VerifyOtpUsecase(gh<_i1030.VerifyOtpRepo>()),
     );
+    gh.factory<_i484.RegisterDataSources>(
+      () => _i525.RegisterDataSorucesImpl(apiService: gh<_i680.ApiService>()),
+    );
     gh.factory<_i118.ServicesRepo>(
       () => _i438.ServicesRepoImpl(
         servicesDataSources: gh<_i459.ServicesDataSources>(),
@@ -128,11 +140,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i239.ServicesCubit>(
       () => _i239.ServicesCubit(gh<_i463.ServicesUsecase>()),
     );
+    gh.factory<_i937.RegisterRepo>(
+      () => _i1058.RegisterRepoImpl(
+        registerDataSources: gh<_i484.RegisterDataSources>(),
+      ),
+    );
     gh.factory<_i716.LoginCubit>(
       () => _i716.LoginCubit(gh<_i188.LoginUsecase>()),
     );
     gh.factory<_i250.SentOtpCubit>(
       () => _i250.SentOtpCubit(gh<_i556.SentOtpUseCase>()),
+    );
+    gh.factory<_i941.RegisterUsecase>(
+      () => _i941.RegisterUsecase(registerRepo: gh<_i937.RegisterRepo>()),
+    );
+    gh.factory<_i31.RegisterCubit>(
+      () => _i31.RegisterCubit(gh<_i941.RegisterUsecase>()),
     );
     return this;
   }
