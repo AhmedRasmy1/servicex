@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/auth/domain/usecases/register_usecase.dart';
+import '../../../../../core/common/api_result.dart';
+import '../../../domain/usecases/register_usecase.dart';
 
 part 'register_state.dart';
 

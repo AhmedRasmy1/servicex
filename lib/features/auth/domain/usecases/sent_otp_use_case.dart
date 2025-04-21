@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/features/auth/domain/repo/sent_otp.dart';
+import '../repo/sent_otp.dart';
 
 @injectable
 class SentOtpUseCase {

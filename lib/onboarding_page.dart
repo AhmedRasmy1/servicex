@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:servicex/core/resources/assets_manager.dart';
-import 'package:servicex/features/auth/presentation/views/login_view.dart';
+import 'core/resources/assets_manager.dart';
+import 'features/auth/presentation/views/login_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingPage extends StatefulWidget {

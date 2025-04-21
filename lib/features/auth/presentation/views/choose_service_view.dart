@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/core/resources/color_manager.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/auth/presentation/views/register_for_technician.dart';
-import 'package:servicex/features/home/presentation/viewmodels/services_viewmodel/services_cubit.dart';
+import '../../../../core/di/di.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/utils/cashed_data_shared_preferences.dart';
+import 'register_for_technician.dart';
+import '../../../home/presentation/viewmodels/services_viewmodel/services_cubit.dart';
 
 class ChooseServiceView extends StatefulWidget {
   const ChooseServiceView({super.key});

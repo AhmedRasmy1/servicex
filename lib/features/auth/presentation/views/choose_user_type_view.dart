@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:servicex/core/resources/color_manager.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/auth/presentation/views/choose_service_view.dart';
-import 'package:servicex/features/auth/presentation/views/register_for_customer.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/utils/cashed_data_shared_preferences.dart';
+import 'choose_service_view.dart';
+import 'register_for_customer.dart';
 
 class ChooseUserTypeView extends StatefulWidget {
   const ChooseUserTypeView({super.key});

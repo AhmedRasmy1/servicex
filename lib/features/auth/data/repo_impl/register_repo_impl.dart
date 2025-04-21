@@ -1,7 +1,7 @@
 import 'package:dio/src/form_data.dart';
 import 'package:injectable/injectable.dart';
-import 'package:servicex/features/auth/data/data_sources/register_data_sources.dart';
-import 'package:servicex/features/auth/domain/repo/register_repo.dart';
+import '../data_sources/register_data_sources.dart';
+import '../../domain/repo/register_repo.dart';
 
 @Injectable(as: RegisterRepo)
 class RegisterRepoImpl implements RegisterRepo {

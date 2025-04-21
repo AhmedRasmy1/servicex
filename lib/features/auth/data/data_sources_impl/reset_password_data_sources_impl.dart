@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/core/api/api_extentions.dart';
-import 'package:servicex/core/api/api_manager/api_manager.dart';
-import 'package:servicex/features/auth/data/data_sources/reset_password_data_sources.dart';
+import '../../../../core/api/api_extentions.dart';
+import '../../../../core/api/api_manager/api_manager.dart';
+import '../data_sources/reset_password_data_sources.dart';
 
 @Injectable(as: ResetPasswordDataSource)
 class ResetPasswordDataSourcesImpl implements ResetPasswordDataSource {

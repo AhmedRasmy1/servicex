@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:servicex/core/common/custom_exception.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/core/resources/color_manager.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/auth/presentation/viewmodels/reset_password_viewmodel/reset_password_cubit.dart';
-import 'package:servicex/features/auth/presentation/views/login_view.dart';
-import 'package:servicex/features/auth/presentation/widgets/custom_text_field.dart';
+import '../../../../core/common/custom_exception.dart';
+import '../../../../core/di/di.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/utils/cashed_data_shared_preferences.dart';
+import '../viewmodels/reset_password_viewmodel/reset_password_cubit.dart';
+import 'login_view.dart';
+import '../widgets/custom_text_field.dart';
 
 class ResetPasswordView extends StatefulWidget {
   const ResetPasswordView({super.key});

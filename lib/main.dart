@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/core/utils/my_bloc_observer.dart';
-import 'package:servicex/onboarding_page.dart';
+import 'core/di/di.dart';
+import 'core/utils/cashed_data_shared_preferences.dart';
+import 'core/utils/my_bloc_observer.dart';
+import 'onboarding_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

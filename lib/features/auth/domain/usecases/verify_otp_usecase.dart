@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/features/auth/domain/repo/verify_otp_repo.dart';
+import '../repo/verify_otp_repo.dart';
 
 @injectable
 class VerifyOtpUsecase {

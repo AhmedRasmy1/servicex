@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/auth/domain/usecases/sent_otp_use_case.dart';
+import '../../../../../core/common/api_result.dart';
+import '../../../domain/usecases/sent_otp_use_case.dart';
 
 part 'sent_otp_state.dart';
 

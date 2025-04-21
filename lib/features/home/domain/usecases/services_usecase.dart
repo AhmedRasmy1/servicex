@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/home/domain/entities/service_entity.dart';
-import 'package:servicex/features/home/domain/repo/services_repo.dart';
+import '../../../../core/common/api_result.dart';
+import '../entities/service_entity.dart';
+import '../repo/services_repo.dart';
 
 @injectable
 class ServicesUsecase {

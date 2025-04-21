@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/features/auth/data/data_sources_impl/sent_otp_data_sources.dart';
-import 'package:servicex/features/auth/domain/repo/sent_otp.dart';
+import '../data_sources_impl/sent_otp_data_sources.dart';
+import '../../domain/repo/sent_otp.dart';
 
 @Injectable(as: SentOtpRepo)
 class SentOtpRepoImpl implements SentOtpRepo {

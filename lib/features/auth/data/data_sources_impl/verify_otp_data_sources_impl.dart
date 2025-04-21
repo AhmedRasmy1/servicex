@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/core/api/api_extentions.dart';
-import 'package:servicex/core/api/api_manager/api_manager.dart';
-import 'package:servicex/features/auth/data/data_sources/verify_otp_data_source.dart';
+import '../../../../core/api/api_extentions.dart';
+import '../../../../core/api/api_manager/api_manager.dart';
+import '../data_sources/verify_otp_data_source.dart';
 
 @Injectable(as: VerifyOtpDataSource)
 class VerifyOtpDataSourcesImpl implements VerifyOtpDataSource {

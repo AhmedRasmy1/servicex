@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/auth/domain/usecases/reset_password_usecase.dart';
+import '../../../../../core/common/api_result.dart';
+import '../../../domain/usecases/reset_password_usecase.dart';
 
 part 'reset_password_state.dart';
 

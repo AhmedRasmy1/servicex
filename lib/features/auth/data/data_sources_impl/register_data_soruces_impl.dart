@@ -1,8 +1,8 @@
 import 'package:dio/src/form_data.dart';
 import 'package:injectable/injectable.dart';
-import 'package:servicex/core/api/api_extentions.dart';
-import 'package:servicex/core/api/api_manager/api_manager.dart';
-import 'package:servicex/features/auth/data/data_sources/register_data_sources.dart';
+import '../../../../core/api/api_extentions.dart';
+import '../../../../core/api/api_manager/api_manager.dart';
+import '../data_sources/register_data_sources.dart';
 
 @Injectable(as: RegisterDataSources)
 class RegisterDataSorucesImpl implements RegisterDataSources {

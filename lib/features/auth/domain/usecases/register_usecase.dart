@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:servicex/features/auth/domain/repo/register_repo.dart';
+import '../repo/register_repo.dart';
 
 @injectable
 class RegisterUsecase {

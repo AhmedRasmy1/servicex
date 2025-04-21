@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/home/domain/entities/service_entity.dart';
-import 'package:servicex/features/home/domain/usecases/services_usecase.dart';
+import '../../../../../core/common/api_result.dart';
+import '../../../domain/entities/service_entity.dart';
+import '../../../domain/usecases/services_usecase.dart';
 
 part 'services_state.dart';
 

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:servicex/features/auth/domain/entities/login_entity.dart';
+import '../../domain/entities/login_entity.dart';
 part 'login_model.g.dart';
 
 @JsonSerializable()

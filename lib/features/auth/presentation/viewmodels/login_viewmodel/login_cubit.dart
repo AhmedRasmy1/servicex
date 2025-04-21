@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/auth/domain/entities/login_entity.dart';
-import 'package:servicex/features/auth/domain/usecases/login_usecase.dart';
+import '../../../../../core/common/api_result.dart';
+import '../../../../../core/utils/cashed_data_shared_preferences.dart';
+import '../../../domain/entities/login_entity.dart';
+import '../../../domain/usecases/login_usecase.dart';
 
 part 'login_state.dart';
 

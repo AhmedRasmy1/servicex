@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:servicex/core/common/custom_exception.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/core/resources/color_manager.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/auth/presentation/viewmodels/sent_otp_viewmodel/sent_otp_cubit.dart';
-import 'package:servicex/features/auth/presentation/views/verify_otp.dart';
-import 'package:servicex/features/auth/presentation/widgets/custom_text_field.dart';
+import '../../../../core/common/custom_exception.dart';
+import '../../../../core/di/di.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/utils/cashed_data_shared_preferences.dart';
+import '../viewmodels/sent_otp_viewmodel/sent_otp_cubit.dart';
+import 'verify_otp.dart';
+import '../widgets/custom_text_field.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({super.key});

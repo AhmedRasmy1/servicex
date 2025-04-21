@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:servicex/core/common/custom_exception.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/core/resources/color_manager.dart';
-import 'package:servicex/features/auth/presentation/viewmodels/verify_otp_viewmode/verify_otp_cubit.dart';
-import 'package:servicex/features/auth/presentation/views/reset_password_view.dart';
+import '../../../../core/common/custom_exception.dart';
+import '../../../../core/di/di.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../viewmodels/verify_otp_viewmode/verify_otp_cubit.dart';
+import 'reset_password_view.dart';
 
 class VerifyOtpView extends StatefulWidget {
   const VerifyOtpView({super.key});

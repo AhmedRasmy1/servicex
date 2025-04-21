@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/features/auth/domain/repo/reset_password_repo.dart';
+import '../repo/reset_password_repo.dart';
 
 @injectable
 class ResetPasswordUsecase {
