@@ -13,4 +13,7 @@ class ColorManager {
   static const Color offwhite = Color(0xffD9D9D9);
   static const Color mainColor = Color(0XFFFF4100);
   static const Color appColor = Color(0xff0054A5);
+  static const Color textColor = Color(0xffBDBDBD);
+    static const Color secondaryTextColor = Color(0xff757171);
+
 }

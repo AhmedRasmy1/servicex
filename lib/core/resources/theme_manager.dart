@@ -46,6 +46,32 @@ OutlineInputBorder outLintInputBorderMethod(
     BorderSide borderSide, BorderRadius borderRadius) {
   return OutlineInputBorder(
     borderSide: borderSide,
-    borderRadius: const BorderRadius.all(Radius.circular(AppSize.s20)),
+    borderRadius: borderRadius,
   );
 }
+
+class TextStyles {
+  static TextStyle titleTextStyle(BuildContext context) {
+    return TextStyle(
+      fontSize: MediaQuery.of(context).size.width * 0.05,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  static TextStyle subtitleTextStyle(BuildContext context) {
+    return TextStyle(
+      fontSize: MediaQuery.of(context).size.width * 0.035,
+      fontWeight: FontWeight.w600,
+      color: ColorManager.textColor,
+    );
+  }
+
+  static TextStyle buttonTextStyle(BuildContext context) {
+    return TextStyle(
+      fontSize: MediaQuery.of(context).size.width * 0.045,
+      fontWeight: FontWeight.w600,
+      color: ColorManager.white,
+    );
+  }
+}
+

@@ -11,7 +11,7 @@ import '../../../../core/di/di.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/utils/cashed_data_shared_preferences.dart';
 import '../viewmodels/register_viewmodel/register_cubit.dart';
-import 'login_view.dart';
+import '../../../../login/view/login_view.dart';
 import '../widgets/custom_text_field.dart';
 import 'package:image_picker/image_picker.dart';
 

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:servicex/core/resources/color_manager.dart';
+import 'package:servicex/core/resources/font_manager.dart';
+import 'package:servicex/core/resources/style_manager.dart';
+import 'package:servicex/core/resources/theme_manager.dart';
+import 'package:servicex/core/resources/values_manager.dart';
 
-import '../resources/color_manager.dart';
-import '../resources/font_manager.dart';
-import '../resources/style_manager.dart';
-import '../resources/theme_manager.dart';
-import '../resources/values_manager.dart';
-
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
+class CustomTextFormFieldRegister extends StatelessWidget {
+  const CustomTextFormFieldRegister({
     super.key,
     required this.controller,
     this.labelText,
@@ -20,7 +19,7 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.initialValue,
     this.onChanged,
-    this.inputAction,
+    this.onTap,
   });
 
   final TextEditingController controller;
@@ -33,32 +32,30 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffix;
   final Widget? prefixIcon;
   final TextInputType? keyboardType;
-  final TextInputAction? inputAction;
   final void Function(String)? onChanged;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: AppSize.s45,
       child: TextFormField(
-        textInputAction: inputAction,
         cursorColor: ColorManager.placeHolderColor,
         style: const TextStyle(color: ColorManager.placeHolderColor),
         initialValue: initialValue,
         readOnly: enabled ?? false,
+        onTap: onTap,
         controller: controller,
         keyboardType: keyboardType,
         decoration: InputDecoration(
           prefixIcon: prefixIcon,
-          prefixIconColor: ColorManager.placeHolderColor,
-          suffixIcon: suffix != null
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    suffix!,
-                  ],
-                )
-              : null,
+          fillColor: ColorManager.placeHolderColor.withAlpha(100),
+          filled: true,
+          prefixIconColor: ColorManager.white,
+          suffixIcon:
+              suffix != null
+                  ? Row(mainAxisSize: MainAxisSize.min, children: [suffix!])
+                  : null,
           suffixIconColor: ColorManager.placeHolderColor,
           labelText: labelText,
           labelStyle: getRegularStyle(
@@ -66,19 +63,24 @@ class CustomTextFormField extends StatelessWidget {
             fontSize: FontSize.s16,
           ),
           hintText: hintText,
-          hintStyle: getRegularStyle(
-            color: ColorManager.placeHolderColor,
+          hintStyle: getSemiBoldStyle(
+            color: ColorManager.white,
             fontSize: FontSize.s14,
           ),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           contentPadding: const EdgeInsets.all(AppPadding.p18),
           enabledBorder: outLintInputBorderMethod(
             const BorderSide(
-                color: ColorManager.placeHolderColor, width: AppSize.w1_5),
+              color: ColorManager.placeHolderColor,
+              width: AppSize.w1_5,
+            ),
             const BorderRadius.all(Radius.circular(AppSize.s20)),
           ),
           focusedBorder: outLintInputBorderMethod(
-            const BorderSide(color: ColorManager.orange, width: AppSize.w1_5),
+            const BorderSide(
+              color: ColorManager.placeHolderColor,
+              width: AppSize.w1_5,
+            ),
             const BorderRadius.all(Radius.circular(AppSize.s20)),
           ),
           errorBorder: outLintInputBorderMethod(
@@ -91,16 +93,16 @@ class CustomTextFormField extends StatelessWidget {
           ),
           disabledBorder: outLintInputBorderMethod(
             const BorderSide(
-                color: ColorManager.placeHolderColor, width: AppSize.w1_5),
+              color: ColorManager.placeHolderColor,
+              width: AppSize.w1_5,
+            ),
             const BorderRadius.all(Radius.circular(AppSize.s20)),
           ),
         ),
         obscureText: obscureText ?? false,
         validator: validator,
         onChanged: onChanged,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
       ),
     );
   }
 }
-

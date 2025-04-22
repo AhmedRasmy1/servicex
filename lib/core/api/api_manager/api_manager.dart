@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import '../../../features/auth/data/models/login_model.dart';
+import 'package:servicex/features/auth/data/models/login_model.dart';
 import '../../../features/home/data/models/services_model.dart';
 import '../api_constants.dart';
 part 'api_manager.g.dart';
