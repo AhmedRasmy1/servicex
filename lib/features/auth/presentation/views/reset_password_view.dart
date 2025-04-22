@@ -159,7 +159,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         SvgPicture.asset(
-                                          'assets/images/congratulationsIcon.svg',
+                                          'assets/images/successicon.svg',
                                           height: 100,
                                         ),
                                         const SizedBox(height: 20),

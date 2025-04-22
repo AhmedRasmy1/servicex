@@ -238,7 +238,7 @@ class _RegisterForCustomerViewState extends State<RegisterForCustomerView> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         SvgPicture.asset(
-                                          'assets/images/congratulationsIcon.svg',
+                                          'assets/images/successicon.svg',
                                           height: 100,
                                         ),
                                         const SizedBox(height: 20),

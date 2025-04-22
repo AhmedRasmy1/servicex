@@ -86,11 +86,11 @@ flutter:
           weight: 600
 
 flutter_native_splash:
-  color: "#0474ED"
+  color: "#0054A5"
   image: assets/images/icon.png
   android_12:
     image: assets/images/icon.png
-    icon_background_color: "#0474ED"
+    icon_background_color: "#0054A5"
   fullscreen: true
 
 flutter_launcher_icons:
@@ -101,6 +101,6 @@ flutter_launcher_icons:
     image_path: "assets/icons/app_icon.png"
     icon_size: 256
   image_path: "assets/icons/app_icon.png"
-  adaptive_icon_background: "#0474ED"
+  adaptive_icon_background: "#0054A5"
   adaptive_icon_foreground: "assets/icons/app_icon_foreground.png"
   min_sdk_android: 21
