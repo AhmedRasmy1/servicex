@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_constants.dart';
+import '../../core/resources/constants_text_app.dart';
 
 class LoginInstructions extends StatelessWidget {
   const LoginInstructions({super.key});
@@ -8,7 +8,7 @@ class LoginInstructions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        LoginConstants.instructions,
+        ConstantsText.instructions,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: MediaQuery.of(context).size.width * 0.04,

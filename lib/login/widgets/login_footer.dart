@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:servicex/core/resources/color_manager.dart';
-import 'package:servicex/features/auth/presentation/views/choose_user_type_view.dart';
-import 'login_constants.dart';
+import 'package:servicex/User_type/view/choose_user_type_view.dart';
+import '../../core/resources/constants_text_app.dart';
 
 class LoginFooter extends StatelessWidget {
   const LoginFooter({super.key});
@@ -18,9 +18,9 @@ class LoginFooter extends StatelessWidget {
             color: ColorManager.textColor,
           ),
           children: [
-            const TextSpan(text: LoginConstants.noAccount),
+            const TextSpan(text: ConstantsText.noAccount),
             TextSpan(
-              text: LoginConstants.createAccount,
+              text: ConstantsText.createAccount,
               style: const TextStyle(color: ColorManager.appColor),
               recognizer:
                   TapGestureRecognizer()

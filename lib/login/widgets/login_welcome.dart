@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:servicex/core/resources/theme_manager.dart';
-import 'login_constants.dart';
+import '../../core/resources/constants_text_app.dart';
 
 class LoginWelcomeMessage extends StatelessWidget {
   const LoginWelcomeMessage({super.key});
@@ -8,7 +8,7 @@ class LoginWelcomeMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      LoginConstants.welcomeMessage,
+      ConstantsText.welcomeMessage,
       style: TextStyles.subtitleTextStyle(context),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import'package:servicex/features/auth/presentation/widgets/custom_text_field.dart';
-import'package:servicex/login/widgets/login_constants.dart';
+import 'package:servicex/features/auth/presentation/widgets/custom_text_field.dart';
+import 'package:servicex/core/resources/constants_text_app.dart';
+
 class LoginForm extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -31,7 +32,7 @@ class LoginForm extends StatelessWidget {
 
   Widget _buildEmailField() {
     return CustomTextFormFieldd(
-      hintText: LoginConstants.emailHint,
+      hintText: ConstantsText.emailHint,
       suffixIcon: Icons.email_outlined,
       controller: emailController,
     );
@@ -39,7 +40,7 @@ class LoginForm extends StatelessWidget {
 
   Widget _buildPasswordField() {
     return CustomTextFormFieldd(
-      hintText: LoginConstants.passwordHint,
+      hintText: ConstantsText.passwordHint,
       suffixIcon: Icons.lock_outline,
       obscureText: true,
       controller: passwordController,

@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:servicex/core/resources/assets_manager.dart';
 import 'package:servicex/core/resources/theme_manager.dart';
 
-import 'login_constants.dart';
+import '../../core/resources/constants_text_app.dart';
 
 class LoginHeader extends StatelessWidget {
   const LoginHeader({super.key});
@@ -18,7 +18,7 @@ class LoginHeader extends StatelessWidget {
         ),
         const SizedBox(width: 8),
         Text(
-          LoginConstants.loginTitle,
+          ConstantsText.loginTitle,
           style: TextStyles.titleTextStyle(context),
         ),
       ],

@@ -4,8 +4,8 @@ import 'package:servicex/Home/home_page.dart';
 import 'package:servicex/core/resources/color_manager.dart';
 import 'package:servicex/core/resources/theme_manager.dart';
 import 'package:servicex/features/auth/presentation/viewmodels/login_viewmodel/login_cubit.dart';
-import 'login_constants.dart';
-import 'error_dialog.dart';
+import '../../core/resources/constants_text_app.dart';
+import '../../core/resources/custom_error_dialog.dart';
 
 class LoginButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -35,7 +35,7 @@ class LoginButton extends StatelessWidget {
             ),
           ),
           child: Text(
-            LoginConstants.loginButton,
+            ConstantsText.loginButton,
             style: TextStyles.buttonTextStyle(context),
           ),
         ),
@@ -48,17 +48,14 @@ class LoginButton extends StatelessWidget {
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder:
-            (context) =>
-                 ErrorDialog(message: LoginConstants.loadingText),
+        builder: (context) => ErrorDialog(message: ConstantsText.loadingText),
       );
     } else if (state is LoginFailure) {
       Navigator.pop(context);
       showDialog(
         context: context,
         builder:
-            (context) =>
-                const ErrorDialog(message: LoginConstants.errorMessage),
+            (context) => const ErrorDialog(message: ConstantsText.errorMessage),
       );
     } else if (state is LoginSuccess) {
       Navigator.pop(context);
