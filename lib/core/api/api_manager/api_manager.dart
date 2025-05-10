@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:servicex/features/home/data/models/user_profile_model.dart';
 import '../../../features/auth/data/models/login_model.dart';
 import '../../../features/home/data/models/services_model.dart';
 import '../api_constants.dart';
@@ -34,4 +35,12 @@ abstract class ApiService {
   @POST(ApiConstants.register)
   @MultiPart()
   Future register(@Body() FormData formData);
+
+  @POST('${ApiConstants.charegeBalance}/{code}')
+  Future<MyBalance> chargeBalance(
+    @Path('code') String code,
+    @Header('Authorization') String token,
+  );
+  @GET(ApiConstants.getUserProfile)
+  Future<UserProfile> getUserProfile(@Header('Authorization') String token);
 }

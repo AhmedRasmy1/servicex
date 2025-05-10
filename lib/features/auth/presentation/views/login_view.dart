@@ -2,13 +2,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:servicex/bottom_navigation_bar_widget.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../viewmodels/login_viewmodel/login_cubit.dart';
 import 'choose_user_type_view.dart';
 import 'verify_email_view.dart';
 import '../widgets/custom_text_field.dart';
-import '../../../../main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -202,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => const HomePage(),
+                                  builder: (_) => const MainNavigationPage(),
                                 ),
                               );
                             }

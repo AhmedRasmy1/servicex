@@ -61,13 +61,26 @@ import '../../features/auth/presentation/viewmodels/verify_otp_viewmode/verify_o
     as _i467;
 import '../../features/home/data/data_sources/services_data_sources.dart'
     as _i459;
+import '../../features/home/data/data_sources/user_profile_data_sources.dart'
+    as _i885;
 import '../../features/home/data/data_sources_impl/services_data_sources_impl.dart'
     as _i952;
+import '../../features/home/data/data_sources_impl/user_profile_sources_impl.dart'
+    as _i909;
 import '../../features/home/data/repo_impl/services_repo_impl.dart' as _i438;
+import '../../features/home/data/repo_impl/user_profile_repo_impl.dart'
+    as _i497;
 import '../../features/home/domain/repo/services_repo.dart' as _i118;
+import '../../features/home/domain/repo/user_profile_repo.dart' as _i250;
 import '../../features/home/domain/usecases/services_usecase.dart' as _i463;
+import '../../features/home/domain/usecases/user_profile_use_case.dart'
+    as _i1044;
+import '../../features/home/presentation/viewmodels/my_balance_viewmodel/my_balance_cubit.dart'
+    as _i259;
 import '../../features/home/presentation/viewmodels/services_viewmodel/services_cubit.dart'
     as _i239;
+import '../../features/home/presentation/viewmodels/user_profile_view_model/user_profile_cubit.dart'
+    as _i315;
 import '../api/api_manager/api_manager.dart' as _i680;
 import '../api/dio_module.dart' as _i784;
 
@@ -111,8 +124,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i526.SentOtpRepo>(
       () => _i1020.SentOtpRepoImpl(gh<_i575.SentOtpDataSource>()),
     );
+    gh.factory<_i885.MyBalanceDataSources>(
+      () => _i909.MyBalanceDataSourcesImpl(apiService: gh<_i680.ApiService>()),
+    );
     gh.factory<_i503.VerifyOtpUsecase>(
       () => _i503.VerifyOtpUsecase(gh<_i1030.VerifyOtpRepo>()),
+    );
+    gh.factory<_i885.UserProfileDataSources>(
+      () =>
+          _i909.UserProfileDataSourcesImpl(apiService: gh<_i680.ApiService>()),
     );
     gh.factory<_i484.RegisterDataSources>(
       () => _i525.RegisterDataSorucesImpl(apiService: gh<_i680.ApiService>()),
@@ -134,8 +154,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i463.ServicesUsecase>(
       () => _i463.ServicesUsecase(servicesRepo: gh<_i118.ServicesRepo>()),
     );
+    gh.factory<_i250.MyBalanceRepo>(
+      () => _i497.MyBalanceRepoImpl(gh<_i885.MyBalanceDataSources>()),
+    );
+    gh.factory<_i250.UserProfileRepo>(
+      () => _i497.UserProfileRepoImpl(gh<_i885.UserProfileDataSources>()),
+    );
     gh.factory<_i556.SentOtpUseCase>(
       () => _i556.SentOtpUseCase(gh<_i526.SentOtpRepo>()),
+    );
+    gh.factory<_i1044.UserProfileUseCase>(
+      () => _i1044.UserProfileUseCase(gh<_i250.UserProfileRepo>()),
     );
     gh.factory<_i239.ServicesCubit>(
       () => _i239.ServicesCubit(gh<_i463.ServicesUsecase>()),
@@ -145,11 +174,20 @@ extension GetItInjectableX on _i174.GetIt {
         registerDataSources: gh<_i484.RegisterDataSources>(),
       ),
     );
+    gh.factory<_i1044.MyBalanceUseCase>(
+      () => _i1044.MyBalanceUseCase(gh<_i250.MyBalanceRepo>()),
+    );
+    gh.factory<_i259.MyBalanceCubit>(
+      () => _i259.MyBalanceCubit(gh<_i1044.MyBalanceUseCase>()),
+    );
     gh.factory<_i716.LoginCubit>(
       () => _i716.LoginCubit(gh<_i188.LoginUsecase>()),
     );
     gh.factory<_i250.SentOtpCubit>(
       () => _i250.SentOtpCubit(gh<_i556.SentOtpUseCase>()),
+    );
+    gh.factory<_i315.UserProfileCubit>(
+      () => _i315.UserProfileCubit(gh<_i1044.UserProfileUseCase>()),
     );
     gh.factory<_i941.RegisterUsecase>(
       () => _i941.RegisterUsecase(registerRepo: gh<_i937.RegisterRepo>()),

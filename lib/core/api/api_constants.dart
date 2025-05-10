@@ -6,4 +6,6 @@ class ApiConstants {
   static const String resetPassword = 'api/Auth/reset-password';
   static const String register = 'api/auth/register';
   static const String getAllServices = 'api/service';
+  static const String charegeBalance = 'api/CodesForCharges/applyCode';
+  static const String getUserProfile = 'api/CustomerProfile/me';
 }
