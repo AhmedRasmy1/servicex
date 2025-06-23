@@ -18,11 +18,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late ServicesCubit servicesCubit;
+  late TopServicesCubit topServicesCubit;
   late UserProfileCubit userProfileCubit;
   @override
   void initState() {
     super.initState();
     servicesCubit = getIt.get<ServicesCubit>();
+    topServicesCubit = getIt.get<TopServicesCubit>();
     userProfileCubit = getIt.get<UserProfileCubit>();
   }
 
@@ -33,6 +35,7 @@ class _HomePageState extends State<HomePage> {
       providers: [
         BlocProvider(create: (context) => servicesCubit..getAllServices()),
         BlocProvider(create: (context) => userProfileCubit..getUserProfile()),
+        BlocProvider(create: (context) => topServicesCubit..getTopServices()),
       ],
       child: Scaffold(
         backgroundColor: const Color(0xFF2E2589),
@@ -238,24 +241,51 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: 5,
-                          physics: const NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            return ServiceCard(
-                              imagePath: 'assets/images/defaulttechnician.png',
-                              imageBackgroundColor: Colors.white,
-                              name: 'محمد',
-                              accentColor: const Color(0xFF2E2589),
-                              service: 'خدمة 1',
-                              price: 100,
-                              rating: 4.5,
-                              reviewCount: 120,
-                              bookmarkIcon: Icons.bookmark_border,
-                            );
+                        BlocBuilder<TopServicesCubit, ServicesState>(
+                          builder: (context, state) {
+                            if (state is ServicesLoading) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else if (state is TopServicesSuccess) {
+                              final topServices = state.topServices;
+
+                              return ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: topServices.length,
+                                physics: const NeverScrollableScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  return ServiceCard(
+                                    imagePath:
+                                        'assets/images/defaulttechnician.png',
+                                    serviceName: topServices[index].serviceName,
+                                    orderCount: topServices[index].orderCount,
+                                  );
+                                },
+                              );
+                            } else if (state is TopServicesFailed) {
+                              return const Center(
+                                child: Text('Failed to load top services'),
+                              );
+                            } else {
+                              return const SizedBox.shrink();
+                            }
                           },
+                          // builder: (context, state) {
+                          //   return ListView.builder(
+                          //     shrinkWrap: true,
+                          //     itemCount: 5,
+                          //     physics: const NeverScrollableScrollPhysics(),
+                          //     scrollDirection: Axis.vertical,
+                          //     itemBuilder: (context, index) {
+                          //       return ServiceCard(
+                          //         imagePath:
+                          //             'assets/images/defaulttechnician.png',
+                          //       );
+                          //     },
+                          //   );
+                          // },
                         ),
                       ],
                     ),

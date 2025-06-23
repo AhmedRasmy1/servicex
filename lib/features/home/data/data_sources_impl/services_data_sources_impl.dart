@@ -19,3 +19,18 @@ class ServicesDataSourcesImpl implements ServicesDataSources {
     });
   }
 }
+
+@Injectable(as: TopServicesDataSources)
+class TopServicesDataSourcesImpl implements TopServicesDataSources {
+  ApiService apiService;
+  TopServicesDataSourcesImpl({required this.apiService});
+  @override
+  Future<Result<List<TopServicesEntity>>> getTopServices() {
+    return executeApi<List<TopServicesEntity>>(() async {
+      var response = await apiService.getTopServices();
+      var data =
+          response.map((services) => services.toTopServicesEntity()).toList();
+      return data;
+    });
+  }
+}

@@ -43,4 +43,6 @@ abstract class ApiService {
   );
   @GET(ApiConstants.getUserProfile)
   Future<UserProfile> getUserProfile(@Header('Authorization') String token);
+  @GET(ApiConstants.topServices)
+  Future<List<TopServicesModel>> getTopServices();
 }

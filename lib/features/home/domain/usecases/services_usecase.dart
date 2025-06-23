@@ -11,3 +11,12 @@ class ServicesUsecase {
     return await servicesRepo.getAllServices();
   }
 }
+
+@injectable
+class TopServicesUsecase {
+  TopServicesRepo topServicesRepo;
+  TopServicesUsecase({required this.topServicesRepo});
+  Future<Result<List<TopServicesEntity>>> getTopServices() async {
+    return await topServicesRepo.getTopServices();
+  }
+}

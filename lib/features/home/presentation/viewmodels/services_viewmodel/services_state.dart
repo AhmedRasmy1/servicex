@@ -18,3 +18,17 @@ final class ServicesFailed extends ServicesState {
 
   ServicesFailed({required this.errorMessage});
 }
+
+final class TopServicesLoading extends ServicesState {}
+
+final class TopServicesSuccess extends ServicesState {
+  final List<TopServicesEntity> topServices;
+
+  TopServicesSuccess({required this.topServices});
+}
+
+final class TopServicesFailed extends ServicesState {
+  final String errorMessage;
+
+  TopServicesFailed({required this.errorMessage});
+}

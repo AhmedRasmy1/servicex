@@ -4,3 +4,7 @@ import '../entities/service_entity.dart';
 abstract class ServicesRepo {
   Future<Result<List<ServiceEntity>>> getAllServices();
 }
+
+abstract class TopServicesRepo {
+  Future<Result<List<TopServicesEntity>>> getTopServices();
+}

@@ -11,3 +11,10 @@ class ServiceEntity {
     required this.imageUrl,
   });
 }
+
+class TopServicesEntity {
+  final String serviceName;
+  final int orderCount;
+
+  TopServicesEntity({required this.serviceName, required this.orderCount});
+}

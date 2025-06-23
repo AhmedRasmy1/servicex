@@ -24,3 +24,20 @@ class ServicesModel {
     );
   }
 }
+
+@JsonSerializable()
+class TopServicesModel {
+  String? serviceName;
+  int? orderCount;
+
+  TopServicesModel({this.serviceName, this.orderCount});
+  factory TopServicesModel.fromJson(Map<String, dynamic> json) =>
+      _$TopServicesModelFromJson(json);
+  Map<String, dynamic> toJson() => _$TopServicesModelToJson(this);
+  TopServicesEntity toTopServicesEntity() {
+    return TopServicesEntity(
+      serviceName: serviceName ?? '',
+      orderCount: orderCount ?? 0,
+    );
+  }
+}

@@ -21,3 +21,15 @@ Map<String, dynamic> _$ServicesModelToJson(ServicesModel instance) =>
       'description': instance.description,
       'imageUrl': instance.imageUrl,
     };
+
+TopServicesModel _$TopServicesModelFromJson(Map<String, dynamic> json) =>
+    TopServicesModel(
+      serviceName: json['serviceName'] as String?,
+      orderCount: (json['orderCount'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$TopServicesModelToJson(TopServicesModel instance) =>
+    <String, dynamic>{
+      'serviceName': instance.serviceName,
+      'orderCount': instance.orderCount,
+    };

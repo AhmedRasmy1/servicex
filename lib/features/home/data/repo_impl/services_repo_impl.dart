@@ -13,3 +13,13 @@ class ServicesRepoImpl implements ServicesRepo {
     return servicesDataSources.getAllServices();
   }
 }
+
+@Injectable(as: TopServicesRepo)
+class TopServicesRepoImpl implements TopServicesRepo {
+  TopServicesDataSources topServicesDataSources;
+  TopServicesRepoImpl({required this.topServicesDataSources});
+  @override
+  Future<Result<List<TopServicesEntity>>> getTopServices() {
+    return topServicesDataSources.getTopServices();
+  }
+}

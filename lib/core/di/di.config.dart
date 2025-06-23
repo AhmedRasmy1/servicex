@@ -94,6 +94,10 @@ extension GetItInjectableX on _i174.GetIt {
     final dioModule = _$DioModule();
     gh.lazySingleton<_i361.Dio>(() => dioModule.providerDio());
     gh.factory<_i680.ApiService>(() => _i680.ApiService(gh<_i361.Dio>()));
+    gh.factory<_i459.TopServicesDataSources>(
+      () =>
+          _i952.TopServicesDataSourcesImpl(apiService: gh<_i680.ApiService>()),
+    );
     gh.factory<_i459.ServicesDataSources>(
       () => _i952.ServicesDataSourcesImpl(apiService: gh<_i680.ApiService>()),
     );
@@ -117,6 +121,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i594.ResetPasswordRepo>(
       () => _i653.ResetPasswordRepoImpl(gh<_i956.ResetPasswordDataSource>()),
+    );
+    gh.factory<_i118.TopServicesRepo>(
+      () => _i438.TopServicesRepoImpl(
+        topServicesDataSources: gh<_i459.TopServicesDataSources>(),
+      ),
     );
     gh.factory<_i474.ResetPasswordUsecase>(
       () => _i474.ResetPasswordUsecase(gh<_i594.ResetPasswordRepo>()),
@@ -160,6 +169,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i250.UserProfileRepo>(
       () => _i497.UserProfileRepoImpl(gh<_i885.UserProfileDataSources>()),
     );
+    gh.factory<_i463.TopServicesUsecase>(
+      () => _i463.TopServicesUsecase(
+        topServicesRepo: gh<_i118.TopServicesRepo>(),
+      ),
+    );
     gh.factory<_i556.SentOtpUseCase>(
       () => _i556.SentOtpUseCase(gh<_i526.SentOtpRepo>()),
     );
@@ -185,6 +199,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i250.SentOtpCubit>(
       () => _i250.SentOtpCubit(gh<_i556.SentOtpUseCase>()),
+    );
+    gh.factory<_i239.TopServicesCubit>(
+      () => _i239.TopServicesCubit(gh<_i463.TopServicesUsecase>()),
     );
     gh.factory<_i315.UserProfileCubit>(
       () => _i315.UserProfileCubit(gh<_i1044.UserProfileUseCase>()),
