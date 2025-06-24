@@ -50,4 +50,5 @@ class CacheConstants {
   static const String userType = "userType";
   static const String technichianService = 'technichianService';
   static const String serviceId = 'serviceId';
+  static const String technicalId = 'TechnichianId';
 }

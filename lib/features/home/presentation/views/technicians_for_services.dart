@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:servicex/core/di/di.dart';
 import 'package:servicex/core/resources/color_manager.dart';
 import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
 import 'package:servicex/features/home/domain/entities/service_entity.dart';
 import 'package:servicex/features/home/presentation/viewmodels/services_viewmodel/services_cubit.dart';
+import 'package:servicex/features/orders/presentation/views/create_order_view.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TechniciansView extends StatefulWidget {
@@ -110,41 +112,6 @@ class _TechniciansViewState extends State<TechniciansView> {
       ),
     );
   }
-
-  // Widget _buildGrid(int crossAxisCount, double mainAxisExtent) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(16.0),
-  //     child: BlocBuilder<TechniciansForServicesCubit, ServicesState>(
-  //       builder: (context, state) {
-  //         if (state is TechniciansForServicesLoading) {
-  //           return _buildShimmer(crossAxisCount, mainAxisExtent);
-  //         } else if (state is TechniciansForServicesSuccess) {
-  //           return GridView.builder(
-  //             itemCount: state.techniciansForServices.length,
-  //             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-  //               crossAxisCount: crossAxisCount,
-  //               mainAxisExtent: mainAxisExtent,
-  //               crossAxisSpacing: 18,
-  //               mainAxisSpacing: 18,
-  //             ),
-  //             itemBuilder: (context, index) {
-  //               final tech = state.techniciansForServices[index];
-  //               return _TechnicianCard(tech: tech);
-  //             },
-  //           );
-  //         } else if (state is TechniciansForServicesFailed) {
-  //           return Center(
-  //             child: Text(
-  //               state.errorMessage,
-  //               style: const TextStyle(fontSize: 18, color: Colors.red),
-  //             ),
-  //           );
-  //         }
-  //         return const Center(child: CircularProgressIndicator());
-  //       },
-  //     ),
-  //   );
-  // }
 
   Widget _buildShimmer(int crossAxisCount, double mainAxisExtent) {
     return Padding(
@@ -378,11 +345,14 @@ class _TechnicianCard extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('تم إرسال طلب الحجز لـ ${tech.fullName}'),
-                      behavior: SnackBarBehavior.floating,
-                      backgroundColor: ColorManager.appColor,
+                  CacheService.setData(
+                    key: CacheConstants.technicalId,
+                    value: tech.technicalId,
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CreateOrderView(),
                     ),
                   );
                 },

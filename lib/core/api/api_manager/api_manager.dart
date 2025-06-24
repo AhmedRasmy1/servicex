@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:servicex/features/home/data/models/user_profile_model.dart';
+import 'package:servicex/features/orders/data/models/order_model.dart';
 import '../../../features/auth/data/models/login_model.dart';
 import '../../../features/home/data/models/services_model.dart';
 import '../api_constants.dart';
@@ -48,5 +49,12 @@ abstract class ApiService {
   @GET(ApiConstants.getTechniciansForServices)
   Future<List<TechniciansForServices>> getTechniciansForServices(
     @Path('serviceId') String serviceId,
+  );
+  @POST(ApiConstants.createOrder)
+  @MultiPart()
+  Future<CreateOrderModel> createOrder(
+    @Path('technicianId') String technicianId,
+    @Header('Authorization') String token,
+    @Body() FormData formData,
   );
 }

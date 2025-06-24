@@ -81,6 +81,15 @@ import '../../features/home/presentation/viewmodels/services_viewmodel/services_
     as _i239;
 import '../../features/home/presentation/viewmodels/user_profile_view_model/user_profile_cubit.dart'
     as _i315;
+import '../../features/orders/data/data_sources/order_data_source.dart'
+    as _i405;
+import '../../features/orders/data/data_sources_impl/order_data_source_impl.dart'
+    as _i710;
+import '../../features/orders/data/repo_impl/order_repo_impl.dart' as _i1057;
+import '../../features/orders/domain/repo/order_repo.dart' as _i443;
+import '../../features/orders/domain/usecase/order_usecase.dart' as _i441;
+import '../../features/orders/presentation/viewmodel/order/order_cubit.dart'
+    as _i196;
 import '../api/api_manager/api_manager.dart' as _i680;
 import '../api/dio_module.dart' as _i784;
 
@@ -157,6 +166,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i484.RegisterDataSources>(
       () => _i525.RegisterDataSorucesImpl(apiService: gh<_i680.ApiService>()),
     );
+    gh.factory<_i405.OrderDataSource>(
+      () => _i710.OrderDataSourceImpl(apiService: gh<_i680.ApiService>()),
+    );
     gh.factory<_i118.ServicesRepo>(
       () => _i438.ServicesRepoImpl(
         servicesDataSources: gh<_i459.ServicesDataSources>(),
@@ -168,6 +180,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i113.ResetPasswordCubit>(
       () => _i113.ResetPasswordCubit(gh<_i474.ResetPasswordUsecase>()),
     );
+    gh.factory<_i443.OrderRepo>(
+      () => _i1057.OrderRepoImpl(orderDataSource: gh<_i405.OrderDataSource>()),
+    );
     gh.factory<_i463.TechniciansForServicesUsecase>(
       () => _i463.TechniciansForServicesUsecase(
         techniciansForServicesRepo: gh<_i118.TechniciansForServicesRepo>(),
@@ -175,6 +190,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i188.LoginUsecase>(
       () => _i188.LoginUsecase(gh<_i543.LoginRepo>()),
+    );
+    gh.factory<_i441.OrderUsecase>(
+      () => _i441.OrderUsecase(orderRepo: gh<_i443.OrderRepo>()),
     );
     gh.factory<_i463.ServicesUsecase>(
       () => _i463.ServicesUsecase(servicesRepo: gh<_i118.ServicesRepo>()),
@@ -192,6 +210,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i556.SentOtpUseCase>(
       () => _i556.SentOtpUseCase(gh<_i526.SentOtpRepo>()),
+    );
+    gh.factory<_i196.OrderCubit>(
+      () => _i196.OrderCubit(gh<_i441.OrderUsecase>()),
     );
     gh.factory<_i239.TechniciansForServicesCubit>(
       () => _i239.TechniciansForServicesCubit(

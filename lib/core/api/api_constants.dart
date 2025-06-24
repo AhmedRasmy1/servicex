@@ -11,4 +11,5 @@ class ApiConstants {
   static const String topServices = 'api/order/top-services';
   static const String getTechniciansForServices =
       'api/service/{serviceId}/technicians';
+  static const String createOrder = 'api/order/{technicianId}';
 }
