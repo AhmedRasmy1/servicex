@@ -50,3 +50,28 @@ class TopServicesCubit extends Cubit<ServicesState> {
     }
   }
 }
+
+@injectable
+class TechniciansForServicesCubit extends Cubit<ServicesState> {
+  final TechniciansForServicesUsecase _techniciansForServicesUsecase;
+  TechniciansForServicesCubit(this._techniciansForServicesUsecase)
+    : super(ServicesInitial());
+  Future<void> getTechniciansForServices(String serviceId) async {
+    emit(ServicesLoading());
+    final result = await _techniciansForServicesUsecase
+        .getTechniciansForServices(serviceId);
+    log('result: $result');
+    switch (result) {
+      case Success<List<TechniciansForServicesEntity>>():
+        emit(
+          TechniciansForServicesSuccess(techniciansForServices: result.data),
+        );
+        log('result.data: ${result.data}');
+        break;
+      case Fail<TechniciansForServicesEntity>():
+        emit(TechniciansForServicesFailed(errorMessage: 'Error'));
+        log('Error');
+        break;
+    }
+  }
+}

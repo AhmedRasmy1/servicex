@@ -33,3 +33,29 @@ Map<String, dynamic> _$TopServicesModelToJson(TopServicesModel instance) =>
       'serviceName': instance.serviceName,
       'orderCount': instance.orderCount,
     };
+
+TechniciansForServices _$TechniciansForServicesFromJson(
+  Map<String, dynamic> json,
+) => TechniciansForServices(
+  technicalId: json['technicalId'] as String?,
+  fullName: json['fullName'] as String?,
+  email: json['email'] as String?,
+  phone: json['phone'] as String?,
+  address: json['address'] as String?,
+  imageUrl: json['imageUrl'] as String?,
+  payByHour: (json['payByHour'] as num?)?.toInt(),
+  name: json['name'] as String?,
+);
+
+Map<String, dynamic> _$TechniciansForServicesToJson(
+  TechniciansForServices instance,
+) => <String, dynamic>{
+  'technicalId': instance.technicalId,
+  'fullName': instance.fullName,
+  'email': instance.email,
+  'phone': instance.phone,
+  'address': instance.address,
+  'imageUrl': instance.imageUrl,
+  'payByHour': instance.payByHour,
+  'name': instance.name,
+};

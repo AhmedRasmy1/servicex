@@ -8,3 +8,9 @@ abstract class ServicesDataSources {
 abstract class TopServicesDataSources {
   Future<Result<List<TopServicesEntity>>> getTopServices();
 }
+
+abstract class TechniciansForServicesDataSources {
+  Future<Result<List<TechniciansForServicesEntity>>> getTechniciansForServices(
+    String serviceId,
+  );
+}

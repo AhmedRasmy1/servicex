@@ -20,3 +20,16 @@ class TopServicesUsecase {
     return await topServicesRepo.getTopServices();
   }
 }
+
+@injectable
+class TechniciansForServicesUsecase {
+  TechniciansForServicesRepo techniciansForServicesRepo;
+  TechniciansForServicesUsecase({required this.techniciansForServicesRepo});
+  Future<Result<List<TechniciansForServicesEntity>>> getTechniciansForServices(
+    String serviceId,
+  ) async {
+    return await techniciansForServicesRepo.getTechniciansForServices(
+      serviceId,
+    );
+  }
+}

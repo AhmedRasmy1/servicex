@@ -18,3 +18,25 @@ class TopServicesEntity {
 
   TopServicesEntity({required this.serviceName, required this.orderCount});
 }
+
+class TechniciansForServicesEntity {
+  final String technicalId;
+  final String fullName;
+  final String email;
+  final String phone;
+  final String address;
+  final String imageUrl;
+  final int payByHour;
+  final String name;
+
+  TechniciansForServicesEntity({
+    required this.technicalId,
+    required this.fullName,
+    required this.email,
+    required this.phone,
+    required this.address,
+    required this.imageUrl,
+    required this.payByHour,
+    required this.name,
+  });
+}

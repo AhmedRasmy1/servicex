@@ -136,8 +136,19 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i885.MyBalanceDataSources>(
       () => _i909.MyBalanceDataSourcesImpl(apiService: gh<_i680.ApiService>()),
     );
+    gh.factory<_i459.TechniciansForServicesDataSources>(
+      () => _i952.TechniciansForServicesDataSourcesImpl(
+        apiService: gh<_i680.ApiService>(),
+      ),
+    );
     gh.factory<_i503.VerifyOtpUsecase>(
       () => _i503.VerifyOtpUsecase(gh<_i1030.VerifyOtpRepo>()),
+    );
+    gh.factory<_i118.TechniciansForServicesRepo>(
+      () => _i438.TechniciansForServicesRepoImpl(
+        techniciansForServicesDataSources:
+            gh<_i459.TechniciansForServicesDataSources>(),
+      ),
     );
     gh.factory<_i885.UserProfileDataSources>(
       () =>
@@ -156,6 +167,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i113.ResetPasswordCubit>(
       () => _i113.ResetPasswordCubit(gh<_i474.ResetPasswordUsecase>()),
+    );
+    gh.factory<_i463.TechniciansForServicesUsecase>(
+      () => _i463.TechniciansForServicesUsecase(
+        techniciansForServicesRepo: gh<_i118.TechniciansForServicesRepo>(),
+      ),
     );
     gh.factory<_i188.LoginUsecase>(
       () => _i188.LoginUsecase(gh<_i543.LoginRepo>()),
@@ -176,6 +192,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i556.SentOtpUseCase>(
       () => _i556.SentOtpUseCase(gh<_i526.SentOtpRepo>()),
+    );
+    gh.factory<_i239.TechniciansForServicesCubit>(
+      () => _i239.TechniciansForServicesCubit(
+        gh<_i463.TechniciansForServicesUsecase>(),
+      ),
     );
     gh.factory<_i1044.UserProfileUseCase>(
       () => _i1044.UserProfileUseCase(gh<_i250.UserProfileRepo>()),

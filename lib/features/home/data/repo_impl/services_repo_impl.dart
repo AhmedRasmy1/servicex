@@ -23,3 +23,19 @@ class TopServicesRepoImpl implements TopServicesRepo {
     return topServicesDataSources.getTopServices();
   }
 }
+
+@Injectable(as: TechniciansForServicesRepo)
+class TechniciansForServicesRepoImpl implements TechniciansForServicesRepo {
+  TechniciansForServicesDataSources techniciansForServicesDataSources;
+  TechniciansForServicesRepoImpl({
+    required this.techniciansForServicesDataSources,
+  });
+  @override
+  Future<Result<List<TechniciansForServicesEntity>>> getTechniciansForServices(
+    String serviceId,
+  ) {
+    return techniciansForServicesDataSources.getTechniciansForServices(
+      serviceId,
+    );
+  }
+}

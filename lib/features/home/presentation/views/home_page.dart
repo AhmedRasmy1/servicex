@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:servicex/core/di/di.dart';
 import 'package:servicex/core/resources/color_manager.dart';
+import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
 import 'package:servicex/features/home/presentation/viewmodels/services_viewmodel/services_cubit.dart';
 import 'package:servicex/features/home/presentation/viewmodels/user_profile_view_model/user_profile_cubit.dart';
+import 'package:servicex/features/home/presentation/views/technicians_for_services.dart';
 import 'package:servicex/features/home/presentation/widgets/custom_app_bar.dart';
 import 'package:servicex/features/home/presentation/widgets/most_service.dart';
 
@@ -166,28 +168,48 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ],
                                         ),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            12,
-                                          ),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              SvgPicture.network(
-                                                services[index].imageUrl,
-                                                height: screenHeight * 0.04,
-                                                width: screenHeight * 0.04,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            CacheService.setData(
+                                              key: CacheConstants.serviceId,
+                                              value: services[index].id,
+                                            );
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (
+                                                      context,
+                                                    ) => TechniciansView(
+                                                      // serviceId:
+                                                      //     services[index].id,
+                                                    ),
                                               ),
-                                              SizedBox(height: 6),
-                                              Text(
-                                                services[index].name,
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
+                                            );
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                SvgPicture.network(
+                                                  services[index].imageUrl,
+                                                  height: screenHeight * 0.04,
+                                                  width: screenHeight * 0.04,
                                                 ),
-                                              ),
-                                            ],
+                                                SizedBox(height: 6),
+                                                Text(
+                                                  services[index].name,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),

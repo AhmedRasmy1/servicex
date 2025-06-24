@@ -41,3 +41,41 @@ class TopServicesModel {
     );
   }
 }
+
+@JsonSerializable()
+class TechniciansForServices {
+  String? technicalId;
+  String? fullName;
+  String? email;
+  String? phone;
+  String? address;
+  String? imageUrl;
+  int? payByHour;
+  String? name;
+
+  TechniciansForServices({
+    this.technicalId,
+    this.fullName,
+    this.email,
+    this.phone,
+    this.address,
+    this.imageUrl,
+    this.payByHour,
+    this.name,
+  });
+  factory TechniciansForServices.fromJson(Map<String, dynamic> json) =>
+      _$TechniciansForServicesFromJson(json);
+  Map<String, dynamic> toJson() => _$TechniciansForServicesToJson(this);
+  TechniciansForServicesEntity toTechniciansForServicesEntity() {
+    return TechniciansForServicesEntity(
+      technicalId: technicalId ?? '',
+      fullName: fullName ?? '',
+      email: email ?? '',
+      phone: phone ?? '',
+      address: address ?? '',
+      imageUrl: imageUrl ?? '',
+      payByHour: payByHour ?? 0,
+      name: name ?? '',
+    );
+  }
+}

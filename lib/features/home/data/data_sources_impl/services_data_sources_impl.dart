@@ -34,3 +34,23 @@ class TopServicesDataSourcesImpl implements TopServicesDataSources {
     });
   }
 }
+
+@Injectable(as: TechniciansForServicesDataSources)
+class TechniciansForServicesDataSourcesImpl
+    implements TechniciansForServicesDataSources {
+  ApiService apiService;
+  TechniciansForServicesDataSourcesImpl({required this.apiService});
+  @override
+  Future<Result<List<TechniciansForServicesEntity>>> getTechniciansForServices(
+    String serviceId,
+  ) {
+    return executeApi<List<TechniciansForServicesEntity>>(() async {
+      var response = await apiService.getTechniciansForServices(serviceId);
+      var data =
+          response
+              .map((services) => services.toTechniciansForServicesEntity())
+              .toList();
+      return data;
+    });
+  }
+}

@@ -32,3 +32,17 @@ final class TopServicesFailed extends ServicesState {
 
   TopServicesFailed({required this.errorMessage});
 }
+
+final class TechniciansForServicesLoading extends ServicesState {}
+
+final class TechniciansForServicesSuccess extends ServicesState {
+  final List<TechniciansForServicesEntity> techniciansForServices;
+
+  TechniciansForServicesSuccess({required this.techniciansForServices});
+}
+
+final class TechniciansForServicesFailed extends ServicesState {
+  final String errorMessage;
+
+  TechniciansForServicesFailed({required this.errorMessage});
+}
