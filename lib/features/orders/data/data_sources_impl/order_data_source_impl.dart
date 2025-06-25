@@ -102,3 +102,46 @@ class CompletedOrderForTechnicianDataSourceImpl
     });
   }
 }
+
+@Injectable(as: PindingOrderForTechnicianDataSource)
+class PindingOrderForTechnicianDataSourceImpl
+    implements PindingOrderForTechnicianDataSource {
+  ApiService apiService;
+  PindingOrderForTechnicianDataSourceImpl({required this.apiService});
+  @override
+  Future<Result<List<PendingOrderEntityForTechnician>>>
+  getPendingOrdersForTechnician({required String token}) {
+    return executeApi<List<PendingOrderEntityForTechnician>>(() async {
+      final response = await apiService.getAllPendingOrderForTechnician(token);
+      final data =
+          response
+              .map((order) => order.toPendingOrderModelEntityForTechnician())
+              .toList();
+      return data;
+    });
+  }
+}
+
+@Injectable(as: CompletedOrderByTechnicianDataSource)
+class CompletedOrderByTechnicianDataSourceImpl
+    implements CompletedOrderByTechnicianDataSource {
+  ApiService apiService;
+  CompletedOrderByTechnicianDataSourceImpl({required this.apiService});
+  @override
+  Future<Result<CompletedOrderEntityForTechnician>>
+  getCompletedOrdersByTechnician({
+    required String orderId,
+    required int period,
+    required String token,
+  }) {
+    return executeApi<CompletedOrderEntityForTechnician>(() async {
+      final response = await apiService.completeOrderByTechnician(
+        orderId,
+        period,
+        token,
+      );
+      final data = response.toCompletedOrderEntityByTechnician();
+      return data;
+    });
+  }
+}

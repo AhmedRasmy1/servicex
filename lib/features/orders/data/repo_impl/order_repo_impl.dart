@@ -84,3 +84,43 @@ class CompletedOrderForTechnicianRepoImpl
     );
   }
 }
+
+@Injectable(as: PindingOrderRepoForTechnician)
+class PindingOrderRepoForTechnicianImpl
+    implements PindingOrderRepoForTechnician {
+  PindingOrderForTechnicianDataSource pindingOrderForTechnicianDataSource;
+  PindingOrderRepoForTechnicianImpl({
+    required this.pindingOrderForTechnicianDataSource,
+  });
+
+  @override
+  Future<Result<List<PendingOrderEntityForTechnician>>>
+  getPendingOrdersForTechnician({required String token}) {
+    return pindingOrderForTechnicianDataSource.getPendingOrdersForTechnician(
+      token: token,
+    );
+  }
+}
+
+@Injectable(as: CompletedOrderByTechnicianRepo)
+class CompletedOrderByTechnicianRepoImpl
+    implements CompletedOrderByTechnicianRepo {
+  CompletedOrderByTechnicianDataSource completedOrderByTechnicianDataSource;
+  CompletedOrderByTechnicianRepoImpl({
+    required this.completedOrderByTechnicianDataSource,
+  });
+
+  @override
+  Future<Result<CompletedOrderEntityForTechnician>>
+  getCompletedOrdersByTechnician({
+    required String orderId,
+    required int period,
+    required String token,
+  }) {
+    return completedOrderByTechnicianDataSource.getCompletedOrdersByTechnician(
+      orderId: orderId,
+      period: period,
+      token: token,
+    );
+  }
+}

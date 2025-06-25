@@ -77,4 +77,16 @@ abstract class ApiService {
   @GET(ApiConstants.getAllCompletedOrderForTechnician)
   Future<List<CompleteOrderModelForTechnician>>
   getAllCompletedOrderForTechnician(@Header('Authorization') String token);
+
+  @GET(ApiConstants.getAllPendingOrderForTechnician)
+  Future<List<PendingOrderModelForTechnician>> getAllPendingOrderForTechnician(
+    @Header('Authorization') String token,
+  );
+
+  @PUT(ApiConstants.completeOrderByTechnician)
+  Future<CompletedOrderModelByTechnician> completeOrderByTechnician(
+    @Path('orderId') String orderId,
+    @Field('Period') int period,
+    @Header('Authorization') String token,
+  );
 }

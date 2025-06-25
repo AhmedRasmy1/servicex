@@ -4,6 +4,7 @@ part of 'order_cubit.dart';
 sealed class OrderState {}
 
 final class OrderInitial extends OrderState {}
+//========================================================
 
 final class OrderLoading extends OrderState {}
 
@@ -18,6 +19,7 @@ final class OrderFailed extends OrderState {
 
   OrderFailed({required this.message});
 }
+//========================================================
 
 final class PendingOrderLoading extends OrderState {}
 
@@ -32,6 +34,7 @@ final class PendingOrderFailed extends OrderState {
 
   PendingOrderFailed({required this.message});
 }
+//========================================================
 
 final class CompleteOrderLoading extends OrderState {}
 
@@ -46,6 +49,7 @@ final class CompleteOrderFailed extends OrderState {
 
   CompleteOrderFailed({required this.message});
 }
+//========================================================
 
 final class CompleteOrderForTechnicianLoading extends OrderState {}
 
@@ -61,6 +65,22 @@ final class CompleteOrderForTechnicianFailed extends OrderState {
   CompleteOrderForTechnicianFailed({required this.message});
 }
 
+//========================================================
+final class PendingOrderForTechnicianLoading extends OrderState {}
+
+final class PendingOrderForTechnicianSuccess extends OrderState {
+  final List<PendingOrderEntityForTechnician> pendingOrders;
+
+  PendingOrderForTechnicianSuccess({required this.pendingOrders});
+}
+
+final class PendingOrderForTechnicianFailed extends OrderState {
+  final String message;
+
+  PendingOrderForTechnicianFailed({required this.message});
+}
+
+//========================================================
 final class CompleteOrderByCustomerLoading extends OrderState {
   final int loadingOrderId;
 
@@ -82,6 +102,33 @@ final class CompleteOrderByCustomerFailed extends OrderState {
   final int failedOrderId;
 
   CompleteOrderByCustomerFailed({
+    required this.message,
+    required this.failedOrderId,
+  });
+}
+//========================================================
+
+final class CompleteOrderByTechnicianLoading extends OrderState {
+  final String loadingOrderId;
+
+  CompleteOrderByTechnicianLoading({required this.loadingOrderId});
+}
+
+final class CompleteOrderByTechnicianSuccess extends OrderState {
+  final String message;
+  final String completedOrderId;
+
+  CompleteOrderByTechnicianSuccess({
+    required this.message,
+    required this.completedOrderId,
+  });
+}
+
+final class CompleteOrderByTechnicianFailed extends OrderState {
+  final String message;
+  final String failedOrderId;
+
+  CompleteOrderByTechnicianFailed({
     required this.message,
     required this.failedOrderId,
   });

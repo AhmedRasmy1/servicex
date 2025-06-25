@@ -31,25 +31,25 @@ class _CompletedOrderPageForTechnicianState
       child: SafeArea(
         child: Scaffold(
           backgroundColor: const Color(0xFFF3F6FB),
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(FontAwesomeIcons.arrowRight, size: 24),
-              onPressed: () => Navigator.pop(context),
-            ),
-            title: const Text(
-              'الطلبات المكتملة',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 22,
-                letterSpacing: 1,
-              ),
-            ),
-            centerTitle: true,
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-            elevation: 2,
-          ),
+          // appBar: AppBar(
+          //   leading: IconButton(
+          //     icon: const Icon(FontAwesomeIcons.arrowRight, size: 24),
+          //     onPressed: () => Navigator.pop(context),
+          //   ),
+          //   title: const Text(
+          //     'الطلبات المكتملة',
+          //     style: TextStyle(
+          //       color: Colors.black,
+          //       fontWeight: FontWeight.bold,
+          //       fontSize: 22,
+          //       letterSpacing: 1,
+          //     ),
+          //   ),
+          //   centerTitle: true,
+          //   backgroundColor: Colors.white,
+          //   foregroundColor: Colors.black,
+          //   elevation: 2,
+          // ),
           body: BlocBuilder<CompleteOrderForTechnicianCubit, OrderState>(
             builder: (context, state) {
               if (state is CompleteOrderForTechnicianLoading) {

@@ -70,3 +70,35 @@ class CompletedOrderForTechnicianUsecase {
     return completedOrderForTechnician.getCompletedOrders(token: token);
   }
 }
+
+@injectable
+class PendingOrderForTechnicianUsecase {
+  PindingOrderRepoForTechnician pindingOrderRepoForTechnician;
+  PendingOrderForTechnicianUsecase({
+    required this.pindingOrderRepoForTechnician,
+  });
+  Future<Result<List<PendingOrderEntityForTechnician>>>
+  getPendingOrdersForTechnician({required String token}) {
+    return pindingOrderRepoForTechnician.getPendingOrdersForTechnician(
+      token: token,
+    );
+  }
+}
+
+@injectable
+class CompletedOrderByTechnicianUsecase {
+  CompletedOrderByTechnicianRepo completedOrderByTechnician;
+  CompletedOrderByTechnicianUsecase({required this.completedOrderByTechnician});
+  Future<Result<CompletedOrderEntityForTechnician>>
+  getCompletedOrdersByTechnician({
+    required String orderId,
+    required int period,
+    required String token,
+  }) {
+    return completedOrderByTechnician.getCompletedOrdersByTechnician(
+      orderId: orderId,
+      period: period,
+      token: token,
+    );
+  }
+}

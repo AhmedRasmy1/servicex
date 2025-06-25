@@ -239,3 +239,81 @@ class CompleteOrderModelForTechnician {
     );
   }
 }
+
+@JsonSerializable()
+class PendingOrderModelForTechnician {
+  int? id;
+  String? userName;
+  String? orderStatus;
+  String? problemDescription;
+  String? date;
+  String? time;
+  String? address;
+  String? phone;
+  String? imageUrl;
+  String? technicianName;
+  String? serviceName;
+  bool? isCompletedByCustomer;
+  bool? isCompletedByTechnician;
+  int? period;
+  int? price;
+
+  PendingOrderModelForTechnician({
+    this.id,
+    this.userName,
+    this.orderStatus,
+    this.problemDescription,
+    this.date,
+    this.time,
+    this.address,
+    this.phone,
+    this.imageUrl,
+    this.technicianName,
+    this.serviceName,
+    this.isCompletedByCustomer,
+    this.isCompletedByTechnician,
+    this.period,
+    this.price,
+  });
+  factory PendingOrderModelForTechnician.fromJson(Map<String, dynamic> json) =>
+      _$PendingOrderModelForTechnicianFromJson(json);
+  Map<String, dynamic> toJson() => _$PendingOrderModelForTechnicianToJson(this);
+  PendingOrderEntityForTechnician toPendingOrderModelEntityForTechnician() {
+    return PendingOrderEntityForTechnician(
+      id: id,
+      userName: userName,
+      orderStatus: orderStatus,
+      problemDescription: problemDescription,
+      date: date,
+      time: time,
+      address: address,
+      phone: phone,
+      imageUrl: imageUrl,
+      technicianName: technicianName,
+      serviceName: serviceName,
+      isCompletedByCustomer: isCompletedByCustomer,
+      isCompletedByTechnician: isCompletedByTechnician,
+      period: period,
+      price: price,
+    );
+  }
+}
+
+@JsonSerializable()
+class CompletedOrderModelByTechnician {
+  String? message;
+  int? totalPrice;
+
+  CompletedOrderModelByTechnician({this.message, this.totalPrice});
+
+  factory CompletedOrderModelByTechnician.fromJson(Map<String, dynamic> json) =>
+      _$CompletedOrderModelByTechnicianFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$CompletedOrderModelByTechnicianToJson(this);
+  CompletedOrderEntityForTechnician toCompletedOrderEntityByTechnician() {
+    return CompletedOrderEntityForTechnician(
+      message: message,
+      totalPrice: totalPrice,
+    );
+  }
+}

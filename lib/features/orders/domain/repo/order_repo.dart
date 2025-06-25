@@ -34,3 +34,17 @@ abstract class CompletedOrderForTechnician {
     required String token,
   });
 }
+
+abstract class PindingOrderRepoForTechnician {
+  Future<Result<List<PendingOrderEntityForTechnician>>>
+  getPendingOrdersForTechnician({required String token});
+}
+
+abstract class CompletedOrderByTechnicianRepo {
+  Future<Result<CompletedOrderEntityForTechnician>>
+  getCompletedOrdersByTechnician({
+    required String orderId,
+    required int period,
+    required String token,
+  });
+}

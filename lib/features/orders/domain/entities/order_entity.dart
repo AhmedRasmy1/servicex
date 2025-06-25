@@ -140,3 +140,45 @@ class CompleteOrderEntityForTechnician {
     this.price,
   });
 }
+
+class PendingOrderEntityForTechnician {
+  int? id;
+  String? userName;
+  String? orderStatus;
+  String? problemDescription;
+  String? date;
+  String? time;
+  String? address;
+  String? phone;
+  String? imageUrl;
+  String? technicianName;
+  String? serviceName;
+  bool? isCompletedByCustomer;
+  bool? isCompletedByTechnician;
+  int? period;
+  int? price;
+
+  PendingOrderEntityForTechnician({
+    this.id,
+    this.userName,
+    this.orderStatus,
+    this.problemDescription,
+    this.date,
+    this.time,
+    this.address,
+    this.phone,
+    this.imageUrl,
+    this.technicianName,
+    this.serviceName,
+    this.isCompletedByCustomer,
+    this.isCompletedByTechnician,
+    this.period,
+    this.price,
+  });
+}
+
+class CompletedOrderEntityForTechnician {
+  String? message;
+  int? totalPrice;
+  CompletedOrderEntityForTechnician({this.message, this.totalPrice});
+}

@@ -143,3 +143,76 @@ class CompleteOrderByCustomerCubit extends Cubit<OrderState> {
     }
   }
 }
+
+@injectable
+class PendingOrderForTechnicianCubit extends Cubit<OrderState> {
+  final PendingOrderForTechnicianUsecase _pendingOrderForTechnicianUsecase;
+  PendingOrderForTechnicianCubit(this._pendingOrderForTechnicianUsecase)
+    : super(OrderInitial());
+  Future<void> getPendingOrdersForTechnician() async {
+    emit(PendingOrderForTechnicianLoading());
+    final token =
+        'Bearer ${CacheService.getData(key: CacheConstants.userToken) ?? ''}';
+    final result = await _pendingOrderForTechnicianUsecase
+        .getPendingOrdersForTechnician(token: token);
+    switch (result) {
+      case Success<List<PendingOrderEntityForTechnician>>():
+        emit(PendingOrderForTechnicianSuccess(pendingOrders: result.data));
+        break;
+      case Fail<List<PendingOrderEntityForTechnician>>():
+        emit(
+          PendingOrderForTechnicianFailed(
+            message: 'Error: ${result.exception}',
+          ),
+        );
+        break;
+    }
+  }
+}
+
+@injectable
+class CompleteOrderByTechnicianCubit extends Cubit<OrderState> {
+  final CompletedOrderByTechnicianUsecase _completeOrderByTechnicianUsecase;
+
+  CompleteOrderByTechnicianCubit(this._completeOrderByTechnicianUsecase)
+    : super(OrderInitial());
+
+  Future<void> completeOrderByTechnician({
+    required String orderId,
+    required int period,
+  }) async {
+    final int id = int.tryParse(orderId) ?? -1;
+
+    emit(CompleteOrderByTechnicianLoading(loadingOrderId: id.toString()));
+
+    final token =
+        'Bearer ${CacheService.getData(key: CacheConstants.userToken) ?? ''}';
+
+    final result = await _completeOrderByTechnicianUsecase
+        .getCompletedOrdersByTechnician(
+          orderId: orderId,
+          period: period,
+          token: token,
+        );
+
+    switch (result) {
+      case Success<CompletedOrderEntityForTechnician>():
+        emit(
+          CompleteOrderByTechnicianSuccess(
+            message: 'تم اكتمال الطلب بنجاح',
+            completedOrderId: id.toString(),
+          ),
+        );
+        break;
+
+      case Fail<CompletedOrderEntityForTechnician>():
+        emit(
+          CompleteOrderByTechnicianFailed(
+            message: 'حدث خطأ أثناء إتمام الطلب: ${result.exception}',
+            failedOrderId: id.toString(),
+          ),
+        );
+        break;
+    }
+  }
+}
