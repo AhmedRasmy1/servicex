@@ -28,3 +28,9 @@ abstract class CompleteOrderByCustomerRepo {
     required String token,
   });
 }
+
+abstract class CompletedOrderForTechnician {
+  Future<Result<List<CompleteOrderEntityForTechnician>>> getCompletedOrders({
+    required String token,
+  });
+}

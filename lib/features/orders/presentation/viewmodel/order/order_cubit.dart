@@ -77,6 +77,35 @@ class CompleteOrderCubit extends Cubit<OrderState> {
 }
 
 @injectable
+class CompleteOrderForTechnicianCubit extends Cubit<OrderState> {
+  final CompletedOrderForTechnicianUsecase _completeOrderForTechnicianUsecase;
+
+  CompleteOrderForTechnicianCubit(this._completeOrderForTechnicianUsecase)
+    : super(OrderInitial());
+
+  Future<void> getCompletedOrders() async {
+    emit(CompleteOrderForTechnicianLoading());
+    final token =
+        'Bearer ${CacheService.getData(key: CacheConstants.userToken) ?? ''}';
+    final result = await _completeOrderForTechnicianUsecase.getCompletedOrders(
+      token: token,
+    );
+    switch (result) {
+      case Success<List<CompleteOrderEntityForTechnician>>():
+        emit(CompleteOrderForTechnicianSuccess(completedOrders: result.data));
+        break;
+      case Fail<List<CompleteOrderEntityForTechnician>>():
+        emit(
+          CompleteOrderForTechnicianFailed(
+            message: 'Error: ${result.exception}',
+          ),
+        );
+        break;
+    }
+  }
+}
+
+@injectable
 class CompleteOrderByCustomerCubit extends Cubit<OrderState> {
   final CompleteOrderByCustomerUsecase _completeOrderByCustomerUsecase;
 

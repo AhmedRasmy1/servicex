@@ -16,4 +16,6 @@ class ApiConstants {
   static const String getAllCompletedOrder = 'api/order/my-orders/completed';
   static const String completeOrderByCustomer =
       'api/order/complete-by-customer/{orderId}';
+  static const String getAllCompletedOrderForTechnician =
+      'api/order/technician-orders/completed';
 }

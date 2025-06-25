@@ -28,3 +28,9 @@ abstract class CompleteOrderByCustomerDataSource {
     required String token,
   });
 }
+
+abstract class CompletedOrderForTechnicianDataSource {
+  Future<Result<List<CompleteOrderEntityForTechnician>>> getCompletedOrders({
+    required String token,
+  });
+}

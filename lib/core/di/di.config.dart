@@ -172,9 +172,20 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i459.TechniciansForServicesDataSources>(),
       ),
     );
+    gh.factory<_i405.CompletedOrderForTechnicianDataSource>(
+      () => _i710.CompletedOrderForTechnicianDataSourceImpl(
+        apiService: gh<_i680.ApiService>(),
+      ),
+    );
     gh.factory<_i885.UserProfileDataSources>(
       () =>
           _i909.UserProfileDataSourcesImpl(apiService: gh<_i680.ApiService>()),
+    );
+    gh.factory<_i443.CompletedOrderForTechnician>(
+      () => _i1057.CompletedOrderForTechnicianRepoImpl(
+        completedOrderForTechnicianDataSource:
+            gh<_i405.CompletedOrderForTechnicianDataSource>(),
+      ),
     );
     gh.factory<_i484.RegisterDataSources>(
       () => _i525.RegisterDataSorucesImpl(apiService: gh<_i680.ApiService>()),
@@ -245,6 +256,11 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i405.CompleteOrderByCustomerDataSource>(),
       ),
     );
+    gh.factory<_i441.CompletedOrderForTechnicianUsecase>(
+      () => _i441.CompletedOrderForTechnicianUsecase(
+        completedOrderForTechnician: gh<_i443.CompletedOrderForTechnician>(),
+      ),
+    );
     gh.factory<_i196.OrderCubit>(
       () => _i196.OrderCubit(gh<_i441.OrderUsecase>()),
     );
@@ -283,6 +299,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i250.SentOtpCubit>(
       () => _i250.SentOtpCubit(gh<_i556.SentOtpUseCase>()),
+    );
+    gh.factory<_i196.CompleteOrderForTechnicianCubit>(
+      () => _i196.CompleteOrderForTechnicianCubit(
+        gh<_i441.CompletedOrderForTechnicianUsecase>(),
+      ),
     );
     gh.factory<_i239.TopServicesCubit>(
       () => _i239.TopServicesCubit(gh<_i463.TopServicesUsecase>()),

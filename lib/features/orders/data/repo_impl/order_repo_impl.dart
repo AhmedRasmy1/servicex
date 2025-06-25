@@ -66,3 +66,21 @@ class CompleteOrderByCustomerRepoImpl implements CompleteOrderByCustomerRepo {
     );
   }
 }
+
+@Injectable(as: CompletedOrderForTechnician)
+class CompletedOrderForTechnicianRepoImpl
+    implements CompletedOrderForTechnician {
+  CompletedOrderForTechnicianDataSource completedOrderForTechnicianDataSource;
+  CompletedOrderForTechnicianRepoImpl({
+    required this.completedOrderForTechnicianDataSource,
+  });
+
+  @override
+  Future<Result<List<CompleteOrderEntityForTechnician>>> getCompletedOrders({
+    required String token,
+  }) {
+    return completedOrderForTechnicianDataSource.getCompletedOrders(
+      token: token,
+    );
+  }
+}

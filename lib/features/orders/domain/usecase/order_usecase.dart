@@ -57,3 +57,16 @@ class CompleteOrderByCustomerUsecase {
     );
   }
 }
+
+@injectable
+class CompletedOrderForTechnicianUsecase {
+  CompletedOrderForTechnician completedOrderForTechnician;
+  CompletedOrderForTechnicianUsecase({
+    required this.completedOrderForTechnician,
+  });
+  Future<Result<List<CompleteOrderEntityForTechnician>>> getCompletedOrders({
+    required String token,
+  }) {
+    return completedOrderForTechnician.getCompletedOrders(token: token);
+  }
+}

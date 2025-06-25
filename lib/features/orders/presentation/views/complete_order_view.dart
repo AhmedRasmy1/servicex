@@ -172,7 +172,7 @@ class _CompleteOrdersViewState extends State<CompleteOrdersView> {
                               icon: FontAwesomeIcons.moneyBillWave,
                               color: const Color(0xFF2E2589),
                               title: 'السعر:',
-                              value: '${order.price} \ج.م',
+                              value: '${order.price} ج.م',
                             ),
                           ],
                         ),

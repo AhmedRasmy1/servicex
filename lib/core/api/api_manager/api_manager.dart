@@ -73,4 +73,8 @@ abstract class ApiService {
     @Path('orderId') String orderId,
     @Header('Authorization') String token,
   );
+
+  @GET(ApiConstants.getAllCompletedOrderForTechnician)
+  Future<List<CompleteOrderModelForTechnician>>
+  getAllCompletedOrderForTechnician(@Header('Authorization') String token);
 }

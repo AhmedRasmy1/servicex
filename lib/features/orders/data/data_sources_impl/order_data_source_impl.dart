@@ -80,3 +80,25 @@ class CompleteOrderByCustomerDataSourceImpl
     });
   }
 }
+
+@Injectable(as: CompletedOrderForTechnicianDataSource)
+class CompletedOrderForTechnicianDataSourceImpl
+    implements CompletedOrderForTechnicianDataSource {
+  ApiService apiService;
+  CompletedOrderForTechnicianDataSourceImpl({required this.apiService});
+  @override
+  Future<Result<List<CompleteOrderEntityForTechnician>>> getCompletedOrders({
+    required String token,
+  }) {
+    return executeApi<List<CompleteOrderEntityForTechnician>>(() async {
+      final response = await apiService.getAllCompletedOrderForTechnician(
+        token,
+      );
+      final data =
+          response
+              .map((order) => order.toCompleteOrderEntityForTechnician())
+              .toList();
+      return data;
+    });
+  }
+}
