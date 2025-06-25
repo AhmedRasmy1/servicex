@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/orders/domain/entities/order_entity.dart';
+import '../../../../core/common/api_result.dart';
+import '../../domain/entities/order_entity.dart';
 
 abstract class OrderDataSource {
   Future<Result<CreateOrderEntity>> createOrder({

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:servicex/features/home/domain/entities/user_profile_entity.dart';
+import '../../domain/entities/user_profile_entity.dart';
 
 part 'user_profile_model.g.dart';
 

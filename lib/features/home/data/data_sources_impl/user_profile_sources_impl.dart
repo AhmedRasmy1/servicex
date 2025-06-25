@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/core/api/api_extentions.dart';
-import 'package:servicex/core/api/api_manager/api_manager.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/home/data/data_sources/user_profile_data_sources.dart';
-import 'package:servicex/features/home/domain/entities/user_profile_entity.dart';
+import '../../../../core/api/api_extentions.dart';
+import '../../../../core/api/api_manager/api_manager.dart';
+import '../../../../core/common/api_result.dart';
+import '../data_sources/user_profile_data_sources.dart';
+import '../../domain/entities/user_profile_entity.dart';
 
 @Injectable(as: MyBalanceDataSources)
 class MyBalanceDataSourcesImpl implements MyBalanceDataSources {

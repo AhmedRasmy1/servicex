@@ -2,10 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/orders/domain/entities/order_entity.dart';
-import 'package:servicex/features/orders/domain/usecase/order_usecase.dart';
+import '../../../../../core/common/api_result.dart';
+import '../../../../../core/utils/cashed_data_shared_preferences.dart';
+import '../../../domain/entities/order_entity.dart';
+import '../../../domain/usecase/order_usecase.dart';
 
 part 'order_state.dart';
 

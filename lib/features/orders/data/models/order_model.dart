@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:servicex/features/orders/domain/entities/order_entity.dart';
+import '../../domain/entities/order_entity.dart';
 
 part 'order_model.g.dart';
 

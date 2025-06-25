@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:servicex/core/resources/color_manager.dart';
-import 'package:servicex/features/home/presentation/views/home_page.dart';
-import 'package:servicex/features/home/presentation/views/orders_page.dart';
-import 'package:servicex/features/home/presentation/views/profile_page.dart';
+import 'core/resources/color_manager.dart';
+import 'features/home/presentation/views/home_page.dart';
+import 'features/home/presentation/views/orders_page.dart';
+import 'features/home/presentation/views/profile_page.dart';
 
 class MainNavigationPage extends StatefulWidget {
   const MainNavigationPage({super.key});

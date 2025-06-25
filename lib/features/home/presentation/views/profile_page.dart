@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/features/home/presentation/viewmodels/user_profile_view_model/user_profile_cubit.dart';
-import 'package:servicex/features/home/presentation/views/charge_balance.dart';
+import '../../../../core/di/di.dart';
+import '../viewmodels/user_profile_view_model/user_profile_cubit.dart';
+import 'charge_balance.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

@@ -7,10 +7,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/core/resources/color_manager.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/orders/presentation/viewmodel/order/order_cubit.dart';
+import '../../../../core/di/di.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/utils/cashed_data_shared_preferences.dart';
+import '../viewmodel/order/order_cubit.dart';
 
 class CreateOrderView extends StatefulWidget {
   const CreateOrderView({super.key});

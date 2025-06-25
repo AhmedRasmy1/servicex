@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/orders/domain/entities/order_entity.dart';
-import 'package:servicex/features/orders/domain/repo/order_repo.dart';
+import '../../../../core/common/api_result.dart';
+import '../entities/order_entity.dart';
+import '../repo/order_repo.dart';
 
 @injectable
 class OrderUsecase {

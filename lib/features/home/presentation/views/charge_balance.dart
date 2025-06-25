@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:servicex/core/common/custom_exception.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/features/home/presentation/viewmodels/my_balance_viewmodel/my_balance_cubit.dart';
+import '../../../../core/common/custom_exception.dart';
+import '../../../../core/di/di.dart';
+import '../viewmodels/my_balance_viewmodel/my_balance_cubit.dart';
 
 class RechargeWalletPage extends StatefulWidget {
   const RechargeWalletPage({super.key});

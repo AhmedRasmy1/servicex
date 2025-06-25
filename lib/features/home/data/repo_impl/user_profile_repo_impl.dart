@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/home/data/data_sources/user_profile_data_sources.dart';
-import 'package:servicex/features/home/domain/entities/user_profile_entity.dart';
-import 'package:servicex/features/home/domain/repo/user_profile_repo.dart';
+import '../../../../core/common/api_result.dart';
+import '../data_sources/user_profile_data_sources.dart';
+import '../../domain/entities/user_profile_entity.dart';
+import '../../domain/repo/user_profile_repo.dart';
 
 @Injectable(as: MyBalanceRepo)
 class MyBalanceRepoImpl implements MyBalanceRepo {

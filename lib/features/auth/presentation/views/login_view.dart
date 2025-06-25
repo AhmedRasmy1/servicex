@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:servicex/bottom_navigation_bar_widget.dart';
+import '../../../../bottom_navigation_bar_widget.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../viewmodels/login_viewmodel/login_cubit.dart';

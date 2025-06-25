@@ -1,5 +1,5 @@
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/home/domain/entities/user_profile_entity.dart';
+import '../../../../core/common/api_result.dart';
+import '../../domain/entities/user_profile_entity.dart';
 
 abstract class MyBalanceDataSources {
   Future<Result<MyBalanceEntity>> chargeBalance({

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/core/resources/color_manager.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/home/presentation/viewmodels/services_viewmodel/services_cubit.dart';
-import 'package:servicex/features/home/presentation/viewmodels/user_profile_view_model/user_profile_cubit.dart';
-import 'package:servicex/features/home/presentation/views/technicians_for_services.dart';
-import 'package:servicex/features/home/presentation/widgets/custom_app_bar.dart';
-import 'package:servicex/features/home/presentation/widgets/most_service.dart';
+import '../../../../core/di/di.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/utils/cashed_data_shared_preferences.dart';
+import '../viewmodels/services_viewmodel/services_cubit.dart';
+import '../viewmodels/user_profile_view_model/user_profile_cubit.dart';
+import 'technicians_for_services.dart';
+import '../widgets/custom_app_bar.dart';
+import '../widgets/most_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
     userProfileCubit = getIt.get<UserProfileCubit>();
   }
 
+  @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;

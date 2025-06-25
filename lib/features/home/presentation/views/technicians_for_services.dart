@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/core/resources/color_manager.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/home/domain/entities/service_entity.dart';
-import 'package:servicex/features/home/presentation/viewmodels/services_viewmodel/services_cubit.dart';
-import 'package:servicex/features/orders/presentation/views/create_order_view.dart';
+import '../../../../core/di/di.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/utils/cashed_data_shared_preferences.dart';
+import '../../domain/entities/service_entity.dart';
+import '../viewmodels/services_viewmodel/services_cubit.dart';
+import '../../../orders/presentation/views/create_order_view.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TechniciansView extends StatefulWidget {
