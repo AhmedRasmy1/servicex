@@ -142,6 +142,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i526.SentOtpRepo>(
       () => _i1020.SentOtpRepoImpl(gh<_i575.SentOtpDataSource>()),
     );
+    gh.factory<_i405.PendingOrderDataSource>(
+      () =>
+          _i710.PendingOrderDataSourceImpl(apiService: gh<_i680.ApiService>()),
+    );
     gh.factory<_i885.MyBalanceDataSources>(
       () => _i909.MyBalanceDataSourcesImpl(apiService: gh<_i680.ApiService>()),
     );
@@ -182,6 +186,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i443.OrderRepo>(
       () => _i1057.OrderRepoImpl(orderDataSource: gh<_i405.OrderDataSource>()),
+    );
+    gh.factory<_i443.PendingOrderRepo>(
+      () => _i1057.PendingOrderRepoImpl(
+        pendingOrderDataSource: gh<_i405.PendingOrderDataSource>(),
+      ),
     );
     gh.factory<_i463.TechniciansForServicesUsecase>(
       () => _i463.TechniciansForServicesUsecase(
@@ -233,6 +242,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1044.MyBalanceUseCase>(
       () => _i1044.MyBalanceUseCase(gh<_i250.MyBalanceRepo>()),
     );
+    gh.factory<_i441.PendingOrderUsecase>(
+      () => _i441.PendingOrderUsecase(
+        pendingOrderRepo: gh<_i443.PendingOrderRepo>(),
+      ),
+    );
     gh.factory<_i259.MyBalanceCubit>(
       () => _i259.MyBalanceCubit(gh<_i1044.MyBalanceUseCase>()),
     );
@@ -250,6 +264,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i941.RegisterUsecase>(
       () => _i941.RegisterUsecase(registerRepo: gh<_i937.RegisterRepo>()),
+    );
+    gh.factory<_i196.PendingOrderCubit>(
+      () => _i196.PendingOrderCubit(gh<_i441.PendingOrderUsecase>()),
     );
     gh.factory<_i31.RegisterCubit>(
       () => _i31.RegisterCubit(gh<_i941.RegisterUsecase>()),

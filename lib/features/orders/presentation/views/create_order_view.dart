@@ -442,7 +442,7 @@ class _CreateOrderViewState extends State<CreateOrderView> {
               _image!,
               height: 180,
               width: double.infinity,
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
           ),
           const SizedBox(height: 10),

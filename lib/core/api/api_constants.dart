@@ -12,4 +12,5 @@ class ApiConstants {
   static const String getTechniciansForServices =
       'api/service/{serviceId}/technicians';
   static const String createOrder = 'api/order/{technicianId}';
+  static const String getAllPendingOrder = 'api/order/my-orders/pending';
 }

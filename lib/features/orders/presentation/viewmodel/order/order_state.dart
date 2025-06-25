@@ -18,3 +18,17 @@ final class OrderFailed extends OrderState {
 
   OrderFailed({required this.message});
 }
+
+final class PendingOrderLoading extends OrderState {}
+
+final class PendingOrderSuccess extends OrderState {
+  final List<PendingOrderModelEntity> pendingOrders;
+
+  PendingOrderSuccess({required this.pendingOrders});
+}
+
+final class PendingOrderFailed extends OrderState {
+  final String message;
+
+  PendingOrderFailed({required this.message});
+}

@@ -20,3 +20,14 @@ class OrderUsecase {
     );
   }
 }
+
+@injectable
+class PendingOrderUsecase {
+  PendingOrderRepo pendingOrderRepo;
+  PendingOrderUsecase({required this.pendingOrderRepo});
+  Future<Result<List<PendingOrderModelEntity>>> getAllPendingOrder({
+    required String token,
+  }) {
+    return pendingOrderRepo.getAllPendingOrder(token: token);
+  }
+}

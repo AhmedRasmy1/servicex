@@ -35,3 +35,23 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 }
+
+@injectable
+class PendingOrderCubit extends Cubit<OrderState> {
+  final PendingOrderUsecase _pendingOrderUsecase;
+  PendingOrderCubit(this._pendingOrderUsecase) : super(OrderInitial());
+  Future<void> getAllPendingOrder() async {
+    emit(PendingOrderLoading());
+    final token =
+        'Bearer ${CacheService.getData(key: CacheConstants.userToken) ?? ''}';
+    final result = await _pendingOrderUsecase.getAllPendingOrder(token: token);
+    switch (result) {
+      case Success<List<PendingOrderModelEntity>>():
+        emit(PendingOrderSuccess(pendingOrders: result.data));
+        break;
+      case Fail<List<PendingOrderModelEntity>>():
+        emit(PendingOrderFailed(message: 'Error: ${result.exception}'));
+        break;
+    }
+  }
+}

@@ -9,3 +9,9 @@ abstract class OrderDataSource {
     required FormData formData,
   });
 }
+
+abstract class PendingOrderDataSource {
+  Future<Result<List<PendingOrderModelEntity>>> getAllPendingOrder({
+    required String token,
+  });
+}

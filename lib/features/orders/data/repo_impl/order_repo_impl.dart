@@ -22,3 +22,16 @@ class OrderRepoImpl implements OrderRepo {
     );
   }
 }
+
+@Injectable(as: PendingOrderRepo)
+class PendingOrderRepoImpl implements PendingOrderRepo {
+  PendingOrderDataSource pendingOrderDataSource;
+  PendingOrderRepoImpl({required this.pendingOrderDataSource});
+
+  @override
+  Future<Result<List<PendingOrderModelEntity>>> getAllPendingOrder({
+    required String token,
+  }) {
+    return pendingOrderDataSource.getAllPendingOrder(token: token);
+  }
+}

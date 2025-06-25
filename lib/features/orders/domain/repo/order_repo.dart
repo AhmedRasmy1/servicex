@@ -9,3 +9,9 @@ abstract class OrderRepo {
     required FormData formData,
   });
 }
+
+abstract class PendingOrderRepo {
+  Future<Result<List<PendingOrderModelEntity>>> getAllPendingOrder({
+    required String token,
+  });
+}

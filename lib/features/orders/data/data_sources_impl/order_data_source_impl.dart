@@ -28,3 +28,21 @@ class OrderDataSourceImpl implements OrderDataSource {
     });
   }
 }
+
+@Injectable(as: PendingOrderDataSource)
+class PendingOrderDataSourceImpl implements PendingOrderDataSource {
+  ApiService apiService;
+
+  PendingOrderDataSourceImpl({required this.apiService});
+  @override
+  Future<Result<List<PendingOrderModelEntity>>> getAllPendingOrder({
+    required String token,
+  }) {
+    return executeApi<List<PendingOrderModelEntity>>(() async {
+      final response = await apiService.getAllPendingOrder(token);
+      final data =
+          response.map((order) => order.toPendingOrderModelEntity()).toList();
+      return data;
+    });
+  }
+}

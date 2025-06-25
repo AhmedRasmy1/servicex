@@ -57,4 +57,9 @@ abstract class ApiService {
     @Header('Authorization') String token,
     @Body() FormData formData,
   );
+
+  @GET(ApiConstants.getAllPendingOrder)
+  Future<List<PendingOrderModel>> getAllPendingOrder(
+    @Header('Authorization') String token,
+  );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:servicex/features/orders/presentation/views/pending_order_view.dart';
 import '../../../../core/di/di.dart';
 import '../viewmodels/user_profile_view_model/user_profile_cubit.dart';
 import 'charge_balance.dart';
@@ -127,6 +128,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             title: 'الطلبات المعلقة',
                             leadingImage: 'assets/images/pending_order.png',
                             fontSize: screenWidth * 0.04,
+                            onTap:
+                                () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) => const PendingOrdersView(),
+                                  ),
+                                ),
                           ),
                           ProfileListTile(
                             title: 'العروض',
