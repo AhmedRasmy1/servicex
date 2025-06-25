@@ -62,4 +62,10 @@ abstract class ApiService {
   Future<List<PendingOrderModel>> getAllPendingOrder(
     @Header('Authorization') String token,
   );
+
+  @PUT(ApiConstants.completeOrderByCustomer)
+  Future completeOrderByCustomer(
+    @Path('orderId') String orderId,
+    @Header('Authorization') String token,
+  );
 }

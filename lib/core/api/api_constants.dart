@@ -13,4 +13,6 @@ class ApiConstants {
       'api/service/{serviceId}/technicians';
   static const String createOrder = 'api/order/{technicianId}';
   static const String getAllPendingOrder = 'api/order/my-orders/pending';
+  static const String completeOrderByCustomer =
+      'api/order/complete-by-customer/{orderId}';
 }

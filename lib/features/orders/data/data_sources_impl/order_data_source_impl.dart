@@ -46,3 +46,19 @@ class PendingOrderDataSourceImpl implements PendingOrderDataSource {
     });
   }
 }
+
+@Injectable(as: CompleteOrderByCustomerDataSource)
+class CompleteOrderByCustomerDataSourceImpl
+    implements CompleteOrderByCustomerDataSource {
+  ApiService apiService;
+  CompleteOrderByCustomerDataSourceImpl({required this.apiService});
+  @override
+  Future completeOrderByCustomer({
+    required String orderId,
+    required String token,
+  }) {
+    return executeApi(() async {
+      await apiService.completeOrderByCustomer(orderId, token);
+    });
+  }
+}

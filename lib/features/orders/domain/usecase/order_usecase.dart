@@ -31,3 +31,18 @@ class PendingOrderUsecase {
     return pendingOrderRepo.getAllPendingOrder(token: token);
   }
 }
+
+@injectable
+class CompleteOrderByCustomerUsecase {
+  CompleteOrderByCustomerRepo completeOrderByCustomerRepo;
+  CompleteOrderByCustomerUsecase({required this.completeOrderByCustomerRepo});
+  Future completeOrderByCustomer({
+    required String orderId,
+    required String token,
+  }) {
+    return completeOrderByCustomerRepo.completeOrderByCustomer(
+      orderId: orderId,
+      token: token,
+    );
+  }
+}

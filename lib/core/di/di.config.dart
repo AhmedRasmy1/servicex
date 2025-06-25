@@ -146,6 +146,11 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i710.PendingOrderDataSourceImpl(apiService: gh<_i680.ApiService>()),
     );
+    gh.factory<_i405.CompleteOrderByCustomerDataSource>(
+      () => _i710.CompleteOrderByCustomerDataSourceImpl(
+        apiService: gh<_i680.ApiService>(),
+      ),
+    );
     gh.factory<_i885.MyBalanceDataSources>(
       () => _i909.MyBalanceDataSourcesImpl(apiService: gh<_i680.ApiService>()),
     );
@@ -220,6 +225,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i556.SentOtpUseCase>(
       () => _i556.SentOtpUseCase(gh<_i526.SentOtpRepo>()),
     );
+    gh.factory<_i443.CompleteOrderByCustomerRepo>(
+      () => _i1057.CompleteOrderByCustomerRepoImpl(
+        completeOrderByCustomerDataSource:
+            gh<_i405.CompleteOrderByCustomerDataSource>(),
+      ),
+    );
     gh.factory<_i196.OrderCubit>(
       () => _i196.OrderCubit(gh<_i441.OrderUsecase>()),
     );
@@ -262,6 +273,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i315.UserProfileCubit>(
       () => _i315.UserProfileCubit(gh<_i1044.UserProfileUseCase>()),
     );
+    gh.factory<_i441.CompleteOrderByCustomerUsecase>(
+      () => _i441.CompleteOrderByCustomerUsecase(
+        completeOrderByCustomerRepo: gh<_i443.CompleteOrderByCustomerRepo>(),
+      ),
+    );
     gh.factory<_i941.RegisterUsecase>(
       () => _i941.RegisterUsecase(registerRepo: gh<_i937.RegisterRepo>()),
     );
@@ -270,6 +286,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i31.RegisterCubit>(
       () => _i31.RegisterCubit(gh<_i941.RegisterUsecase>()),
+    );
+    gh.factory<_i196.CompleteOrderByCustomerCubit>(
+      () => _i196.CompleteOrderByCustomerCubit(
+        gh<_i441.CompleteOrderByCustomerUsecase>(),
+      ),
     );
     return this;
   }

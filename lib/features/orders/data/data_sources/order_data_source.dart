@@ -15,3 +15,10 @@ abstract class PendingOrderDataSource {
     required String token,
   });
 }
+
+abstract class CompleteOrderByCustomerDataSource {
+  Future completeOrderByCustomer({
+    required String orderId,
+    required String token,
+  });
+}

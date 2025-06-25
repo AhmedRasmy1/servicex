@@ -35,3 +35,22 @@ class PendingOrderRepoImpl implements PendingOrderRepo {
     return pendingOrderDataSource.getAllPendingOrder(token: token);
   }
 }
+
+@Injectable(as: CompleteOrderByCustomerRepo)
+class CompleteOrderByCustomerRepoImpl implements CompleteOrderByCustomerRepo {
+  CompleteOrderByCustomerDataSource completeOrderByCustomerDataSource;
+  CompleteOrderByCustomerRepoImpl({
+    required this.completeOrderByCustomerDataSource,
+  });
+
+  @override
+  Future completeOrderByCustomer({
+    required String orderId,
+    required String token,
+  }) {
+    return completeOrderByCustomerDataSource.completeOrderByCustomer(
+      orderId: orderId,
+      token: token,
+    );
+  }
+}

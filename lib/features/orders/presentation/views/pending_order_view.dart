@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:servicex/core/di/di.dart';
+import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
 import 'package:servicex/features/orders/presentation/viewmodel/order/order_cubit.dart';
 
 class PendingOrdersView extends StatefulWidget {
@@ -13,34 +14,45 @@ class PendingOrdersView extends StatefulWidget {
 
 class _PendingOrdersViewState extends State<PendingOrdersView> {
   late PendingOrderCubit pendingOrderCubit;
-  final List<Map<String, String>> orders = const [
-    {
-      "serviceType": "الأجهزة المنزلية",
-      "date": "2025-06-29",
-      "time": "11:23",
-      "address": "بني مزار",
-      "technician": "مصطفى محمد",
-      "description": "عندي مشكلة في الغسالة والتلاجة",
-    },
-    {
-      "serviceType": "صيانة كهرباء",
-      "date": "2025-07-01",
-      "time": "2:30",
-      "address": "المنيا الجديدة",
-      "technician": "أحمد حمدي",
-      "description": "المبة بتنور وتطفي لوحدها",
-    },
-  ];
+  late CompleteOrderByCustomerCubit completeOrderByCustomerCubit;
+  List<String> completedOrderIds = [];
+
   @override
   void initState() {
     super.initState();
     pendingOrderCubit = getIt.get<PendingOrderCubit>();
+    completeOrderByCustomerCubit = getIt.get<CompleteOrderByCustomerCubit>();
+    _loadCompletedOrders();
+  }
+
+  void _loadCompletedOrders() {
+    final stored = CacheService.getData(key: 'completedOrderIds');
+    if (stored is List<String>) {
+      completedOrderIds = stored;
+    } else if (stored is List<dynamic>) {
+      completedOrderIds = stored.map((e) => e.toString()).toList();
+    }
+  }
+
+  void _saveCompletedOrder(String id) async {
+    if (!completedOrderIds.contains(id)) {
+      completedOrderIds.add(id);
+      await CacheService.setData(
+        key: 'completedOrderIds',
+        value: completedOrderIds,
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => pendingOrderCubit..getAllPendingOrder(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => pendingOrderCubit..getAllPendingOrder(),
+        ),
+        BlocProvider(create: (context) => completeOrderByCustomerCubit),
+      ],
       child: SafeArea(
         child: Scaffold(
           backgroundColor: const Color(0xFFF3F6FB),
@@ -71,7 +83,7 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                 return Center(
                   child: Text(
                     state.message,
-                    style: const TextStyle(color: Colors.red, fontSize: 16),
+                    style: const TextStyle(color: Colors.red),
                   ),
                 );
               } else if (state is PendingOrderSuccess) {
@@ -80,7 +92,7 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                   return const Center(
                     child: Text(
                       'لا توجد طلبات معلقة',
-                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                      style: TextStyle(color: Colors.grey),
                     ),
                   );
                 }
@@ -89,6 +101,10 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                   itemCount: pendingOrders.length,
                   itemBuilder: (context, index) {
                     final order = pendingOrders[index];
+                    final isCompleted = completedOrderIds.contains(
+                      order.id.toString(),
+                    );
+
                     return Container(
                       margin: const EdgeInsets.only(bottom: 20),
                       decoration: BoxDecoration(
@@ -124,11 +140,10 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                                 const SizedBox(width: 10),
                                 Expanded(
                                   child: Text(
-                                    order.serviceName!,
+                                    order.serviceName ?? '',
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17,
-                                      color: Colors.black,
                                     ),
                                   ),
                                 ),
@@ -138,7 +153,7 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                                     vertical: 4,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Color(0xFFd0f26f),
+                                    color: const Color(0xFFd0f26f),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Row(
@@ -150,7 +165,7 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                                       ),
                                       const SizedBox(width: 4),
                                       Text(
-                                        order.date!,
+                                        order.date ?? '',
                                         style: const TextStyle(
                                           fontSize: 13,
                                           color: Colors.black,
@@ -164,60 +179,99 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                             const SizedBox(height: 14),
                             _buildInfoRow(
                               icon: FontAwesomeIcons.mapMarkerAlt,
-                              color: Colors.redAccent,
+                              color: Color(0xFF2E2589),
                               title: 'العنوان:',
-                              value: order.address!,
+                              value: order.address ?? '',
                             ),
                             _buildInfoRow(
                               icon: FontAwesomeIcons.userTie,
-                              color: Colors.green,
+                              color: Color(0xFF2E2589),
                               title: 'اسم الفني:',
-                              value: order.technicianName!,
+                              value: order.technicianName ?? '',
                             ),
                             _buildInfoRow(
                               icon: FontAwesomeIcons.clock,
-                              color: Colors.blueGrey,
+                              color: Color(0xFF2E2589),
                               title: 'الوقت:',
-                              value: order.time!,
+                              value: order.time ?? '',
                             ),
                             _buildInfoRow(
                               icon: FontAwesomeIcons.infoCircle,
-                              color: Color(0xFF2E2589),
+                              color: const Color(0xFF2E2589),
                               title: 'وصف المشكلة:',
-                              value: order.problemDescription!,
+                              value: order.problemDescription ?? '',
                               maxLines: 2,
                             ),
                             const SizedBox(height: 18),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                ElevatedButton.icon(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xFF2E2589),
+                                if (isCompleted)
+                                  Container(
                                     padding: const EdgeInsets.symmetric(
-                                      horizontal: 24,
-                                      vertical: 12,
+                                      horizontal: 20,
+                                      vertical: 10,
                                     ),
-                                    shape: RoundedRectangleBorder(
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF2E2589),
                                       borderRadius: BorderRadius.circular(14),
                                     ),
-                                    elevation: 0,
-                                  ),
-                                  icon: const Icon(
-                                    FontAwesomeIcons.check,
-                                    color: Colors.white,
-                                    size: 16,
-                                  ),
-                                  label: const Text(
-                                    'إكتمال الطلب',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                          FontAwesomeIcons.check,
+                                          color: Colors.white,
+                                          size: 16,
+                                        ),
+                                        SizedBox(width: 8),
+                                        Text(
+                                          'تم الاكتمال',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                else
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      completeOrderByCustomerCubit
+                                          .completeOrderByCustomer(
+                                            orderId: order.id.toString(),
+                                          );
+                                      _saveCompletedOrder(order.id.toString());
+                                      setState(() {});
+                                      context
+                                          .read<PendingOrderCubit>()
+                                          .getAllPendingOrder();
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color.fromARGB(
+                                        255,
+                                        255,
+                                        17,
+                                        0,
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 24,
+                                        vertical: 12,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(14),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      'إكتمال الطلب',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
                                     ),
                                   ),
-                                ),
                               ],
                             ),
                           ],

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheService {
@@ -11,27 +12,23 @@ class CacheService {
     required String key,
     required dynamic value,
   }) async {
-    if (value is int) {
-      await sharedPreferences.setInt(key, value);
-      return true;
-    }
-    if (value is String) {
-      await sharedPreferences.setString(key, value);
-      return true;
-    }
-    if (value is double) {
-      await sharedPreferences.setDouble(key, value);
-      return true;
-    }
-    if (value is bool) {
-      await sharedPreferences.setBool(key, value);
-      return true;
-    }
+    if (value is int) return await sharedPreferences.setInt(key, value);
+    if (value is String) return await sharedPreferences.setString(key, value);
+    if (value is double) return await sharedPreferences.setDouble(key, value);
+    if (value is bool) return await sharedPreferences.setBool(key, value);
+    if (value is List<String>)
+      return await sharedPreferences.setString(key, jsonEncode(value));
     return false;
   }
 
   static dynamic getData({required String key}) {
-    return sharedPreferences.get(key);
+    final data = sharedPreferences.get(key);
+    if (data is String && data.startsWith('[') && data.endsWith(']')) {
+      try {
+        return List<String>.from(jsonDecode(data));
+      } catch (_) {}
+    }
+    return data;
   }
 
   static void deleteItem({required String key}) async {

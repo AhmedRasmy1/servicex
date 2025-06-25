@@ -55,3 +55,42 @@ class PendingOrderCubit extends Cubit<OrderState> {
     }
   }
 }
+
+@injectable
+class CompleteOrderByCustomerCubit extends Cubit<OrderState> {
+  final CompleteOrderByCustomerUsecase _completeOrderByCustomerUsecase;
+
+  CompleteOrderByCustomerCubit(this._completeOrderByCustomerUsecase)
+    : super(OrderInitial());
+
+  Future<void> completeOrderByCustomer({required String orderId}) async {
+    final int id = int.tryParse(orderId) ?? -1;
+
+    emit(CompleteOrderByCustomerLoading(loadingOrderId: id));
+
+    final token =
+        'Bearer ${CacheService.getData(key: CacheConstants.userToken) ?? ''}';
+
+    final result = await _completeOrderByCustomerUsecase
+        .completeOrderByCustomer(orderId: orderId, token: token);
+
+    switch (result) {
+      case Success<void>():
+        emit(
+          CompleteOrderByCustomerSuccess(
+            message: 'تم اكتمال الطلب بنجاح',
+            completedOrderId: id,
+          ),
+        );
+        break;
+      case Fail<void>():
+        emit(
+          CompleteOrderByCustomerFailed(
+            message: 'حدث خطأ أثناء إتمام الطلب: ${result.exception}',
+            failedOrderId: id,
+          ),
+        );
+        break;
+    }
+  }
+}

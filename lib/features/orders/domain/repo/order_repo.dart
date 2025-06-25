@@ -15,3 +15,10 @@ abstract class PendingOrderRepo {
     required String token,
   });
 }
+
+abstract class CompleteOrderByCustomerRepo {
+  Future completeOrderByCustomer({
+    required String orderId,
+    required String token,
+  });
+}
