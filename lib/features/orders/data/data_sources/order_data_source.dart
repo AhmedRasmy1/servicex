@@ -16,6 +16,12 @@ abstract class PendingOrderDataSource {
   });
 }
 
+abstract class CompleteOrderDataSource {
+  Future<Result<List<CompletedOrderModelEntity>>> completeOrder({
+    required String token,
+  });
+}
+
 abstract class CompleteOrderByCustomerDataSource {
   Future completeOrderByCustomer({
     required String orderId,

@@ -139,6 +139,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i474.ResetPasswordUsecase>(
       () => _i474.ResetPasswordUsecase(gh<_i594.ResetPasswordRepo>()),
     );
+    gh.factory<_i405.CompleteOrderDataSource>(
+      () =>
+          _i710.CompleteOrderDataSourceImpl(apiService: gh<_i680.ApiService>()),
+    );
     gh.factory<_i526.SentOtpRepo>(
       () => _i1020.SentOtpRepoImpl(gh<_i575.SentOtpDataSource>()),
     );
@@ -202,6 +206,11 @@ extension GetItInjectableX on _i174.GetIt {
         techniciansForServicesRepo: gh<_i118.TechniciansForServicesRepo>(),
       ),
     );
+    gh.factory<_i443.CompleteOrderRepo>(
+      () => _i1057.CompleteOrderRepoImpl(
+        completeOrderDataSource: gh<_i405.CompleteOrderDataSource>(),
+      ),
+    );
     gh.factory<_i188.LoginUsecase>(
       () => _i188.LoginUsecase(gh<_i543.LoginRepo>()),
     );
@@ -225,6 +234,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i556.SentOtpUseCase>(
       () => _i556.SentOtpUseCase(gh<_i526.SentOtpRepo>()),
     );
+    gh.factory<_i441.CompleteOrderUsecase>(
+      () => _i441.CompleteOrderUsecase(
+        completeOrderRepo: gh<_i443.CompleteOrderRepo>(),
+      ),
+    );
     gh.factory<_i443.CompleteOrderByCustomerRepo>(
       () => _i1057.CompleteOrderByCustomerRepoImpl(
         completeOrderByCustomerDataSource:
@@ -241,6 +255,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i1044.UserProfileUseCase>(
       () => _i1044.UserProfileUseCase(gh<_i250.UserProfileRepo>()),
+    );
+    gh.factory<_i196.CompleteOrderCubit>(
+      () => _i196.CompleteOrderCubit(gh<_i441.CompleteOrderUsecase>()),
     );
     gh.factory<_i239.ServicesCubit>(
       () => _i239.ServicesCubit(gh<_i463.ServicesUsecase>()),

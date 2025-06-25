@@ -33,6 +33,20 @@ final class PendingOrderFailed extends OrderState {
   PendingOrderFailed({required this.message});
 }
 
+final class CompleteOrderLoading extends OrderState {}
+
+final class CompleteOrderSuccess extends OrderState {
+  final List<CompletedOrderModelEntity> completedOrders;
+
+  CompleteOrderSuccess({required this.completedOrders});
+}
+
+final class CompleteOrderFailed extends OrderState {
+  final String message;
+
+  CompleteOrderFailed({required this.message});
+}
+
 final class CompleteOrderByCustomerLoading extends OrderState {
   final int loadingOrderId;
 

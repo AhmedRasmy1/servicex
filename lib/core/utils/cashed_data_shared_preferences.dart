@@ -16,8 +16,9 @@ class CacheService {
     if (value is String) return await sharedPreferences.setString(key, value);
     if (value is double) return await sharedPreferences.setDouble(key, value);
     if (value is bool) return await sharedPreferences.setBool(key, value);
-    if (value is List<String>)
+    if (value is List<String>) {
       return await sharedPreferences.setString(key, jsonEncode(value));
+    }
     return false;
   }
 

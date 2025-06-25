@@ -36,6 +36,18 @@ class PendingOrderRepoImpl implements PendingOrderRepo {
   }
 }
 
+@Injectable(as: CompleteOrderRepo)
+class CompleteOrderRepoImpl implements CompleteOrderRepo {
+  CompleteOrderDataSource completeOrderDataSource;
+  CompleteOrderRepoImpl({required this.completeOrderDataSource});
+  @override
+  Future<Result<List<CompletedOrderModelEntity>>> completeOrder({
+    required String token,
+  }) {
+    return completeOrderDataSource.completeOrder(token: token);
+  }
+}
+
 @Injectable(as: CompleteOrderByCustomerRepo)
 class CompleteOrderByCustomerRepoImpl implements CompleteOrderByCustomerRepo {
   CompleteOrderByCustomerDataSource completeOrderByCustomerDataSource;

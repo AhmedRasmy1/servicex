@@ -57,6 +57,26 @@ class PendingOrderCubit extends Cubit<OrderState> {
 }
 
 @injectable
+class CompleteOrderCubit extends Cubit<OrderState> {
+  final CompleteOrderUsecase _completeOrderUsecase;
+  CompleteOrderCubit(this._completeOrderUsecase) : super(OrderInitial());
+  Future<void> getAllCompletedOrder() async {
+    emit(CompleteOrderLoading());
+    final token =
+        'Bearer ${CacheService.getData(key: CacheConstants.userToken) ?? ''}';
+    final result = await _completeOrderUsecase.completeOrder(token: token);
+    switch (result) {
+      case Success<List<CompletedOrderModelEntity>>():
+        emit(CompleteOrderSuccess(completedOrders: result.data));
+        break;
+      case Fail<List<CompletedOrderModelEntity>>():
+        emit(CompleteOrderFailed(message: 'Error: ${result.exception}'));
+        break;
+    }
+  }
+}
+
+@injectable
 class CompleteOrderByCustomerCubit extends Cubit<OrderState> {
   final CompleteOrderByCustomerUsecase _completeOrderByCustomerUsecase;
 

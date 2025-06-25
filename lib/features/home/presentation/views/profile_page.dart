@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:servicex/features/orders/presentation/views/complete_order_view.dart';
 import 'package:servicex/features/orders/presentation/views/pending_order_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/di/di.dart';
 import '../viewmodels/user_profile_view_model/user_profile_cubit.dart';
 import 'charge_balance.dart';
@@ -123,6 +125,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             title: 'الطلبات المكتملة',
                             leadingImage: 'assets/images/complete-ordrer.png',
                             fontSize: screenWidth * 0.04,
+                            onTap:
+                                () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) => const CompleteOrdersView(),
+                                  ),
+                                ),
                           ),
                           ProfileListTile(
                             title: 'الطلبات المعلقة',
@@ -137,11 +147,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                           ),
-                          ProfileListTile(
-                            title: 'العروض',
-                            leadingImage: 'assets/images/offers.png',
-                            fontSize: screenWidth * 0.04,
-                          ),
+                          // ProfileListTile(
+                          //   title: 'العروض',
+                          //   leadingImage: 'assets/images/offers.png',
+                          //   fontSize: screenWidth * 0.04,
+                          // ),
                           ProfileListTile(
                             title: 'الأسئلة الشائعة',
                             leadingImage: 'assets/images/questionmark.png',
@@ -182,19 +192,54 @@ class _ProfilePageState extends State<ProfilePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                'assets/images/facebook.png',
-                                width: screenWidth * 0.08,
+                              InkWell(
+                                onTap: () async {
+                                  const url =
+                                      'https://www.facebook.com/Ahmedmido232?mibextid=wwXIfr&mibextid=wwXIfr';
+                                  if (await canLaunchUrl(Uri.parse(url))) {
+                                    await launchUrl(
+                                      Uri.parse(url),
+                                      mode: LaunchMode.externalApplication,
+                                    );
+                                  }
+                                },
+                                child: Image.asset(
+                                  'assets/images/facebook.png',
+                                  width: screenWidth * 0.08,
+                                ),
                               ),
                               SizedBox(width: screenWidth * 0.04),
-                              Image.asset(
-                                'assets/images/twitter.png',
-                                width: screenWidth * 0.08,
+                              InkWell(
+                                onTap: () async {
+                                  const url =
+                                      'https://x.com/ahmedhishamrsmy?s=21&t=YZr6AgTbJ7LlmzcKqdlgFQ';
+                                  if (await canLaunchUrl(Uri.parse(url))) {
+                                    await launchUrl(
+                                      Uri.parse(url),
+                                      mode: LaunchMode.externalApplication,
+                                    );
+                                  }
+                                },
+                                child: Image.asset(
+                                  'assets/images/twitter.png',
+                                  width: screenWidth * 0.08,
+                                ),
                               ),
                               SizedBox(width: screenWidth * 0.04),
-                              Image.asset(
-                                'assets/images/whatsapp.png',
-                                width: screenWidth * 0.08,
+                              InkWell(
+                                onTap: () async {
+                                  const url = 'https://wa.me/201154126873';
+                                  if (await canLaunchUrl(Uri.parse(url))) {
+                                    await launchUrl(
+                                      Uri.parse(url),
+                                      mode: LaunchMode.externalApplication,
+                                    );
+                                  }
+                                },
+                                child: Image.asset(
+                                  'assets/images/whatsapp.png',
+                                  width: screenWidth * 0.08,
+                                ),
                               ),
                             ],
                           ),

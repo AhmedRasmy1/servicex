@@ -120,3 +120,62 @@ class PendingOrderModel {
     );
   }
 }
+
+@JsonSerializable()
+class CompleteOrderModel {
+  int? id;
+  String? userName;
+  String? orderStatus;
+  String? problemDescription;
+  String? date;
+  String? time;
+  String? address;
+  String? phone;
+  String? imageUrl;
+  String? technicianName;
+  String? serviceName;
+  bool? isCompletedByCustomer;
+  bool? isCompletedByTechnician;
+  int? period;
+  int? price;
+
+  CompleteOrderModel({
+    this.id,
+    this.userName,
+    this.orderStatus,
+    this.problemDescription,
+    this.date,
+    this.time,
+    this.address,
+    this.phone,
+    this.imageUrl,
+    this.technicianName,
+    this.serviceName,
+    this.isCompletedByCustomer,
+    this.isCompletedByTechnician,
+    this.period,
+    this.price,
+  });
+  factory CompleteOrderModel.fromJson(Map<String, dynamic> json) =>
+      _$CompleteOrderModelFromJson(json);
+  Map<String, dynamic> toJson() => _$CompleteOrderModelToJson(this);
+  CompletedOrderModelEntity toCompletedOrderModelEntity() {
+    return CompletedOrderModelEntity(
+      id: id,
+      userName: userName,
+      orderStatus: orderStatus,
+      problemDescription: problemDescription,
+      date: date,
+      time: time,
+      address: address,
+      phone: phone,
+      imageUrl: imageUrl,
+      technicianName: technicianName,
+      serviceName: serviceName,
+      isCompletedByCustomer: isCompletedByCustomer,
+      isCompletedByTechnician: isCompletedByTechnician,
+      period: period,
+      price: price,
+    );
+  }
+}

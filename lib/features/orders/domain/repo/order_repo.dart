@@ -16,6 +16,12 @@ abstract class PendingOrderRepo {
   });
 }
 
+abstract class CompleteOrderRepo {
+  Future<Result<List<CompletedOrderModelEntity>>> completeOrder({
+    required String token,
+  });
+}
+
 abstract class CompleteOrderByCustomerRepo {
   Future completeOrderByCustomer({
     required String orderId,

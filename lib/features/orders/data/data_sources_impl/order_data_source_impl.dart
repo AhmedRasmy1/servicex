@@ -47,6 +47,24 @@ class PendingOrderDataSourceImpl implements PendingOrderDataSource {
   }
 }
 
+@Injectable(as: CompleteOrderDataSource)
+class CompleteOrderDataSourceImpl implements CompleteOrderDataSource {
+  ApiService apiService;
+
+  CompleteOrderDataSourceImpl({required this.apiService});
+  @override
+  Future<Result<List<CompletedOrderModelEntity>>> completeOrder({
+    required String token,
+  }) {
+    return executeApi<List<CompletedOrderModelEntity>>(() async {
+      final response = await apiService.getAllCompletedOrder(token);
+      final data =
+          response.map((order) => order.toCompletedOrderModelEntity()).toList();
+      return data;
+    });
+  }
+}
+
 @Injectable(as: CompleteOrderByCustomerDataSource)
 class CompleteOrderByCustomerDataSourceImpl
     implements CompleteOrderByCustomerDataSource {

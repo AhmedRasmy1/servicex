@@ -33,6 +33,17 @@ class PendingOrderUsecase {
 }
 
 @injectable
+class CompleteOrderUsecase {
+  CompleteOrderRepo completeOrderRepo;
+  CompleteOrderUsecase({required this.completeOrderRepo});
+  Future<Result<List<CompletedOrderModelEntity>>> completeOrder({
+    required String token,
+  }) {
+    return completeOrderRepo.completeOrder(token: token);
+  }
+}
+
+@injectable
 class CompleteOrderByCustomerUsecase {
   CompleteOrderByCustomerRepo completeOrderByCustomerRepo;
   CompleteOrderByCustomerUsecase({required this.completeOrderByCustomerRepo});
