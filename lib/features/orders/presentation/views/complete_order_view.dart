@@ -160,6 +160,20 @@ class _CompleteOrdersViewState extends State<CompleteOrdersView> {
                               value: order.problemDescription!,
                               maxLines: 2,
                             ),
+                            _buildInfoRow(
+                              icon: FontAwesomeIcons.stopwatch,
+                              color: Color(0xFF2E2589),
+                              title: 'المدة:',
+                              value: '${order.period} ساعة',
+                              maxLines: 2,
+                            ),
+
+                            _buildInfoRow(
+                              icon: FontAwesomeIcons.moneyBillWave,
+                              color: const Color(0xFF2E2589),
+                              title: 'السعر:',
+                              value: '${order.price} \ج.م',
+                            ),
                           ],
                         ),
                       ),

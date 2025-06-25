@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:servicex/features/orders/presentation/views/completed_order_page_for_technician.dart';
+import 'package:servicex/features/orders/presentation/views/pending_order_page_for_technician.dart';
+import 'package:servicex/features/technician/presentation/views/technician_profile_view.dart';
 import 'core/resources/color_manager.dart';
-import 'features/home/presentation/views/home_page.dart';
-import 'features/home/presentation/views/orders_page.dart';
-import 'features/home/presentation/views/profile_page.dart';
 
-class MainNavigationPage extends StatefulWidget {
-  const MainNavigationPage({super.key});
+class TechnicianNavigationPage extends StatefulWidget {
+  const TechnicianNavigationPage({super.key});
 
   @override
-  State<MainNavigationPage> createState() => _MainNavigationPageState();
+  State<TechnicianNavigationPage> createState() =>
+      _TechnicianNavigationPageState();
 }
 
-class _MainNavigationPageState extends State<MainNavigationPage> {
+class _TechnicianNavigationPageState extends State<TechnicianNavigationPage> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = const [HomePage(), OrdersPage(), ProfilePage()];
+  final List<Widget> _pages = const [
+    PendingOrderPageForTechnician(),
+    CompletedOrderPageForTechnician(),
+    TechnicianProfileView(),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -38,14 +43,14 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
           type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home, size: 30),
-              label: 'الرئيسية',
+              icon: Icon(Icons.schedule_outlined),
+              activeIcon: Icon(Icons.schedule, size: 30),
+              label: 'الطلبات المعلقة',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.receipt_long_outlined),
-              activeIcon: Icon(Icons.receipt_long, size: 30),
-              label: 'الطلبات',
+              icon: Icon(Icons.check_circle_outline),
+              activeIcon: Icon(Icons.check_circle, size: 30),
+              label: 'الطلبات المكتملة',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_outline),

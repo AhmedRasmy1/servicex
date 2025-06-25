@@ -2,7 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../bottom_navigation_bar_widget.dart';
+import 'package:servicex/bottom_navigation_bar_widget_for_techician.dart';
+import '../../../../bottom_navigation_bar_widget_for_customer.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../viewmodels/login_viewmodel/login_cubit.dart';
@@ -199,12 +200,31 @@ class _LoginPageState extends State<LoginPage> {
                               );
                             } else if (state is LoginSuccess) {
                               Navigator.pop(context);
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const MainNavigationPage(),
-                                ),
-                              );
+
+                              final role = state.loginEntity.role;
+
+                              if (role == "Technician") {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => TechnicianNavigationPage(),
+                                  ),
+                                );
+                              } else if (role == "Customer") {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (_) => MainNavigationPageForCustomer(),
+                                  ),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("نوع المستخدم غير معروف"),
+                                  ),
+                                );
+                              }
                             }
                           },
                           child: ElevatedButton(
