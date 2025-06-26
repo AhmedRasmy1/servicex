@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:servicex/core/di/di.dart';
+import 'package:servicex/features/orders/presentation/viewmodel/create_review/add_review_cubit.dart';
 import 'package:servicex/features/orders/presentation/viewmodel/order/order_cubit.dart';
 
 class CompleteOrdersView extends StatefulWidget {
@@ -13,17 +14,22 @@ class CompleteOrdersView extends StatefulWidget {
 
 class _CompleteOrdersViewState extends State<CompleteOrdersView> {
   late CompleteOrderCubit completeOrderCubit;
+  late AddReviewCubit addReviewCubit;
 
   @override
   void initState() {
     super.initState();
     completeOrderCubit = getIt.get<CompleteOrderCubit>();
+    addReviewCubit = getIt.get<AddReviewCubit>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => completeOrderCubit..getAllCompletedOrder(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => completeOrderCubit..getAllCompletedOrder()),
+        BlocProvider(create: (_) => addReviewCubit),
+      ],
       child: SafeArea(
         child: Scaffold(
           backgroundColor: const Color(0xFFF3F6FB),
@@ -111,7 +117,7 @@ class _CompleteOrdersViewState extends State<CompleteOrdersView> {
                                     vertical: 4,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Color(0xFFd0f26f),
+                                    color: const Color(0xFFd0f26f),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Row(
@@ -155,24 +161,60 @@ class _CompleteOrdersViewState extends State<CompleteOrdersView> {
                             ),
                             _buildInfoRow(
                               icon: FontAwesomeIcons.infoCircle,
-                              color: Color(0xFF2E2589),
+                              color: const Color(0xFF2E2589),
                               title: 'وصف المشكلة:',
                               value: order.problemDescription!,
                               maxLines: 2,
                             ),
                             _buildInfoRow(
                               icon: FontAwesomeIcons.stopwatch,
-                              color: Color(0xFF2E2589),
+                              color: const Color(0xFF2E2589),
                               title: 'المدة:',
                               value: '${order.period} ساعة',
-                              maxLines: 2,
                             ),
-
                             _buildInfoRow(
                               icon: FontAwesomeIcons.moneyBillWave,
                               color: const Color(0xFF2E2589),
                               title: 'السعر:',
                               value: '${order.price} ج.م',
+                            ),
+                            const SizedBox(height: 12),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: ElevatedButton.icon(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return BlocProvider.value(
+                                        value: context.read<AddReviewCubit>(),
+                                        child: _RatingDialog(
+                                          technicianName: order.technicianName!,
+                                          orderId: order.id!.toString(),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF2E2589),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 8,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                icon: const Icon(
+                                  Icons.star_rate,
+                                  color: Colors.white,
+                                ),
+                                label: const Text(
+                                  'إضافة تقييم للفني',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -225,6 +267,127 @@ class _CompleteOrdersViewState extends State<CompleteOrdersView> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _RatingDialog extends StatefulWidget {
+  final String technicianName;
+  final String orderId;
+
+  const _RatingDialog({required this.technicianName, required this.orderId});
+
+  @override
+  State<_RatingDialog> createState() => _RatingDialogState();
+}
+
+class _RatingDialogState extends State<_RatingDialog> {
+  int selectedStars = 0;
+  final commentController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      title: Row(
+        children: [
+          const Icon(Icons.star, color: Color(0xFF2E2589)),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              'تقييم الفني: ${widget.technicianName}',
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+          ),
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(5, (index) {
+              return IconButton(
+                icon: Icon(
+                  index < selectedStars ? Icons.star : Icons.star_border,
+                  color: Colors.amber,
+                  size: 30,
+                ),
+                onPressed: () {
+                  setState(() {
+                    selectedStars = index + 1;
+                  });
+                },
+              );
+            }),
+          ),
+          const SizedBox(height: 12),
+          TextField(
+            controller: commentController,
+            maxLines: 3,
+            decoration: InputDecoration(
+              hintText: 'أضف تعليقًا (اختياري)',
+              filled: true,
+              fillColor: Colors.grey.shade100,
+              contentPadding: const EdgeInsets.all(12),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('إلغاء', style: TextStyle(color: Colors.red)),
+        ),
+        BlocListener<AddReviewCubit, AddReviewState>(
+          listener: (context, state) {
+            if (state is AddReviewSuccess) {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    state.addReviewEntity.message ?? 'تم التقييم بنجاح',
+                  ),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            } else if (state is AddReviewFailed) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.errorMessage),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
+          },
+          child: ElevatedButton(
+            onPressed: () {
+              final rating = selectedStars;
+              final comment = commentController.text.trim();
+              context.read<AddReviewCubit>().addReview(
+                orderId: widget.orderId,
+                rating: rating,
+                comment: comment,
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF2E2589),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: const Text(
+              'تأكيد التقييم',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

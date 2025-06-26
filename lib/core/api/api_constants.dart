@@ -23,4 +23,5 @@ class ApiConstants {
       'api/order/technician-orders/completed';
   static const String getAllPendingOrderForTechnician =
       'api/order/technician-orders/pending';
+  static const String addReviewByUser = 'api/Review';
 }

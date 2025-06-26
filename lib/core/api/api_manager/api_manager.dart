@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:servicex/features/orders/data/models/add_review_model.dart';
 import 'package:servicex/features/technician/data/technician_profile_model.dart';
 import '../../../features/home/data/models/user_profile_model.dart';
 import '../../../features/orders/data/models/order_model.dart';
@@ -93,5 +94,13 @@ abstract class ApiService {
   @GET(ApiConstants.getTechnicianProfile)
   Future<TechnicianProfileModel> getTechnicianProfile(
     @Header('Authorization') String token,
+  );
+
+  @POST(ApiConstants.addReviewByUser)
+  Future<AddReviewModel> addReviewByUser(
+    @Header('Authorization') String token,
+    @Field('OrderId') String orderId,
+    @Field('RatingValue') int rating,
+    @Field('Comments') String comment,
   );
 }

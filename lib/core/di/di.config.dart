@@ -81,13 +81,22 @@ import '../../features/home/presentation/viewmodels/services_viewmodel/services_
     as _i239;
 import '../../features/home/presentation/viewmodels/user_profile_view_model/user_profile_cubit.dart'
     as _i315;
+import '../../features/orders/data/data_sources/add_review_data_source.dart'
+    as _i1027;
 import '../../features/orders/data/data_sources/order_data_source.dart'
     as _i405;
+import '../../features/orders/data/data_sources_impl/add_review_data_source_impl.dart'
+    as _i64;
 import '../../features/orders/data/data_sources_impl/order_data_source_impl.dart'
     as _i710;
+import '../../features/orders/data/repo_impl/add_review_repo_impl.dart' as _i60;
 import '../../features/orders/data/repo_impl/order_repo_impl.dart' as _i1057;
+import '../../features/orders/domain/repo/add_review_repo.dart' as _i159;
 import '../../features/orders/domain/repo/order_repo.dart' as _i443;
+import '../../features/orders/domain/usecase/add_review_usecase.dart' as _i887;
 import '../../features/orders/domain/usecase/order_usecase.dart' as _i441;
+import '../../features/orders/presentation/viewmodel/create_review/add_review_cubit.dart'
+    as _i1002;
 import '../../features/orders/presentation/viewmodel/order/order_cubit.dart'
     as _i196;
 import '../../features/technician/data/technician_profile_data_source.dart'
@@ -133,6 +142,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i466.LoginDataSource>(
       () => _i785.LoginDataSourceImpl(gh<_i680.ApiService>()),
+    );
+    gh.factory<_i1027.AddReviewDataSource>(
+      () => _i64.AddReviewDataSourceImpl(gh<_i680.ApiService>()),
     );
     gh.factory<_i398.VerifyOtpDataSource>(
       () => _i1070.VerifyOtpDataSourcesImpl(gh<_i680.ApiService>()),
@@ -236,6 +248,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i467.VerifyOtpCubit>(
       () => _i467.VerifyOtpCubit(gh<_i503.VerifyOtpUsecase>()),
+    );
+    gh.factory<_i159.AddReviewRepo>(
+      () => _i60.AddReviewRepoImpl(gh<_i1027.AddReviewDataSource>()),
     );
     gh.factory<_i113.ResetPasswordCubit>(
       () => _i113.ResetPasswordCubit(gh<_i474.ResetPasswordUsecase>()),
@@ -359,6 +374,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i716.LoginCubit>(
       () => _i716.LoginCubit(gh<_i188.LoginUsecase>()),
     );
+    gh.factory<_i887.AddReviewUsecase>(
+      () => _i887.AddReviewUsecase(addReviewRepo: gh<_i159.AddReviewRepo>()),
+    );
     gh.factory<_i1024.TechnicianProfileUsecase>(
       () => _i1024.TechnicianProfileUsecase(gh<_i311.TechnicianProfileRepo>()),
     );
@@ -389,6 +407,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i196.PendingOrderCubit>(
       () => _i196.PendingOrderCubit(gh<_i441.PendingOrderUsecase>()),
+    );
+    gh.factory<_i1002.AddReviewCubit>(
+      () => _i1002.AddReviewCubit(gh<_i887.AddReviewUsecase>()),
     );
     gh.factory<_i31.RegisterCubit>(
       () => _i31.RegisterCubit(gh<_i941.RegisterUsecase>()),
