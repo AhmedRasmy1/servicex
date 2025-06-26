@@ -90,6 +90,17 @@ import '../../features/orders/domain/repo/order_repo.dart' as _i443;
 import '../../features/orders/domain/usecase/order_usecase.dart' as _i441;
 import '../../features/orders/presentation/viewmodel/order/order_cubit.dart'
     as _i196;
+import '../../features/technician/data/technician_profile_data_source.dart'
+    as _i757;
+import '../../features/technician/data/technician_profile_data_source_impl.dart'
+    as _i333;
+import '../../features/technician/data/technician_profile_repo_impl.dart'
+    as _i211;
+import '../../features/technician/domain/technician_profile_repo.dart' as _i311;
+import '../../features/technician/domain/technician_profile_usecase.dart'
+    as _i1024;
+import '../../features/technician/presentation/viewmodels/technician_profile/technician_profile_cubit.dart'
+    as _i65;
 import '../api/api_manager/api_manager.dart' as _i680;
 import '../api/dio_module.dart' as _i784;
 
@@ -146,6 +157,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i594.ResetPasswordRepo>(
       () => _i653.ResetPasswordRepoImpl(gh<_i956.ResetPasswordDataSource>()),
+    );
+    gh.factory<_i757.TechnicianProfileDataSource>(
+      () => _i333.TechnicianProfileDataSourceImpl(gh<_i680.ApiService>()),
     );
     gh.factory<_i118.TopServicesRepo>(
       () => _i438.TopServicesRepoImpl(
@@ -264,6 +278,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i463.ServicesUsecase>(
       () => _i463.ServicesUsecase(servicesRepo: gh<_i118.ServicesRepo>()),
     );
+    gh.factory<_i311.TechnicianProfileRepo>(
+      () => _i211.TechnicianProfileRepoImpl(
+        gh<_i757.TechnicianProfileDataSource>(),
+      ),
+    );
     gh.factory<_i250.MyBalanceRepo>(
       () => _i497.MyBalanceRepoImpl(gh<_i885.MyBalanceDataSources>()),
     );
@@ -340,6 +359,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i716.LoginCubit>(
       () => _i716.LoginCubit(gh<_i188.LoginUsecase>()),
     );
+    gh.factory<_i1024.TechnicianProfileUsecase>(
+      () => _i1024.TechnicianProfileUsecase(gh<_i311.TechnicianProfileRepo>()),
+    );
     gh.factory<_i250.SentOtpCubit>(
       () => _i250.SentOtpCubit(gh<_i556.SentOtpUseCase>()),
     );
@@ -361,6 +383,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i941.RegisterUsecase>(
       () => _i941.RegisterUsecase(registerRepo: gh<_i937.RegisterRepo>()),
+    );
+    gh.factory<_i65.TechnicianProfileCubit>(
+      () => _i65.TechnicianProfileCubit(gh<_i1024.TechnicianProfileUsecase>()),
     );
     gh.factory<_i196.PendingOrderCubit>(
       () => _i196.PendingOrderCubit(gh<_i441.PendingOrderUsecase>()),

@@ -209,8 +209,10 @@ class _CompletedOrderPageForTechnicianState
                                                     child,
                                                     loadingProgress,
                                                   ) {
-                                                    if (loadingProgress == null)
+                                                    if (loadingProgress ==
+                                                        null) {
                                                       return child;
+                                                    }
                                                     return const Center(
                                                       child:
                                                           CircularProgressIndicator(),
@@ -245,8 +247,9 @@ class _CompletedOrderPageForTechnicianState
                                         child,
                                         loadingProgress,
                                       ) {
-                                        if (loadingProgress == null)
+                                        if (loadingProgress == null) {
                                           return child;
+                                        }
                                         return const Center(
                                           child: CircularProgressIndicator(),
                                         );

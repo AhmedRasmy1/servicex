@@ -8,6 +8,7 @@ class ApiConstants {
   static const String getAllServices = 'api/service';
   static const String charegeBalance = 'api/CodesForCharges/applyCode';
   static const String getUserProfile = 'api/CustomerProfile/me';
+  static const String getTechnicianProfile = 'api/TechnicalProfile/me';
   static const String topServices = 'api/order/top-services';
   static const String getTechniciansForServices =
       'api/service/{serviceId}/technicians';
