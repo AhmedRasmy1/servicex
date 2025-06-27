@@ -121,9 +121,13 @@ class _TechnicianProfileViewState extends State<TechnicianProfileView> {
                                         child: CircleAvatar(
                                           radius: avatarRadius,
                                           backgroundImage:
-                                              profile.image != null &&
-                                                      profile.image!.isNotEmpty
-                                                  ? NetworkImage(profile.image!)
+                                              profile.profileImageUrl != null &&
+                                                      profile
+                                                          .profileImageUrl!
+                                                          .isNotEmpty
+                                                  ? NetworkImage(
+                                                    profile.profileImageUrl!,
+                                                  )
                                                   : const AssetImage(
                                                         'assets/images/default_avatar.png',
                                                       )
@@ -152,7 +156,7 @@ class _TechnicianProfileViewState extends State<TechnicianProfileView> {
                                   ),
                                   SizedBox(height: isTablet ? 22 : 14),
                                   Text(
-                                    profile.name ?? "اسم غير متوفر",
+                                    profile.fullName ?? "اسم غير متوفر",
                                     style: TextStyle(
                                       fontSize: profileNameFont + 2,
                                       fontWeight: FontWeight.bold,
@@ -202,20 +206,47 @@ class _TechnicianProfileViewState extends State<TechnicianProfileView> {
                                       ],
                                     ),
                                   ),
-                                  if (profile.phone != null) ...[
+                                  if (profile.averageRating != null) ...[
                                     SizedBox(height: isTablet ? 14 : 10),
+                                    // النجوم بناءً على averageRating
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                          size: isTablet ? 28 : 20,
+                                        ...List.generate(
+                                          profile.averageRating!.floor(),
+                                          (index) => Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                            size: isTablet ? 28 : 20,
+                                          ),
                                         ),
-                                        SizedBox(width: 6),
+                                        if (profile.averageRating! -
+                                                profile.averageRating!
+                                                    .floor() >=
+                                            0.5)
+                                          Icon(
+                                            Icons.star_half,
+                                            color: Colors.amber,
+                                            size: isTablet ? 28 : 20,
+                                          ),
+                                        ...List.generate(
+                                          5 - profile.averageRating!.ceil(),
+                                          (index) => Icon(
+                                            Icons.star_border,
+                                            color: Colors.amber,
+                                            size: isTablet ? 28 : 20,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: isTablet ? 6 : 4),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
                                         Text(
-                                          profile.phone!,
+                                          profile.averageRating!.toString(),
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -262,7 +293,7 @@ class _TechnicianProfileViewState extends State<TechnicianProfileView> {
                                     _ProfileDetailRow(
                                       icon: Icons.phone,
                                       label: "رقم الهاتف",
-                                      value: profile.phone ?? "غير متوفر",
+                                      value: profile.phoneNumber ?? "غير متوفر",
                                       labelFont: detailLabelFont,
                                       valueFont: detailValueFont,
                                     ),
@@ -278,7 +309,7 @@ class _TechnicianProfileViewState extends State<TechnicianProfileView> {
                                     _ProfileDetailRow(
                                       icon: FontAwesomeIcons.moneyBillWave,
                                       label: "السعر بالساعة",
-                                      value: profile.address ?? "غير متوفر",
+                                      value: "${profile.payByHour} جنية",
                                       labelFont: detailLabelFont,
                                       valueFont: detailValueFont,
                                     ),
@@ -286,7 +317,134 @@ class _TechnicianProfileViewState extends State<TechnicianProfileView> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: isTablet ? 40 : 32),
+                            SizedBox(height: isTablet ? 32 : 24),
+
+                            // --- Reviews Section ---
+                            if (profile.reviews != null &&
+                                profile.reviews!.isNotEmpty) ...[
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    right: isTablet ? 8 : 2,
+                                    bottom: isTablet ? 10 : 6,
+                                  ),
+                                  child: Text(
+                                    "آراء العملاء",
+                                    style: TextStyle(
+                                      fontSize: isTablet ? 22 : 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFF2E2589),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: isTablet ? 10 : 6),
+                              ListView.separated(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: profile.reviews!.length,
+                                separatorBuilder:
+                                    (_, __) =>
+                                        SizedBox(height: isTablet ? 12 : 8),
+                                itemBuilder: (context, index) {
+                                  final review = profile.reviews![index];
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(
+                                        isTablet ? 18 : 12,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.blue.shade100
+                                              .withOpacity(0.18),
+                                          blurRadius: 8,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: isTablet ? 16 : 10,
+                                      horizontal: isTablet ? 18 : 12,
+                                    ),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CircleAvatar(
+                                          backgroundColor:
+                                              Colors.indigo.shade100,
+                                          child: Text(
+                                            review.customerName!.isNotEmpty
+                                                ? review
+                                                    .customerName!
+                                                    .characters
+                                                    .first
+                                                : "?",
+                                            style: TextStyle(
+                                              color: Colors.indigo,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: isTablet ? 22 : 16,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: isTablet ? 16 : 10),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    review.customerName!,
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize:
+                                                          isTablet ? 18 : 15,
+                                                      color: const Color(
+                                                        0xFF2E2589,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 8),
+                                                  Row(
+                                                    children: List.generate(
+                                                      review.ratingValue!,
+                                                      (i) => Icon(
+                                                        Icons.star,
+                                                        color: Colors.amber,
+                                                        size:
+                                                            isTablet ? 20 : 15,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: isTablet ? 8 : 5,
+                                              ),
+                                              Text(
+                                                review.comments!,
+                                                style: TextStyle(
+                                                  fontSize: isTablet ? 16 : 13,
+                                                  color: Colors.black87,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                              SizedBox(height: isTablet ? 32 : 24),
+                            ],
+
+                            // --- End Reviews Section ---
                             Center(
                               child: Text(
                                 'نفسك تعرف أكتر ؟',
@@ -384,8 +542,8 @@ class _ProfileDetailRow extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: const Color(0xFF2E2589).withOpacity(0.08),
-            child: Icon(icon, color: const Color(0xFF2E2589)),
             radius: 18,
+            child: Icon(icon, color: const Color(0xFF2E2589)),
           ),
           const SizedBox(width: 14),
           Expanded(

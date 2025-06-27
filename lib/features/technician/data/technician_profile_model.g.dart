@@ -13,8 +13,15 @@ TechnicianProfileModel _$TechnicianProfileModelFromJson(
   email: json['email'] as String?,
   phoneNumber: json['phoneNumber'] as String?,
   address: json['address'] as String?,
-  serviceName: json['serviceName'] as String?,
   profileImageUrl: json['profileImageUrl'] as String?,
+  serviceName: json['serviceName'] as String?,
+  payByHour: (json['payByHour'] as num?)?.toInt(),
+  averageRating: (json['averageRating'] as num?)?.toDouble(),
+  totalReviews: (json['totalReviews'] as num?)?.toInt(),
+  reviews:
+      (json['reviews'] as List<dynamic>?)
+          ?.map((e) => Reviews.fromJson(e as Map<String, dynamic>))
+          .toList(),
 );
 
 Map<String, dynamic> _$TechnicianProfileModelToJson(
@@ -24,6 +31,24 @@ Map<String, dynamic> _$TechnicianProfileModelToJson(
   'email': instance.email,
   'phoneNumber': instance.phoneNumber,
   'address': instance.address,
-  'serviceName': instance.serviceName,
   'profileImageUrl': instance.profileImageUrl,
+  'serviceName': instance.serviceName,
+  'payByHour': instance.payByHour,
+  'averageRating': instance.averageRating,
+  'totalReviews': instance.totalReviews,
+  'reviews': instance.reviews,
+};
+
+Reviews _$ReviewsFromJson(Map<String, dynamic> json) => Reviews(
+  ratingValue: (json['ratingValue'] as num?)?.toInt(),
+  comments: json['comments'] as String?,
+  customerName: json['customerName'] as String?,
+  orderId: (json['orderId'] as num?)?.toInt(),
+);
+
+Map<String, dynamic> _$ReviewsToJson(Reviews instance) => <String, dynamic>{
+  'ratingValue': instance.ratingValue,
+  'comments': instance.comments,
+  'customerName': instance.customerName,
+  'orderId': instance.orderId,
 };
