@@ -269,7 +269,7 @@ class _ApiService implements ApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'api/service/${serviceId}/technicians',
+            'api/Review/service/${serviceId}/technicians-with-reviews',
             queryParameters: queryParameters,
             data: _data,
           )

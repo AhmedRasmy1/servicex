@@ -37,7 +37,7 @@ class _TechniciansViewState extends State<TechniciansView> {
     if (width >= 1200) return 340;
     if (width >= 900) return 340;
     if (width >= 600) return 340;
-    return 360;
+    return 430;
   }
 
   @override
@@ -183,6 +183,8 @@ class _TechnicianCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final reviews = tech.reviews ?? [];
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 7,
@@ -208,7 +210,7 @@ class _TechnicianCard extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(16),
                                   child: Image.network(
-                                    tech.imageUrl,
+                                    tech.imageUrl ?? '',
                                     fit: BoxFit.contain,
                                     errorBuilder:
                                         (context, error, stackTrace) =>
@@ -248,7 +250,7 @@ class _TechnicianCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(38),
                     child: Image.network(
-                      tech.imageUrl,
+                      tech.imageUrl ?? '',
                       width: 76,
                       height: 76,
                       fit: BoxFit.cover,
@@ -295,7 +297,7 @@ class _TechnicianCard extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              tech.fullName,
+              tech.fullName ?? '',
               style: const TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
@@ -315,7 +317,7 @@ class _TechnicianCard extends StatelessWidget {
                 border: Border.all(color: ColorManager.appColor, width: 1),
               ),
               child: Text(
-                tech.name,
+                tech.serviceName ?? '',
                 style: TextStyle(
                   fontSize: 14,
                   color: ColorManager.appColor,
@@ -327,18 +329,222 @@ class _TechnicianCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            _infoRow(FontAwesomeIcons.phone, tech.phone, context),
+            _infoRow(FontAwesomeIcons.phone, tech.phone ?? '', context),
             const SizedBox(height: 4),
-            _infoRow(FontAwesomeIcons.locationDot, tech.address, context),
+            _infoRow(FontAwesomeIcons.locationDot, tech.address ?? '', context),
             const SizedBox(height: 4),
             _infoRow(
               FontAwesomeIcons.sackDollar,
-              '${tech.payByHour} جنيه/ساعة',
+              '${tech.payByHour ?? ''} جنيه/ساعة',
               context,
               color: ColorManager.appColor,
               fontWeight: FontWeight.bold,
             ),
+            const SizedBox(height: 4),
+            Row(
+              children: [
+                Icon(Icons.star, color: Colors.amber, size: 18),
+                const SizedBox(width: 4),
+                ...List.generate(
+                  5,
+                  (i) => Icon(
+                    i < (tech.averageRating ?? 0).floor()
+                        ? Icons.star
+                        : (i < (tech.averageRating ?? 0)
+                            ? Icons.star_half
+                            : Icons.star_border),
+                    color: Colors.amber,
+                    size: 18,
+                  ),
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  '${(tech.averageRating ?? 0).toStringAsFixed(1)} / 5.0',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: Color(0xFF444E5E),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  '(${tech.totalReviews ?? 0})',
+                  style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+                ),
+              ],
+            ),
             Divider(color: Colors.grey.shade300, thickness: 2, height: 24),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder:
+                        (_) => Dialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Container(
+                            constraints: BoxConstraints(
+                              maxHeight:
+                                  MediaQuery.of(context).size.height * 0.7,
+                              minWidth: 300,
+                            ),
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'كل التقييمات',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: ColorManager.appColor,
+                                  ),
+                                ),
+                                const SizedBox(height: 12),
+                                Expanded(
+                                  child:
+                                      reviews.isEmpty
+                                          ? Center(
+                                            child: Text(
+                                              'لا توجد تقييمات متوفرة',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.grey.shade600,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          )
+                                          : ListView.separated(
+                                            itemCount: reviews.length,
+                                            separatorBuilder:
+                                                (_, __) =>
+                                                    const SizedBox(height: 8),
+                                            itemBuilder: (context, idx) {
+                                              final review = reviews[idx];
+                                              return Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey.shade100,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 8,
+                                                      vertical: 6,
+                                                    ),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.amber,
+                                                      size: 18,
+                                                    ),
+                                                    const SizedBox(width: 3),
+                                                    Text(
+                                                      review.ratingValue
+                                                              ?.toString() ??
+                                                          '',
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 8),
+                                                    Expanded(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            review.comments ??
+                                                                '',
+                                                            style:
+                                                                const TextStyle(
+                                                                  fontSize: 13,
+                                                                  color: Color(
+                                                                    0xFF444E5E,
+                                                                  ),
+                                                                ),
+                                                            maxLines: 3,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 2,
+                                                          ),
+                                                          Text(
+                                                            '- ${review.customerName ?? ''}',
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              color:
+                                                                  Colors
+                                                                      .grey
+                                                                      .shade600,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                ),
+                                const SizedBox(height: 8),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    onPressed:
+                                        () => Navigator.of(context).pop(),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: ColorManager.appColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      'إغلاق',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorManager.appColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  elevation: 0,
+                ),
+                icon: const Icon(Icons.reviews, size: 18, color: Colors.white),
+                label: const Text(
+                  'عرض التقييمات',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
             const Spacer(),
             SizedBox(
               width: double.infinity,

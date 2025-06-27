@@ -51,7 +51,10 @@ class TechniciansForServices {
   String? address;
   String? imageUrl;
   int? payByHour;
-  String? name;
+  String? serviceName;
+  double? averageRating;
+  int? totalReviews;
+  List<Reviews>? reviews;
 
   TechniciansForServices({
     this.technicalId,
@@ -61,7 +64,10 @@ class TechniciansForServices {
     this.address,
     this.imageUrl,
     this.payByHour,
-    this.name,
+    this.serviceName,
+    this.averageRating,
+    this.totalReviews,
+    this.reviews,
   });
   factory TechniciansForServices.fromJson(Map<String, dynamic> json) =>
       _$TechniciansForServicesFromJson(json);
@@ -75,7 +81,23 @@ class TechniciansForServices {
       address: address ?? '',
       imageUrl: imageUrl ?? '',
       payByHour: payByHour ?? 0,
-      name: name ?? '',
+      serviceName: serviceName ?? '',
+      averageRating: averageRating ?? 0.0,
+      totalReviews: totalReviews ?? 0,
+      reviews: reviews ?? [],
     );
   }
+}
+
+@JsonSerializable()
+class Reviews {
+  int? ratingValue;
+  String? comments;
+  String? customerName;
+  int? orderId;
+
+  Reviews({this.ratingValue, this.comments, this.customerName, this.orderId});
+  factory Reviews.fromJson(Map<String, dynamic> json) =>
+      _$ReviewsFromJson(json);
+  Map<String, dynamic> toJson() => _$ReviewsToJson(this);
 }

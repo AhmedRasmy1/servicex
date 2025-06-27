@@ -1,3 +1,5 @@
+import 'package:servicex/features/home/data/models/services_model.dart';
+
 class ServiceEntity {
   final int id;
   final String name;
@@ -20,14 +22,17 @@ class TopServicesEntity {
 }
 
 class TechniciansForServicesEntity {
-  final String technicalId;
-  final String fullName;
-  final String email;
-  final String phone;
-  final String address;
-  final String imageUrl;
-  final int payByHour;
-  final String name;
+  String? technicalId;
+  String? fullName;
+  String? email;
+  String? phone;
+  String? address;
+  String? imageUrl;
+  int? payByHour;
+  String? serviceName;
+  double? averageRating;
+  int? totalReviews;
+  List<Reviews>? reviews;
 
   TechniciansForServicesEntity({
     required this.technicalId,
@@ -37,6 +42,9 @@ class TechniciansForServicesEntity {
     required this.address,
     required this.imageUrl,
     required this.payByHour,
-    required this.name,
+    required this.serviceName,
+    required this.averageRating,
+    required this.totalReviews,
+    required this.reviews,
   });
 }
