@@ -89,29 +89,6 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             const Spacer(),
-                            GestureDetector(
-                              onTap: () {
-                                // Add your navigation or action logic here
-                                print('عرض الكل clicked');
-                              },
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'عرض الكل',
-                                    style: TextStyle(
-                                      color: ColorManager.appColor,
-                                      fontSize: screenWidth * 0.04,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: screenWidth * 0.04,
-                                    color: ColorManager.appColor,
-                                  ),
-                                ],
-                              ),
-                            ),
                           ],
                         ),
                         SizedBox(height: screenHeight * 0.01),
@@ -239,29 +216,6 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             const Spacer(),
-                            GestureDetector(
-                              onTap: () {
-                                // Add your navigation or action logic here
-                                print('عرض الكل clicked');
-                              },
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'عرض الكل',
-                                    style: TextStyle(
-                                      color: ColorManager.appColor,
-                                      fontSize: screenWidth * 0.04,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: screenWidth * 0.04,
-                                    color: ColorManager.appColor,
-                                  ),
-                                ],
-                              ),
-                            ),
                           ],
                         ),
                         BlocBuilder<TopServicesCubit, ServicesState>(
@@ -280,8 +234,7 @@ class _HomePageState extends State<HomePage> {
                                 scrollDirection: Axis.vertical,
                                 itemBuilder: (context, index) {
                                   return ServiceCard(
-                                    imagePath:
-                                        'assets/images/defaulttechnician.png',
+                                    imagePath: topServices[index].image,
                                     serviceName: topServices[index].serviceName,
                                     orderCount: topServices[index].orderCount,
                                   );
@@ -351,16 +304,34 @@ class OffersSlider extends StatelessWidget {
 
     final List<Map<String, String>> offers = [
       {
-        'title': 'خصم 30%',
+        'title': 'خصم 15%',
         'subtitle': 'عرض اليوم!',
         'desc': 'احصل على خصم على كل طلب، العرض ساري اليوم فقط',
-        'image': 'assets/images/defaulttechnician.png',
+        'image': 'assets/images/offer15.png',
       },
       {
         'title': 'خصم 50%',
         'subtitle': 'عرض خاص!',
         'desc': 'عروض الصيف تبدأ الآن، لا تفوت الفرصة!',
-        'image': 'assets/images/defaulttechnician.png',
+        'image': 'assets/images/offer50.png',
+      },
+      {
+        'title': 'خدمة مجانية',
+        'subtitle': 'لفترة محدودة',
+        'desc': 'احصل على استشارة مجانية عند أول طلب لك.',
+        'image': 'assets/images/offer.png',
+      },
+      {
+        'title': 'توصيل مجاني',
+        'subtitle': 'على جميع الطلبات',
+        'desc': 'استفد من التوصيل المجاني لأي خدمة اليوم فقط.',
+        'image': 'assets/images/summeroffer.png',
+      },
+      {
+        'title': 'خصم 10%',
+        'subtitle': 'للمستخدمين الجدد',
+        'desc': 'سجل الآن واحصل على خصم خاص لأول طلب.',
+        'image': 'assets/images/offer10.png',
       },
     ];
 
@@ -375,29 +346,6 @@ class OffersSlider extends StatelessWidget {
               const Text(
                 'عروض خاصة',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              GestureDetector(
-                onTap: () {
-                  // Add your navigation or action logic here
-                  print('عرض الكل clicked');
-                },
-                child: Row(
-                  children: [
-                    const Text(
-                      'عرض الكل',
-                      style: TextStyle(
-                        color: ColorManager.appColor,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(width: 5),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      size: 16,
-                      color: ColorManager.appColor,
-                    ),
-                  ],
-                ),
               ),
             ],
           ),
@@ -470,8 +418,8 @@ class OffersSlider extends StatelessWidget {
                               ),
                               child: Image.asset(
                                 offer['image']!,
-                                height: screenWidth * 0.35,
-                                fit: BoxFit.cover,
+                                height: screenWidth * 0.18,
+                                fit: BoxFit.fill,
                               ),
                             ),
                           ],

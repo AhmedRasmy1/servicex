@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ServiceCard extends StatelessWidget {
   final String imagePath;
@@ -15,7 +16,7 @@ class ServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final imageSize = screenWidth * 0.2;
+    final imageSize = screenWidth * 0.15;
     final horizontalMargin = screenWidth * 0.02;
 
     return Container(
@@ -44,7 +45,12 @@ class ServiceCard extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
-              child: Image.asset(imagePath, fit: BoxFit.cover),
+              child: SvgPicture.network(
+                imagePath,
+                fit: BoxFit.contain,
+                width: imageSize,
+                height: imageSize,
+              ),
             ),
           ),
           SizedBox(width: screenWidth * 0.04),

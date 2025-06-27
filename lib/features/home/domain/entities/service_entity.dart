@@ -17,8 +17,13 @@ class ServiceEntity {
 class TopServicesEntity {
   final String serviceName;
   final int orderCount;
+  final String image;
 
-  TopServicesEntity({required this.serviceName, required this.orderCount});
+  TopServicesEntity({
+    required this.serviceName,
+    required this.orderCount,
+    required this.image,
+  });
 }
 
 class TechniciansForServicesEntity {

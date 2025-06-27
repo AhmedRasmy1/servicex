@@ -26,12 +26,13 @@ TopServicesModel _$TopServicesModelFromJson(Map<String, dynamic> json) =>
     TopServicesModel(
       serviceName: json['serviceName'] as String?,
       orderCount: (json['orderCount'] as num?)?.toInt(),
-    );
+    )..image = json['image'] as String?;
 
 Map<String, dynamic> _$TopServicesModelToJson(TopServicesModel instance) =>
     <String, dynamic>{
       'serviceName': instance.serviceName,
       'orderCount': instance.orderCount,
+      'image': instance.image,
     };
 
 TechniciansForServices _$TechniciansForServicesFromJson(

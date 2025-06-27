@@ -29,6 +29,7 @@ class ServicesModel {
 class TopServicesModel {
   String? serviceName;
   int? orderCount;
+  String? image;
 
   TopServicesModel({this.serviceName, this.orderCount});
   factory TopServicesModel.fromJson(Map<String, dynamic> json) =>
@@ -38,6 +39,7 @@ class TopServicesModel {
     return TopServicesEntity(
       serviceName: serviceName ?? '',
       orderCount: orderCount ?? 0,
+      image: image ?? '',
     );
   }
 }
