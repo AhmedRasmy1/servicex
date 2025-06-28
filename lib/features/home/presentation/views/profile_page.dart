@@ -156,16 +156,45 @@ class _ProfilePageState extends State<ProfilePage> {
                             title: 'الأسئلة الشائعة',
                             leadingImage: 'assets/images/questionmark.png',
                             fontSize: screenWidth * 0.04,
+                            onTap: () async {
+                              const url = 'https://servicex-741d4.web.app/faq';
+                              if (await canLaunchUrl(Uri.parse(url))) {
+                                await launchUrl(
+                                  Uri.parse(url),
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              }
+                            },
                           ),
                           ProfileListTile(
                             title: 'تواصل مع الدعم',
                             leadingImage: 'assets/images/24-hours-service.png',
                             fontSize: screenWidth * 0.04,
+                            onTap: () async {
+                              const url =
+                                  'https://servicex-741d4.web.app/support';
+                              if (await canLaunchUrl(Uri.parse(url))) {
+                                await launchUrl(
+                                  Uri.parse(url),
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              }
+                            },
                           ),
                           ProfileListTile(
                             title: 'سياسة الاستخدام',
                             leadingImage: 'assets/images/secured.png',
                             fontSize: screenWidth * 0.04,
+                            onTap: () async {
+                              const url =
+                                  'https://servicex-741d4.web.app/privacy-policy';
+                              if (await canLaunchUrl(Uri.parse(url))) {
+                                await launchUrl(
+                                  Uri.parse(url),
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              }
+                            },
                           ),
                           SizedBox(height: screenHeight * 0.03),
                           Center(

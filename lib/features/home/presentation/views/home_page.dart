@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/di/di.dart';
-import '../../../../core/resources/color_manager.dart';
 import '../../../../core/utils/cashed_data_shared_preferences.dart';
 import '../viewmodels/services_viewmodel/services_cubit.dart';
 import '../viewmodels/user_profile_view_model/user_profile_cubit.dart';

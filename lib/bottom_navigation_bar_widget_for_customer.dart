@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'core/resources/color_manager.dart';
 import 'features/home/presentation/views/home_page.dart';
 import 'features/home/presentation/views/profile_page.dart';
@@ -81,7 +82,9 @@ class _MainNavigationPageForCustomerState
                       vertical: _selectedIndex == 0 ? 4 : 0,
                     ),
                     child: Icon(
-                      _selectedIndex == 0 ? Icons.home : Icons.home_outlined,
+                      _selectedIndex == 0
+                          ? FontAwesomeIcons.house
+                          : Icons.home_outlined,
                       size: _selectedIndex == 0 ? 30 : 26,
                     ),
                   ),
