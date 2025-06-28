@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:servicex/features/technician/domain/technician_profile_entity.dart';
+import '../domain/technician_profile_entity.dart';
 part 'technician_profile_model.g.dart';
 
 @JsonSerializable()

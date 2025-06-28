@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/core/api/api_extentions.dart';
-import 'package:servicex/core/api/api_manager/api_manager.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/technician/data/technician_profile_data_source.dart';
-import 'package:servicex/features/technician/domain/technician_profile_entity.dart';
+import '../../../core/api/api_extentions.dart';
+import '../../../core/api/api_manager/api_manager.dart';
+import '../../../core/common/api_result.dart';
+import 'technician_profile_data_source.dart';
+import '../domain/technician_profile_entity.dart';
 
 @Injectable(as: TechnicianProfileDataSource)
 class TechnicianProfileDataSourceImpl implements TechnicianProfileDataSource {

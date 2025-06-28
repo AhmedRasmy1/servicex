@@ -208,7 +208,7 @@ class CompleteOrderByTechnicianCubit extends Cubit<OrderState> {
       case Fail<CompletedOrderEntityForTechnician>():
         emit(
           CompleteOrderByTechnicianFailed(
-            message: 'حدث خطأ أثناء إتمام الطلب: ${result.exception}',
+            message: result.exception,
             failedOrderId: id.toString(),
           ),
         );

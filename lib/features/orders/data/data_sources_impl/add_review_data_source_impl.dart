@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/core/api/api_extentions.dart';
-import 'package:servicex/core/api/api_manager/api_manager.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/orders/data/data_sources/add_review_data_source.dart';
-import 'package:servicex/features/orders/domain/entities/add_review_entity.dart';
+import '../../../../core/api/api_extentions.dart';
+import '../../../../core/api/api_manager/api_manager.dart';
+import '../../../../core/common/api_result.dart';
+import '../data_sources/add_review_data_source.dart';
+import '../../domain/entities/add_review_entity.dart';
 
 @Injectable(as: AddReviewDataSource)
 class AddReviewDataSourceImpl implements AddReviewDataSource {

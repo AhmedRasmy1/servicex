@@ -1,4 +1,4 @@
-import 'package:servicex/features/technician/data/technician_profile_model.dart';
+import '../data/technician_profile_model.dart';
 
 class TechnicianProfileEntity {
   String? fullName;

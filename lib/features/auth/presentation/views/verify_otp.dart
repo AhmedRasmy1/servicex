@@ -196,13 +196,13 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: const [
                                         CircularProgressIndicator(
-                                          color: Colors.blue,
+                                          color: ColorManager.appColor,
                                         ),
                                         SizedBox(height: 20),
                                         Text(
                                           'جاري التحقق من الرمز...',
                                           style: TextStyle(
-                                            color: Colors.blue,
+                                            color: ColorManager.appColor,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16,
                                           ),

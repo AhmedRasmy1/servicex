@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/orders/presentation/viewmodel/order/order_cubit.dart';
+import 'package:servicex/core/common/custom_exception.dart';
+import '../../../../core/di/di.dart';
+import '../../../../core/utils/cashed_data_shared_preferences.dart';
+import '../viewmodel/order/order_cubit.dart';
 
 class PendingOrderPageForTechnician extends StatefulWidget {
   const PendingOrderPageForTechnician({super.key});
@@ -85,18 +86,165 @@ class _PendingOrderPageForTechnicianState
           body: BlocConsumer<CompleteOrderByTechnicianCubit, OrderState>(
             listener: (context, state) {
               if (state is CompleteOrderByTechnicianSuccess) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text(state.message)));
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder:
+                      (context) => AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        title: Row(
+                          children: const [
+                            Icon(
+                              FontAwesomeIcons.solidCircleCheck,
+                              color: Color(0xFF2E2589),
+                              size: 24,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'تم اكتمال الطلب',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 19,
+                                color: Color(0xFF2E2589),
+                              ),
+                            ),
+                          ],
+                        ),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'تم إكمال الطلب بنجاح!',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              state.message,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ],
+                        ),
+                        actions: [
+                          TextButton.icon(
+                            icon: const Icon(
+                              FontAwesomeIcons.arrowRight,
+                              color: Color(0xFF2E2589),
+                              size: 16,
+                            ),
+                            label: const Text(
+                              'العودة',
+                              style: TextStyle(
+                                color: Color(0xFF2E2589),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                        ],
+                      ),
+                );
                 _saveCompletedOrder(state.completedOrderId);
                 context
                     .read<PendingOrderForTechnicianCubit>()
                     .getPendingOrdersForTechnician();
               }
               if (state is CompleteOrderByTechnicianFailed) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text(state.message)));
+                String message;
+                if (state.message is ServerError) {
+                  message = (state.message as ServerError).serverMessage!;
+                } else if (state.message is NoInternetError) {
+                  message = "لا يوجد اتصال بالإنترنت";
+                } else {
+                  message = 'حدث خطأ غير متوقع';
+                }
+                showDialog(
+                  context: context,
+                  builder:
+                      (context) => AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        title: Row(
+                          children: const [
+                            Icon(
+                              FontAwesomeIcons.triangleExclamation,
+                              color: Colors.red,
+                              size: 22,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'تنبيه',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        ),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'حدث خطأ أثناء محاولة إكمال الطلب:',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              message,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        ),
+                        actions: [
+                          TextButton.icon(
+                            icon: const Icon(
+                              FontAwesomeIcons.rotateLeft,
+                              color: Color(0xFF2E2589),
+                              size: 16,
+                            ),
+                            label: const Text(
+                              'إعادة المحاولة',
+                              style: TextStyle(
+                                color: Color(0xFF2E2589),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: const Text(
+                              'إغلاق',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                );
               }
             },
             builder: (context, state) {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/orders/presentation/viewmodel/order/order_cubit.dart';
+import '../../../../core/di/di.dart';
+import '../../../../core/utils/cashed_data_shared_preferences.dart';
+import '../viewmodel/order/order_cubit.dart';
 
 class PendingOrdersView extends StatefulWidget {
   const PendingOrdersView({super.key});

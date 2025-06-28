@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/features/technician/presentation/viewmodels/technician_profile/technician_profile_cubit.dart';
+import '../../../../core/di/di.dart';
+import '../viewmodels/technician_profile/technician_profile_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TechnicianProfileView extends StatefulWidget {

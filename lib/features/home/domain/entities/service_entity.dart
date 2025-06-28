@@ -1,4 +1,4 @@
-import 'package:servicex/features/home/data/models/services_model.dart';
+import '../../data/models/services_model.dart';
 
 class ServiceEntity {
   final int id;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:servicex/features/orders/presentation/views/complete_order_view.dart';
-import 'package:servicex/features/orders/presentation/views/pending_order_view.dart';
+import '../../../orders/presentation/views/complete_order_view.dart';
+import '../../../orders/presentation/views/pending_order_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/di/di.dart';
 import '../viewmodels/user_profile_view_model/user_profile_cubit.dart';

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/features/orders/presentation/viewmodel/create_review/add_review_cubit.dart';
-import 'package:servicex/features/orders/presentation/viewmodel/order/order_cubit.dart';
+import 'package:servicex/core/common/custom_exception.dart';
+import 'package:servicex/core/resources/color_manager.dart';
+import '../../../../core/di/di.dart';
+import '../viewmodel/create_review/add_review_cubit.dart';
+import '../viewmodel/order/order_cubit.dart';
 
 class CompleteOrdersView extends StatefulWidget {
   const CompleteOrdersView({super.key});
@@ -326,7 +328,7 @@ class _RatingDialogState extends State<_RatingDialog> {
             controller: commentController,
             maxLines: 3,
             decoration: InputDecoration(
-              hintText: 'أضف تعليقًا (اختياري)',
+              hintText: 'أضف تعليقًا',
               filled: true,
               fillColor: Colors.grey.shade100,
               contentPadding: const EdgeInsets.all(12),
@@ -356,11 +358,79 @@ class _RatingDialogState extends State<_RatingDialog> {
                 ),
               );
             } else if (state is AddReviewFailed) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.errorMessage),
-                  backgroundColor: Colors.red,
-                ),
+              String message;
+              if (state.errorMessage is ServerError) {
+                message =
+                    (state.errorMessage as ServerError).serverMessage ??
+                    'حدث خطاء غير متوقع';
+              } else if (state.errorMessage is NoInternetError) {
+                message = 'خطأ في الاتصال بالشبكة';
+              } else {
+                message = 'حدث خطأ: ${state.errorMessage}';
+              }
+              showDialog(
+                context: context,
+                builder:
+                    (context) => AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      title: Row(
+                        children: const [
+                          Icon(
+                            Icons.error_outline,
+                            color: Colors.red,
+                            size: 28,
+                          ),
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              'حدث خطأ',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            message,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.black87,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 12),
+                          const Icon(
+                            Icons.sentiment_dissatisfied,
+                            color: Colors.redAccent,
+                            size: 40,
+                          ),
+                        ],
+                      ),
+                      actions: [
+                        TextButton.icon(
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: const Icon(
+                            Icons.check_circle,
+                            color: ColorManager.appColor,
+                          ),
+                          label: const Text(
+                            'حسناً',
+                            style: TextStyle(
+                              color: ColorManager.appColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
               );
             }
           },

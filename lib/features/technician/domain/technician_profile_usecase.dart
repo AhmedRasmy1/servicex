@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/technician/domain/technician_profile_entity.dart';
-import 'package:servicex/features/technician/domain/technician_profile_repo.dart';
+import '../../../core/common/api_result.dart';
+import 'technician_profile_entity.dart';
+import 'technician_profile_repo.dart';
 
 @injectable
 class TechnicianProfileUsecase {

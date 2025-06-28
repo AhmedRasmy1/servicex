@@ -125,7 +125,7 @@ final class CompleteOrderByTechnicianSuccess extends OrderState {
 }
 
 final class CompleteOrderByTechnicianFailed extends OrderState {
-  final String message;
+  final Exception message;
   final String failedOrderId;
 
   CompleteOrderByTechnicianFailed({

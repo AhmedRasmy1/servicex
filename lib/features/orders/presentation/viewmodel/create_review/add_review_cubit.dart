@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/core/utils/cashed_data_shared_preferences.dart';
-import 'package:servicex/features/orders/domain/entities/add_review_entity.dart';
-import 'package:servicex/features/orders/domain/usecase/add_review_usecase.dart';
+import '../../../../../core/common/api_result.dart';
+import '../../../../../core/utils/cashed_data_shared_preferences.dart';
+import '../../../domain/entities/add_review_entity.dart';
+import '../../../domain/usecase/add_review_usecase.dart';
 
 part 'add_review_state.dart';
 
@@ -31,7 +31,7 @@ class AddReviewCubit extends Cubit<AddReviewState> {
         emit(AddReviewSuccess(addReviewEntity: result.data));
         break;
       case Fail<AddReviewEntity>():
-        emit(AddReviewFailed(errorMessage: 'Error: ${result.exception}'));
+        emit(AddReviewFailed(errorMessage: result.exception));
         break;
     }
   }

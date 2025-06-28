@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:servicex/core/common/api_result.dart';
-import 'package:servicex/features/orders/domain/entities/add_review_entity.dart';
-import 'package:servicex/features/orders/domain/repo/add_review_repo.dart';
+import '../../../../core/common/api_result.dart';
+import '../entities/add_review_entity.dart';
+import '../repo/add_review_repo.dart';
 
 @injectable
 class AddReviewUsecase {

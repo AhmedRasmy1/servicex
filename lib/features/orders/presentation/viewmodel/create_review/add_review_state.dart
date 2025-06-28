@@ -14,7 +14,7 @@ final class AddReviewSuccess extends AddReviewState {
 }
 
 final class AddReviewFailed extends AddReviewState {
-  final String errorMessage;
+  final Exception errorMessage;
 
   AddReviewFailed({required this.errorMessage});
 }

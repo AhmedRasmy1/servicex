@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:servicex/bottom_navigation_bar_widget_for_techician.dart';
+import '../../../../bottom_navigation_bar_widget_for_techician.dart';
 import '../../../../bottom_navigation_bar_widget_for_customer.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/resources/color_manager.dart';
@@ -148,13 +148,13 @@ class _LoginPageState extends State<LoginPage> {
                                           mainAxisSize: MainAxisSize.min,
                                           children: const [
                                             CircularProgressIndicator(
-                                              color: Colors.blue,
+                                              color: ColorManager.appColor,
                                             ),
                                             SizedBox(height: 20),
                                             Text(
                                               'جاري التسجيل...',
                                               style: TextStyle(
-                                                color: Colors.blue,
+                                                color: ColorManager.appColor,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 16,
                                               ),

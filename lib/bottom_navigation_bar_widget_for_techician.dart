@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:servicex/features/orders/presentation/views/completed_order_page_for_technician.dart';
-import 'package:servicex/features/orders/presentation/views/pending_order_page_for_technician.dart';
-import 'package:servicex/features/technician/presentation/views/technician_profile_view.dart';
+import 'features/orders/presentation/views/completed_order_page_for_technician.dart';
+import 'features/orders/presentation/views/pending_order_page_for_technician.dart';
+import 'features/technician/presentation/views/technician_profile_view.dart';
 import 'core/resources/color_manager.dart';
 
 class TechnicianNavigationPage extends StatefulWidget {

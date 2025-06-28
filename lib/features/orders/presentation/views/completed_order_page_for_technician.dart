@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:servicex/core/di/di.dart';
-import 'package:servicex/features/orders/presentation/viewmodel/order/order_cubit.dart';
+import '../../../../core/di/di.dart';
+import '../viewmodel/order/order_cubit.dart';
 
 class CompletedOrderPageForTechnician extends StatefulWidget {
   const CompletedOrderPageForTechnician({super.key});

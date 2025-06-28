@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:servicex/features/orders/data/models/add_review_model.dart';
-import 'package:servicex/features/technician/data/technician_profile_model.dart';
+import '../../../features/orders/data/models/add_review_model.dart';
+import '../../../features/technician/data/technician_profile_model.dart';
 import '../../../features/home/data/models/user_profile_model.dart';
 import '../../../features/orders/data/models/order_model.dart';
 import '../../../features/auth/data/models/login_model.dart';

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:servicex/features/orders/domain/entities/add_review_entity.dart';
+import '../../domain/entities/add_review_entity.dart';
 part 'add_review_model.g.dart';
 
 @JsonSerializable()

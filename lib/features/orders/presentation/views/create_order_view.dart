@@ -274,6 +274,134 @@ class _CreateOrderViewState extends State<CreateOrderView> {
                       child: ElevatedButton.icon(
                         onPressed: () async {
                           if (!_formKey.currentState!.validate()) return;
+                          if (_selectedDate == null || _selectedTime == null) {
+                            await showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder:
+                                  (context) => Dialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(24.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.event_busy,
+                                            color: Colors.red,
+                                            size: 80,
+                                          ),
+                                          const SizedBox(height: 20),
+                                          const Text(
+                                            'يرجى اختيار التاريخ والوقت',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 24),
+                                          SizedBox(
+                                            width: double.infinity,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.red,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      vertical: 14,
+                                                    ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                              ),
+                                              child: const Text(
+                                                'حسناً',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                            );
+                            return;
+                          }
+                          if (_image == null) {
+                            await showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder:
+                                  (context) => Dialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(24.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.image_not_supported,
+                                            color: Colors.red,
+                                            size: 80,
+                                          ),
+                                          const SizedBox(height: 20),
+                                          const Text(
+                                            'يرجى اختيار صورة للمشكلة',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 24),
+                                          SizedBox(
+                                            width: double.infinity,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.red,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      vertical: 14,
+                                                    ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                              ),
+                                              child: const Text(
+                                                'حسناً',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                            );
+                            return;
+                          }
                           setState(() => _isSubmitting = true);
                           await Future.delayed(const Duration(seconds: 2));
                           setState(() => _isSubmitting = false);
@@ -301,7 +429,7 @@ class _CreateOrderViewState extends State<CreateOrderView> {
                           orderCubit.createOrder(
                             technicianId: CacheService.getData(
                               key: CacheConstants.technicalId.toString(),
-                            ), // Replace with actual ID
+                            ),
                             formData: formData,
                           );
                         },

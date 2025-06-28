@@ -350,47 +350,33 @@ class _RegisterForCustomerViewState extends State<RegisterForCustomerView> {
                           child: ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                if (_selectedImage == null) {
-                                  showDialog(
-                                    context: context,
-                                    builder:
-                                        (context) => Dialog(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              20,
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(24.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: const [
-                                                Icon(
-                                                  Icons.error_outline,
-                                                  color: Colors.red,
-                                                  size: 40,
-                                                ),
-                                                SizedBox(height: 20),
-                                                Text(
-                                                  'يجب إضافة صورة شخصية للمستخدم',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    color: Colors.red,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
+                                MultipartFile coverFile;
+                                String fileNameWithExtension;
+                                if (_selectedImage != null) {
+                                  fileNameWithExtension = basename(
+                                    _selectedImage!.path,
                                   );
-                                  return;
+                                  coverFile = await MultipartFile.fromFile(
+                                    _selectedImage!.path,
+                                    filename: fileNameWithExtension,
+                                  );
+                                } else {
+                                  // Load default image from assets as bytes
+                                  final byteData = await DefaultAssetBundle.of(
+                                    context,
+                                  ).load('assets/images/defaultimageuser.png');
+                                  final tempDir = Directory.systemTemp;
+                                  final tempFile = await File(
+                                    '${tempDir.path}/defaultimageuser.png',
+                                  ).writeAsBytes(byteData.buffer.asUint8List());
+                                  fileNameWithExtension =
+                                      'defaultimageuser.png';
+                                  coverFile = await MultipartFile.fromFile(
+                                    tempFile.path,
+                                    filename: fileNameWithExtension,
+                                  );
                                 }
-                                File file = File(_selectedImage!.path);
-                                String fileNameWithExtension = basename(
-                                  file.path,
-                                );
+
                                 FormData formData = FormData.fromMap({
                                   'FirstName': firstNameController.text,
                                   'LastName': lastNameController.text,
@@ -398,10 +384,7 @@ class _RegisterForCustomerViewState extends State<RegisterForCustomerView> {
                                   'phone': phoneController.text,
                                   'password': passwordController.text,
                                   'address': addressController.text,
-                                  'cover': await MultipartFile.fromFile(
-                                    _selectedImage!.path,
-                                    filename: fileNameWithExtension,
-                                  ),
+                                  'cover': coverFile,
                                   'role': CacheService.getData(
                                     key: CacheConstants.userType,
                                   ),
